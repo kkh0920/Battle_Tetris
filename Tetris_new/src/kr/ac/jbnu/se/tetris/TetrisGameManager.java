@@ -10,7 +10,7 @@ public class TetrisGameManager extends JFrame {
     
     // 메인 화면 클래스 추가
 
-    // 게임 2개를 관리
+    // 게임 2개를 관리.
     Tetris player1Panel;
     Tetris player2Panel;
 
