@@ -22,6 +22,6 @@
    * 장애물 블록 소환
 
 ## 개선 전 클래스 다이어그램
-<img width="821" alt="스크린샷 2023-09-22 오후 8 57 26" src="https://github.com/kkh0920/Java_Swing_Tetris/assets/65442366/deda3ff4-aa21-433e-b976-c6550699d899">
+<img width="517" alt="스크린샷 2023-09-22 오후 9 21 25" src="https://github.com/kkh0920/Java_Swing_Tetris/assets/65442366/03a4a427-22a9-43d8-92ef-0d5a15618714">
 
 ## 개선 후 클래스 다이어그램
