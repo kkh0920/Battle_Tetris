@@ -17,10 +17,8 @@ public class Shape {
 		setShape(Tetrominoes.NoShape);
 	}
 
-	public void setShape(Tetrominoes shape) {
-		// 테이블은 생성자 호출 시 마다 초기화
-		
-		// shape
+	public void setShape(Tetrominoes shape) {	
+			
 		coordsTable = new int[][][] { { { 0, 0 }, { 0, 0 }, { 0, 0 }, { 0, 0 } },
 										{ { 0, -1 }, { 0, 0 }, { -1, 0 }, { -1, 1 } }, 
 										{ { 0, -1 }, { 0, 0 }, { 1, 0 }, { 1, 1 } },

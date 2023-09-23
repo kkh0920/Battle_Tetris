@@ -6,6 +6,7 @@ import java.awt.Graphics;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+
 public class Board extends JPanel {
 
 	final int BoardWidth = 10;
@@ -74,7 +75,7 @@ public class Board extends JPanel {
 	}
 
 
-	// -------------------------------- 일시 정시 시 --------------------------------
+	// -------------------------------- 일시 정시 시 ---------------------------------
 
 	public void setTextPause() {
 		statusbar.setText("paused");

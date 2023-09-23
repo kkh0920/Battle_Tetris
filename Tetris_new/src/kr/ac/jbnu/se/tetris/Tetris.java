@@ -7,7 +7,7 @@ import java.awt.Dimension;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-public class Tetris extends JPanel {
+public class Tetris extends JPanel { //
 
 	Player player;
 	JLabel statusbar;

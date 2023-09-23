@@ -11,7 +11,7 @@ import javax.swing.Timer;
 
 // 현재는 실행 즉시 게임이 진행되는 방식.
 
-// 메인 화면 클래스를 만들고, 버튼 클릭에 따라 Tetris 객체를 생성하고 start() 함수 실행 여부를 결정 할 예정임
+// 메인 화면 클래스를 만들고, 버튼 클릭에 따라 Tetris 객체를 생성하고 start() 함수 실행 여부를 결정 할 예정.
 
 public class TetrisGameManager extends JFrame implements ActionListener{
 
