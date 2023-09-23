@@ -18,14 +18,17 @@ public class Shape {
 	}
 
 	public void setShape(Tetrominoes shape) {
-		// 각 테이블은 생성자 호출 시 마다 초기화
+		// 테이블은 생성자 호출 시 마다 초기화
 		
 		// shape
 		coordsTable = new int[][][] { { { 0, 0 }, { 0, 0 }, { 0, 0 }, { 0, 0 } },
-				{ { 0, -1 }, { 0, 0 }, { -1, 0 }, { -1, 1 } }, { { 0, -1 }, { 0, 0 }, { 1, 0 }, { 1, 1 } },
-				{ { 0, -1 }, { 0, 0 }, { 0, 1 }, { 0, 2 } }, { { -1, 0 }, { 0, 0 }, { 1, 0 }, { 0, 1 } },
-				{ { 0, 0 }, { 1, 0 }, { 0, 1 }, { 1, 1 } }, { { -1, -1 }, { 0, -1 }, { 0, 0 }, { 0, 1 } },
-				{ { 1, -1 }, { 0, -1 }, { 0, 0 }, { 0, 1 } } };
+										{ { 0, -1 }, { 0, 0 }, { -1, 0 }, { -1, 1 } }, 
+										{ { 0, -1 }, { 0, 0 }, { 1, 0 }, { 1, 1 } },
+										{ { 0, -1 }, { 0, 0 }, { 0, 1 }, { 0, 2 } }, 
+										{ { -1, 0 }, { 0, 0 }, { 1, 0 }, { 0, 1 } },
+										{ { 0, 0 }, { 1, 0 }, { 0, 1 }, { 1, 1 } }, 
+										{ { -1, -1 }, { 0, -1 }, { 0, 0 }, { 0, 1 } },
+										{ { 1, -1 }, { 0, -1 }, { 0, 0 }, { 0, 1 } } };
 
 		for (int i = 0; i < 4; i++) {
 			for (int j = 0; j < 2; ++j) {
@@ -39,7 +42,6 @@ public class Shape {
 		return pieceShape;
 	}
 
-	
 	private void setX(int index, int x) {
 		coords[index][0] = x;
 	}
@@ -52,7 +54,6 @@ public class Shape {
 	public int y(int index) {
 		return coords[index][1];
 	}
-	
 
 	public void setRandomShape() {
 		Random r = new Random();
@@ -60,7 +61,6 @@ public class Shape {
 		Tetrominoes[] values = Tetrominoes.values();
 		setShape(values[x]);
 	}
-
 
 	public int minX() {
 		int m = coords[0][0];
@@ -77,37 +77,15 @@ public class Shape {
 		return m;
 	}
 
-
 	public int curX(){
 		return curX;
 	}
 	public int curY(){
 		return curY;
 	}
-
-	private void moveTo(int x, int y){
+	public void moveTo(int x, int y){ // setCurX, setCurY
 		curX = x;
 		curY = y;
-	}
-	
-	// 회전 및 이동에 대한 가능 여부를 체크 후 실제로 이동
-	public boolean tryMove(Board board, int newX, int newY) {
-		for (int i = 0; i < 4; ++i) {
-			int x = newX + x(i);
-			int y = newY - y(i);
-			if (x < 0 || x >= board.BoardWidth || y < 0 || y >= board.BoardHeight)
-				return false;
-			if (board.shapeAt(x, y) != Tetrominoes.NoShape)
-				return false;
-		}
-
-		board.curPiece = this;
-
-		moveTo(newX, newY);
-		
-		board.repaint();
-		
-		return true;
 	}
 
 	public Shape rotateLeft() {

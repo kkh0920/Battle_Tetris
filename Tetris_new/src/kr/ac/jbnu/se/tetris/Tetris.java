@@ -15,7 +15,7 @@ public class Tetris extends JPanel {
 
 	public Tetris() {
 		setPreferredSize(new Dimension(200, 450));
-		setBackground(Color.ORANGE);
+		setBackground(new Color(230, 230, 230));
 		
 		player = new Player();
 		statusbar = new JLabel("0");
@@ -23,8 +23,6 @@ public class Tetris extends JPanel {
 		
 		add(board, BorderLayout.WEST);
 		add(statusbar, BorderLayout.SOUTH);
-
-		board.start();
 	}
 	public JLabel getStatusBar() {
 		return statusbar;
