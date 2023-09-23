@@ -29,7 +29,6 @@ public class Board extends JPanel implements ActionListener {
 	Tetrominoes[] board;
 
 	public Board(Tetris parent) {
-
 		setFocusable(true);
 		curPiece = new Shape();
 		timer = new Timer(400, this);
