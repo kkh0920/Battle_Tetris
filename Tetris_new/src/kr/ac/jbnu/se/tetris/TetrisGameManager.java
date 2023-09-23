@@ -80,7 +80,7 @@ public class TetrisGameManager extends JFrame implements ActionListener{
         }
     }
 
-    public void gameComplete(){ // 누구 한명이 죽었을 때 실행
+    public void gameComplete(){ // 누구 한명이 죽었을 때 실행.
         timer.stop();
         isStarted = false;
         // p1Board.curPiece.setShape(Tetrominoes.NoShape);
