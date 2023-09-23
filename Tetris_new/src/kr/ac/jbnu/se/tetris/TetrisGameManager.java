@@ -22,7 +22,7 @@ public class TetrisGameManager extends JFrame implements ActionListener{
     Board p2Board;
 
     boolean isStarted = false;
-	boolean isPaused = false;
+    boolean isPaused = false;
 
     Timer timer;
 
@@ -38,8 +38,8 @@ public class TetrisGameManager extends JFrame implements ActionListener{
     public void settingFrame(){
         setTitle("Tetris");
         setSize(500, 460);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setLocationRelativeTo(null);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLocationRelativeTo(null);
         setFocusable(true);
 
         player1Panel = new Tetris();
@@ -56,15 +56,15 @@ public class TetrisGameManager extends JFrame implements ActionListener{
     public void actionPerformed(ActionEvent e) {
 
         if (p1Board.isFallingFinished) {
-			p1Board.isFallingFinished = false;
-			if (!p1Board.newPiece()) {
+            p1Board.isFallingFinished = false;
+            if (!p1Board.newPiece()) {
                 gameComplete();
                 player1Panel.getStatusBar().setText("Lose..");
                 player2Panel.getStatusBar().setText("Win!!");
             }
-		} 
+        } 
         else {
-			p1Board.oneLineDown();
+            p1Board.oneLineDown();
         }
 
         if (p2Board.isFallingFinished) {
@@ -88,26 +88,26 @@ public class TetrisGameManager extends JFrame implements ActionListener{
     }
 
     public void start() {
-		if (isPaused)
-			return;
-		isStarted = true;
-		timer.start();
-	}
+        if (isPaused)
+            return;
+        isStarted = true;
+        timer.start();
+    }
     public void pause() {
-		if (!isStarted)
-			return;
+        if (!isStarted)
+            return;
 
-		isPaused = !isPaused;
-		if (isPaused) {
-			timer.stop();
-			p1Board.setTextPause();
+        isPaused = !isPaused;
+        if (isPaused) {
+            timer.stop();
+            p1Board.setTextPause();
             p2Board.setTextPause();
-		} else {
-			timer.start();
-			p1Board.setTextResume();
+        } else {
+            timer.start();
+            p1Board.setTextResume();
             p2Board.setTextResume();
         }
-	}
+    }
 
     public static void main(String[] args){
         TetrisGameManager gameManager = new TetrisGameManager();
@@ -121,14 +121,14 @@ public class TetrisGameManager extends JFrame implements ActionListener{
             Board player2Board = player2Panel.getBoard();
             
             /*
-             
-             세가지 경우에서 키 입력을 제한
+            
+            세가지 경우에서 키 입력을 제한
 
-             1. 게임이 시작되지 않았을 때
-             2. 떨어지고 있는 블록이 없을 때
-             3. pause 상태일 때
+            1. 게임이 시작되지 않았을 때
+            2. 떨어지고 있는 블록이 없을 때
+            3. pause 상태일 때
 
-             */
+            */
 
             if (!isStarted || player1Board.curPiece.getShape() == Tetrominoes.NoShape ||
                                 player2Board.curPiece.getShape() == Tetrominoes.NoShape) {
