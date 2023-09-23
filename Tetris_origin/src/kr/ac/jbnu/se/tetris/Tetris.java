@@ -7,28 +7,28 @@ import javax.swing.JLabel;
 
 public class Tetris extends JFrame {
 
-	JLabel statusbar;
+    JLabel statusbar;
 
-	public Tetris() {
+    public Tetris() {
 
-		statusbar = new JLabel(" 0");
-		add(statusbar, BorderLayout.SOUTH);
-		Board board = new Board(this);
-		add(board);;
-		board.start();
+        statusbar = new JLabel(" 0");
+        add(statusbar, BorderLayout.SOUTH);
+        Board board = new Board(this);
+        add(board);;
+        board.start();
 
-		setSize(200, 400);
-		setTitle("Tetris");
-		setDefaultCloseOperation(EXIT_ON_CLOSE);
-	}
+        setSize(200, 400);
+        setTitle("Tetris");
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+    }
 
-	public JLabel getStatusBar() {
-		return statusbar;
-	}
+    public JLabel getStatusBar() {
+        return statusbar;
+    }
 
-	public static void main(String[] args) {
-		Tetris game = new Tetris();
-		game.setLocationRelativeTo(null);
-		game.setVisible(true);
-	}
+    public static void main(String[] args) {
+        Tetris game = new Tetris();
+        game.setLocationRelativeTo(null);
+        game.setVisible(true);
+    }
 }
