@@ -9,29 +9,29 @@ import javax.swing.JPanel;
 
 public class Tetris extends JPanel { //
 
-	Player player;
-	JLabel statusbar;
-	Board board;
+    Player player;
+    JLabel statusbar;
+    Board board;
 
-	public Tetris() {
-		setPreferredSize(new Dimension(200, 450));
-		setBackground(new Color(230, 230, 230));
-		
-		player = new Player();
-		statusbar = new JLabel("0");
-		board = new Board(this);
-		
-		add(board, BorderLayout.WEST);
-		add(statusbar, BorderLayout.SOUTH);
-	}
-	public JLabel getStatusBar() {
-		return statusbar;
-	}
-	public Board getBoard() {
-		return board;
-	}
-	public Player getPlayer(){
-		return player;
-	}
+    public Tetris() {
+        setPreferredSize(new Dimension(200, 450));
+        setBackground(new Color(230, 230, 230));
+        
+        player = new Player();
+        statusbar = new JLabel("0");
+        board = new Board(this);
+        
+        add(board, BorderLayout.WEST);
+        add(statusbar, BorderLayout.SOUTH);
+    }
+    public JLabel getStatusBar() {
+        return statusbar;
+    }
+    public Board getBoard() {
+        return board;
+    }
+    public Player getPlayer(){
+        return player;
+    }
 }
 
