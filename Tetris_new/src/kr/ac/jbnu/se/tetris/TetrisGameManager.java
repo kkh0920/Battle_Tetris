@@ -69,7 +69,9 @@ public class TetrisGameManager extends JFrame {
             p2Board.setTextResume();
         }
     }
+    
     public class PlayerKeyListener extends KeyAdapter {
+
         public void keyPressed(KeyEvent e) {
 
             Board player1Board = player1Panel.getBoard();
