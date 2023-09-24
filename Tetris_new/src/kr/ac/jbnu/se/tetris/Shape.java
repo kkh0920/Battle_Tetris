@@ -4,7 +4,6 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class Shape implements Cloneable {
 
-
     BoardAI b;
 
     private Tetrominoes pieceShape; // 모양
