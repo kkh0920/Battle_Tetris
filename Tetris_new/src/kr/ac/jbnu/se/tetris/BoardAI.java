@@ -30,7 +30,7 @@ public class BoardAI extends Board {
         start();
     }
 
-    private void initBoardWeight(){
+    private void initBoardWeight() {
         int weight = 23;
         for(int i = 0; i < BoardHeight + 2; i++){
             for(int j = 0; j < BoardWidth + 2; j++){
