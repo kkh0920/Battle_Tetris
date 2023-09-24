@@ -34,15 +34,8 @@ public class Select extends JFrame {
         frame.setSize(Frame_X,Frame_Y);
         frame.setLayout(null);
 
-        File file = new File("image\\backg.png");
-
-        System.out.println(file.exists()); // 존재자체는 하는지
-        System.out.println(file.canRead()); // 읽기 권한이 있는지
-        System.out.println(file.isDirectory()); // 디렉토리인지
-        System.out.println(file.getAbsolutePath()); // 읽었다면 파일의 절대경로는 어디인지
-
         img = ImageIO.read(new File("image\\backg.png"));
-        
+
         background = new BackG();
         background.setSize(Frame_X,Frame_Y);
         frame.add(background);
@@ -119,6 +112,7 @@ public class Select extends JFrame {
             }
         });
     }
+    
     class BackG extends JPanel { // Panel에 배경화면을 나타내기 위해서,
         public void paint(Graphics g){
             g.drawImage(img, 0,0,null);
