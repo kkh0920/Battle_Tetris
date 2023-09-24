@@ -16,7 +16,7 @@ public class BoardAI extends Board {
 
     public BoardAI(Tetris parent) throws CloneNotSupportedException {
         super(parent);
-        //TODO Auto-generated constructor stub
+        //TODO Auto-generated constructor stub 
 
         boardWeight = new int[BoardHeight + 2][BoardWidth + 2];
         initBoardWeight();
