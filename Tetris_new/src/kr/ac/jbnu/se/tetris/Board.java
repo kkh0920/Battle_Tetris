@@ -191,7 +191,7 @@ public class Board extends JPanel implements ActionListener {
         for (int i = 0; i < BoardHeight; ++i) {
             for (int j = 0; j < BoardWidth; ++j) {
                 Tetrominoes shape = shapeAt(j, BoardHeight - i - 1);
-                // if(shape != Tetrominoes.NoShape)
+                if(shape != Tetrominoes.NoShape)
                     drawSquare(g, 0 + j * squareWidth(), boardTop + i * squareHeight(), shape);
             }
         }
