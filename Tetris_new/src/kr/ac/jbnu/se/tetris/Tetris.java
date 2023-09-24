@@ -9,29 +9,35 @@ import javax.swing.JPanel;
 
 public class Tetris extends JPanel { //
 
-    Player player;
     JLabel statusbar;
     Board board;
+    boolean isComputer;
 
-    public Tetris() {
+    public Tetris(boolean isComputer) throws CloneNotSupportedException {
         setPreferredSize(new Dimension(200, 450));
         setBackground(new Color(230, 230, 230));
         
-        player = new Player();
+        this.isComputer = isComputer;
+
         statusbar = new JLabel("0");
-        board = new Board(this);
-        
+
+        if(isComputer)
+            board = new BoardAI(this);
+        else
+            board = new BoardPlayer(this);
+
         add(board, BorderLayout.WEST);
         add(statusbar, BorderLayout.SOUTH);
     }
+    
     public JLabel getStatusBar() {
         return statusbar;
     }
     public Board getBoard() {
         return board;
     }
-    public Player getPlayer(){
-        return player;
+    public boolean isComputer(){
+        return isComputer;
     }
 }
 

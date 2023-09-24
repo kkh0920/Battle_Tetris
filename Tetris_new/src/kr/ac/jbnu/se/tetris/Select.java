@@ -8,7 +8,6 @@ import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.util.Set;
 
 class Button {
     Button(JButton jb) { // 버튼의 이미지를 나타내기 위해 테두리 등을 제거 (부드럽게 나타내기 .. )
@@ -34,7 +33,16 @@ public class Select extends JFrame {
     public void drawBackground() throws IOException { // ImageIO.read => 예외처리 -> IOException이 필수
         frame.setSize(Frame_X,Frame_Y);
         frame.setLayout(null);
+
+        File file = new File("image\\backg.png");
+
+        System.out.println(file.exists()); // 존재자체는 하는지
+        System.out.println(file.canRead()); // 읽기 권한이 있는지
+        System.out.println(file.isDirectory()); // 디렉토리인지
+        System.out.println(file.getAbsolutePath()); // 읽었다면 파일의 절대경로는 어디인지
+
         img = ImageIO.read(new File("image\\backg.png"));
+        
         background = new BackG();
         background.setSize(Frame_X,Frame_Y);
         frame.add(background);
@@ -75,17 +83,30 @@ public class Select extends JFrame {
         ai.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                TetrisGameManager tr = new TetrisGameManager();
+                TetrisGameManager tr;
                 setVisible(false);
-                tr.setVisible(true);
+                try {
+                    tr = new TetrisGameManager(true);
+                    tr.setVisible(true);
+                } catch (CloneNotSupportedException e1) {
+                    // TODO Auto-generated catch block
+                    e1.printStackTrace();
+                }   
             }
         });
 
         versus.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Setting st = new Setting();
+                TetrisGameManager tr;
                 setVisible(false);
+                try {
+                    tr = new TetrisGameManager(false);
+                    tr.setVisible(true);
+                } catch (CloneNotSupportedException e1) {
+                    // TODO Auto-generated catch block
+                    e1.printStackTrace();
+                }
             }
         });
 
@@ -103,7 +124,5 @@ public class Select extends JFrame {
             g.drawImage(img, 0,0,null);
         }
     }
-    public static void main(String[] args) throws IOException {
-        new Select();
-    }
+
 }

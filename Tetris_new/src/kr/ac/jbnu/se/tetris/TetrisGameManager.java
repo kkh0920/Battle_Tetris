@@ -1,19 +1,16 @@
 package kr.ac.jbnu.se.tetris;
 
 import java.awt.BorderLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
 import javax.swing.JFrame;
-import javax.swing.Timer;
 
 // 현재는 실행 즉시 게임이 진행되는 방식.
 
 // 메인 화면 클래스를 만들고, 버튼 클릭에 따라 Tetris 객체를 생성하고 start() 함수 실행 여부를 결정 할 예정.
 
-public class TetrisGameManager extends JFrame implements ActionListener{
+public class TetrisGameManager extends JFrame {
 
     Tetris player1Panel;
     Tetris player2Panel;
@@ -21,89 +18,53 @@ public class TetrisGameManager extends JFrame implements ActionListener{
     Board p1Board;
     Board p2Board;
 
-    boolean isStarted = false;
     boolean isPaused = false;
 
-    Timer timer;
-
-    public TetrisGameManager(){
+    public TetrisGameManager(boolean isComputer) throws CloneNotSupportedException{
         settingFrame();
 
-        addKeyListener(new PlayerKeyListener());
+        settingOpponent(isComputer);
 
-        timer = new Timer(400, this);
-        
-        start();
+        addKeyListener(new PlayerKeyListener());
     }
-    public void settingFrame(){
+
+    public void settingFrame() {
         setTitle("Tetris");
         setSize(500, 460);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         setFocusable(true);
+    }
 
-        player1Panel = new Tetris();
-        player2Panel = new Tetris();
+    public void settingOpponent(boolean isComputer) throws CloneNotSupportedException {
+        player1Panel = new Tetris(false);
+        player2Panel = new Tetris(isComputer);
 
         p1Board = player1Panel.getBoard();
         p2Board = player2Panel.getBoard(); 
+
+        p1Board.setOpponent(p2Board);
+        p2Board.setOpponent(p1Board);
 
         add(player1Panel, BorderLayout.WEST);
         add(player2Panel, BorderLayout.EAST);
     }
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
-
-        if (p1Board.isFallingFinished) {
-            p1Board.isFallingFinished = false;
-            if (!p1Board.newPiece()) {
-                gameComplete();
-                player1Panel.getStatusBar().setText("Lose..");
-                player2Panel.getStatusBar().setText("Win!!");
-            }
-        } 
-        else {
-            p1Board.oneLineDown();
-        }
-
-        if (p2Board.isFallingFinished) {
-            p2Board.isFallingFinished = false;
-            if (!p2Board.newPiece()) {
-                gameComplete();
-                player1Panel.getStatusBar().setText("Win!!");
-                player2Panel.getStatusBar().setText("Lose..");
-            }
-        } 
-        else {
-            p2Board.oneLineDown();
-        }
-    }
-
-    public void gameComplete(){ // 누구 한명이 죽었을 때 실행.
-        timer.stop();
-        isStarted = false;
-        // p1Board.curPiece.setShape(Tetrominoes.NoShape);
-        // p2Board.curPiece.setShape(Tetrominoes.NoShape);
-    }
-
-    public void start() {
-        if (isPaused)
-            return;
-        isStarted = true;
-        timer.start();
-    }
     public void pause() {
-        if (!isStarted)
+        if (!p1Board.isStarted || !p2Board.isStarted)
             return;
 
         isPaused = !isPaused;
         if (isPaused) {
-            timer.stop();
+            p1Board.timer.stop();
+            p2Board.timer.stop();
+
             p1Board.setTextPause();
             p2Board.setTextPause();
         } else {
-            timer.start();
+            p1Board.start();
+            p2Board.start();
+
             p1Board.setTextResume();
             p2Board.setTextResume();
         }
@@ -124,7 +85,8 @@ public class TetrisGameManager extends JFrame implements ActionListener{
 
             */
 
-            if (!isStarted || player1Board.curPiece.getShape() == Tetrominoes.NoShape ||
+            if (!p1Board.isStarted || !p2Board.isStarted || 
+                    player1Board.curPiece.getShape() == Tetrominoes.NoShape ||
                                 player2Board.curPiece.getShape() == Tetrominoes.NoShape) {
                 return;
             }
@@ -168,6 +130,9 @@ public class TetrisGameManager extends JFrame implements ActionListener{
             }
 
             // player2 키 입력
+            
+            if(player2Panel.isComputer())
+                return;
 
             Shape p2CurPiece = player2Board.getCurPiece();
 

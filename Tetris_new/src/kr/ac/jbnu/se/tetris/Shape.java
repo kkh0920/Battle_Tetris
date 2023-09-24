@@ -1,24 +1,29 @@
 package kr.ac.jbnu.se.tetris;
 
-import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 
-public class Shape {
+public class Shape implements Cloneable {
+
+
+    BoardAI b;
 
     private Tetrominoes pieceShape; // 모양
 
     private int[][][] coordsTable; 
-    private int coords[][]; // 모양의 좌표값
+    private int[][] coords; // 모양의 좌표값
 
     private int curX = 0;
     private int curY = 0; // 현재 위치
+
+    private int rotateIndex = 0;
 
     public Shape() {
         coords = new int[4][2];
         setShape(Tetrominoes.NoShape);
     }
 
-    public void setShape(Tetrominoes shape) {	
-            
+    public void setShape(Tetrominoes shape) {
+
         coordsTable = new int[][][] { { { 0, 0 }, { 0, 0 }, { 0, 0 }, { 0, 0 } },
                                         { { 0, -1 }, { 0, 0 }, { -1, 0 }, { -1, 1 } }, 
                                         { { 0, -1 }, { 0, 0 }, { 1, 0 }, { 1, 1 } },
@@ -36,6 +41,11 @@ public class Shape {
         
         pieceShape = shape;
     }
+
+    public Object clone() throws CloneNotSupportedException { // CloneNotSupportedException는 checked exception 이라 반드시 예외처리
+        return super.clone(); // 기본적으로 부모의 clone을 그대로 불러와 반환
+    }
+    
     public Tetrominoes getShape() {
         return pieceShape;
     }
@@ -54,9 +64,10 @@ public class Shape {
     }
 
     public void setRandomShape() {
-        Random r = new Random();
-        int x = Math.abs(r.nextInt()) % 7 + 1; 
+        ThreadLocalRandom r = ThreadLocalRandom.current();
+        int x = r.nextInt(7) + 1;
         Tetrominoes[] values = Tetrominoes.values();
+        rotateIndex = 0;
         setShape(values[x]);
     }
 
@@ -86,11 +97,22 @@ public class Shape {
         curY = y;
     }
 
+    public int getRotateIndex(){
+        return rotateIndex;
+    }
+
     public Shape rotateLeft() {
         if (pieceShape == Tetrominoes.SquareShape)
             return this;
 
         Shape result = new Shape();
+
+        result.moveTo(curX, curY);
+        result.rotateIndex = rotateIndex + 1;
+        
+        if(result.rotateIndex < 0)
+            result.rotateIndex = 3;
+
         result.pieceShape = pieceShape;
 
         for (int i = 0; i < 4; ++i) {
@@ -105,6 +127,13 @@ public class Shape {
             return this;
 
         Shape result = new Shape();
+        
+        result.moveTo(curX, curY);
+        result.rotateIndex = rotateIndex + 1;
+
+        if(result.rotateIndex > 3)
+            result.rotateIndex = 0;
+
         result.pieceShape = pieceShape;
 
         for (int i = 0; i < 4; ++i) {
