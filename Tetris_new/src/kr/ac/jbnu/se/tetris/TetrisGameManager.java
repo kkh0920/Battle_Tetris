@@ -108,12 +108,6 @@ public class TetrisGameManager extends JFrame implements ActionListener{
             p2Board.setTextResume();
         }
     }
-
-    public static void main(String[] args){
-        TetrisGameManager gameManager = new TetrisGameManager();
-        gameManager.setVisible(true);
-    }
-
     public class PlayerKeyListener extends KeyAdapter {
         public void keyPressed(KeyEvent e) {
 
