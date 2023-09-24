@@ -19,7 +19,7 @@ public class TetrisAI {
     int[] dx;
     int[] dy;
     
-    public TetrisAI(BoardAI board){
+    public TetrisAI(BoardAI board) {
         this.board = board;
         dx = new int[] { -1, 1, 0, 0 };
         dy = new int[] { 0, 0, -1, 1 };
