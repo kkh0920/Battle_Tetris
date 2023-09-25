@@ -14,8 +14,11 @@ public class TetrisAI {
     
     Shape curPiece;
 
+    // 0 : 왼쪽 / 1 : 오른쪽 / 2 : 아래 / 3 : right 회전
     String bestRoute;
     
+    int maxWeight;
+
     int[] dx;
     int[] dy;
     
@@ -26,9 +29,32 @@ public class TetrisAI {
     }
 
     public String findBestRoute() throws CloneNotSupportedException {
-
         initFindRoute();
+
+        while(!shape.isEmpty()) {
+            Shape piece = (Shape) shape.poll().clone();
+            String curRoute = route.poll();
+
+            int curX = piece.curX();
+            int curY = piece.curY();
+
+            findRoute_move(piece, curRoute, curX, curY);
+            fineRoute_rotate(piece, curRoute, curX, curY);
+        }
         
+        return bestRoute;
+    }
+
+    
+    private void initFindRoute() throws CloneNotSupportedException {
+        shape = new LinkedList<>();
+        route = new LinkedList<>();
+        
+        maxWeight = 0;
+        bestRoute = "";
+        visited = new boolean[board.BoardHeight][board.BoardWidth][4];
+        curPiece = (Shape) board.curPiece.clone();
+
         for(int i = 0; i < 4; i++){
             visited[curPiece.curY()][curPiece.curX()][curPiece.getRotateIndex()] = true;
 
@@ -38,53 +64,56 @@ public class TetrisAI {
             shape.add(curPiece);
             curPiece = curPiece.rotateRight();
         }
-
-        int maxWeight = 0;
-
-        while(!shape.isEmpty()) {
-            Shape piece = (Shape) shape.poll().clone();
-            String curRoute = route.poll();
-
-            int curX = piece.curX();
-            int curY = piece.curY();
-
-            for(int i = 0; i < 3; i++) {
-                Shape nPiece = (Shape) piece.clone();
-                int nX = curX + dx[i];
-                int nY = curY + dy[i];
-                
-                if(nX < 0 || nX >= board.BoardWidth || nY < 0 || nY >= board.BoardHeight)
-                    continue;
-                if(visited[nY][nX][nPiece.getRotateIndex()])
-                    continue;
-                if(!board.tryMove(nPiece, nX, nY)){
-                    int weight = getWeight(nPiece, curX, curY);
-                    if(maxWeight <= weight){
-                        bestRoute = curRoute;
-                        maxWeight = weight;
-                    }
-                    continue;
-                }
-
-                nPiece.moveTo(nX, nY);
-                visited[nY][nX][nPiece.getRotateIndex()] = true;
-
-                route.add(curRoute + Integer.toString(i));
-                shape.add(nPiece);
-            }
-        }
-
-        return bestRoute;
     }
 
-    private void initFindRoute() throws CloneNotSupportedException{
-        shape = new LinkedList<>();
-        route = new LinkedList<>();
-    
-        // 0 : 왼쪽 / 1 : 오른쪽 / 2 : 아래 / 3 : right 회전
-        bestRoute = "";
-        visited = new boolean[board.BoardHeight][board.BoardWidth][4];
-        curPiece = (Shape) board.curPiece.clone();
+    private void findRoute_move(Shape piece, String curRoute, int curX, int curY) throws CloneNotSupportedException {
+        for(int i = 0; i < 3; i++) {
+            Shape nPiece = (Shape) piece.clone();
+            int nX = curX + dx[i];
+            int nY = curY + dy[i];
+            
+            if(nX < 0 || nX >= board.BoardWidth || nY < 0 || nY >= board.BoardHeight)
+                continue;
+            if(visited[nY][nX][nPiece.getRotateIndex()])
+                continue;
+            if(!board.tryMove(nPiece, nX, nY)){
+                int weight = getWeight(nPiece, curX, curY);
+                if(maxWeight <= weight){
+                    bestRoute = curRoute;
+                    maxWeight = weight;
+                }
+                continue;
+            }
+
+            nPiece.moveTo(nX, nY);
+            visited[nY][nX][nPiece.getRotateIndex()] = true;
+
+            route.add(curRoute + Integer.toString(i));
+            shape.add(nPiece);
+        }
+    }
+
+    private void fineRoute_rotate(Shape rPiece, String curRoute, int curX, int curY) {
+        for(int i = 0; i < 3; i++) {
+            rPiece = rPiece.rotateRight();
+        
+            if(visited[curY][curX][rPiece.getRotateIndex()])
+                continue;
+            if(!board.tryMove(rPiece, curX, curY)){
+                rPiece = rPiece.rotateLeft();
+                int weight = getWeight(rPiece, curX, curY);
+                if(maxWeight < weight){
+                    bestRoute = curRoute;
+                    maxWeight = weight;
+                }
+                break;
+            }
+
+            visited[curY][curX][rPiece.getRotateIndex()] = true;
+
+            route.add(curRoute + "3");
+            shape.add(rPiece);
+        }
     }
 
     private int getWeight(Shape nPiece, int curX, int curY){
