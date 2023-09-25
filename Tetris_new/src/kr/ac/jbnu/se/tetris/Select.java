@@ -1,12 +1,9 @@
 package kr.ac.jbnu.se.tetris;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
 
 class Button {
@@ -23,28 +20,19 @@ public class Select extends JFrame {
     JButton ai,versus,setting,tutorial;
     Button bt;
     BufferedImage img = null;
-    BackG background;
+   // BackG background;
     JLayeredPane frame = new JLayeredPane();
+    Backgrounds backgrounds;
 
     Select() throws IOException {
         setFrame();
     }
-
-    public void drawBackground() throws IOException { // ImageIO.read => 예외처리 -> IOException이 필수
-        frame.setSize(Frame_X,Frame_Y);
-        frame.setLayout(null);
-
-        img = ImageIO.read(new File("image\\backg.png"));
-
-        background = new BackG();
-        background.setSize(Frame_X,Frame_Y);
-        frame.add(background);
-    }
-
     public void setFrame() throws IOException {
-        drawBackground();
+        //drawBackground();
+        backgrounds = new Backgrounds();
+
         setButton();
-        add(ai); add(versus); add(setting);add(tutorial);add(frame);
+        add(ai); add(versus); add(setting);add(tutorial);add(backgrounds.frame);
         setSize(Frame_X,Frame_Y);
         setLayout(null);
         setResizable(false);
@@ -106,17 +94,16 @@ public class Select extends JFrame {
         setting.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Setting st = new Setting();
-                st.setVisible(true);
+                Setting st = null;
                 setVisible(false);
+                try {
+                    st = new Setting();
+                    st.setVisible(true);
+                } catch (IOException ex) {
+                    throw new RuntimeException(ex);
+                }
             }
         });
-    }
-    
-    class BackG extends JPanel { // Panel에 배경화면을 나타내기 위해서,
-        public void paint(Graphics g){
-            g.drawImage(img, 0,0,null);
-        }
     }
 
 }

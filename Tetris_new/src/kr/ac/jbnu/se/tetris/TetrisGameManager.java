@@ -7,6 +7,9 @@ import java.awt.event.KeyEvent;
 import javax.swing.JFrame;
 
 public class TetrisGameManager extends JFrame {
+    int p1_up = 38, p1_down = 40, p1_left = 39, p1_right = 37,
+    p2_up = 119, p2_down = 115, p2_left = 97, p2_right = 100,
+    p2_up_upper = p2_up - 32, p2_down_upper = p2_down - 32, p2_left_upper = p2_left - 32, p2_right_upper = p2_right-32;
 
     Tetris player1Panel;
     Tetris player2Panel;
@@ -101,7 +104,7 @@ public class TetrisGameManager extends JFrame {
             // player1 키 입력
 
             Shape p1CurPiece = player1Board.getCurPiece();
-    
+
             if (keycode == KeyEvent.VK_LEFT) {
                 if (player1Board.tryMove(p1CurPiece, p1CurPiece.curX() - 1, p1CurPiece.curY()))
                     player1Board.move(p1CurPiece, p1CurPiece.curX() - 1, p1CurPiece.curY());
