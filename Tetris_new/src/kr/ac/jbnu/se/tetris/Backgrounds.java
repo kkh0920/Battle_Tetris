@@ -20,6 +20,7 @@ public class Backgrounds extends JFrame {
         frame.setSize(Frame_X,Frame_Y);
         frame.setLayout(null);
 
+        // img = ImageIO.read(new File("TetrisCode/image/backg.png"));
         img = ImageIO.read(new File("image\\backg.png"));
 
         background = new BackG();
