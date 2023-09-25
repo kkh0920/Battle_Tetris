@@ -25,7 +25,7 @@ public class BoardAI extends Board {
 
         bestRoute = computer.findBestRoute();
 
-        timer = new Timer(100, this);
+        timer = new Timer(90, this);
         
         start();
     }
