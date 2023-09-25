@@ -5,7 +5,7 @@ public class Player {
     
      1. hp 기능
 
-     2. ..
+     2. ...
 
      */
 }

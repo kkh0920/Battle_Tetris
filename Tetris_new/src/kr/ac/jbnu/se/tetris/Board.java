@@ -3,11 +3,14 @@ package kr.ac.jbnu.se.tetris;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.Timer;
 
-public class Board extends JPanel {
+public class Board extends JPanel implements ActionListener {
 
     final int BoardWidth = 10;
     final int BoardHeight = 22;
@@ -16,22 +19,24 @@ public class Board extends JPanel {
     final int PreferredSizeHeight = 400;
 
     boolean isFallingFinished = false;
+    boolean isStarted = false;
     
     int numLinesRemoved = 0;
 
     Shape curPiece;
-
     JLabel statusbar;
+    Tetrominoes[][] board;
 
-    Tetrominoes[] board;
+    Timer timer;
+
+    Board opponent;
 
     public Board(Tetris parent) {
         setPreferredSize(new Dimension(PreferredSizeWidth, PreferredSizeHeight));
-        board = new Tetrominoes[BoardWidth * BoardHeight];
         
-        curPiece = new Shape();
-
+        board = new Tetrominoes[BoardHeight][BoardWidth];
         statusbar = parent.getStatusBar();
+        curPiece = new Shape();
 
         isFallingFinished = false;
         numLinesRemoved = 0;
@@ -40,16 +45,28 @@ public class Board extends JPanel {
         newPiece();
     }
 
+    public void setOpponent(Board opponent){
+        this.opponent = opponent;
+    }
+
+    public void start(){
+        isStarted = true;
+        timer.start();
+    }
+
     private void clearBoard() { // 보드 클리어
-        for (int i = 0; i < BoardHeight * BoardWidth; ++i)
-            board[i] = Tetrominoes.NoShape;
+        for (int i = 0; i < BoardHeight; ++i) { 
+            for(int j = 0; j < BoardWidth; ++j) {
+                board[i][j] = Tetrominoes.NoShape;
+            }
+        }
     }
 
     public boolean newPiece() { // 새로운 떨어지는 블록 생성
         curPiece.setRandomShape();
 
-        int initPosX = BoardWidth / 2 + 1;
-        int initPosY = BoardHeight - 1 + curPiece.minY();
+        int initPosX = BoardWidth / 2;
+        int initPosY = BoardHeight - 2 + curPiece.minY();
 
         if (!tryMove(curPiece, initPosX, initPosY))
             return false;
@@ -71,7 +88,7 @@ public class Board extends JPanel {
         return (int) getPreferredSize().height / BoardHeight;
     }
     Tetrominoes shapeAt(int x, int y) { // (x, y)에 있는 블럭의 Tetrominoes 타입
-        return board[(y * BoardWidth) + x];
+        return board[y][x];
     }
 
 
@@ -124,7 +141,7 @@ public class Board extends JPanel {
         for (int i = 0; i < 4; ++i) {
             int x = curPiece.curX() + curPiece.x(i);
             int y = curPiece.curY() - curPiece.y(i);
-            board[(y * BoardWidth) + x] = curPiece.getShape(); 
+            board[y][x] = curPiece.getShape(); 
         }
         removeFullLines();
     }
@@ -142,8 +159,11 @@ public class Board extends JPanel {
             if (lineIsFull) {
                 ++numFullLines;
                 for (int k = i; k < BoardHeight - 1; ++k) {
-                    for (int j = 0; j < BoardWidth; ++j)
-                        board[(k * BoardWidth) + j] = shapeAt(j, k + 1);
+                    for (int j = 0; j < BoardWidth; ++j){
+                        board[k][j] = shapeAt(j, k + 1);
+                        if(k == BoardHeight - 2 && shapeAt(j, k + 1) != Tetrominoes.NoShape)
+                            board[k + 1][j] = Tetrominoes.NoShape;
+                    }
                 }
             }
         }
@@ -171,7 +191,7 @@ public class Board extends JPanel {
         for (int i = 0; i < BoardHeight; ++i) {
             for (int j = 0; j < BoardWidth; ++j) {
                 Tetrominoes shape = shapeAt(j, BoardHeight - i - 1);
-                // if(shape != Tetrominoes.NoShape)
+                if(shape != Tetrominoes.NoShape)
                     drawSquare(g, 0 + j * squareWidth(), boardTop + i * squareHeight(), shape);
             }
         }
@@ -205,4 +225,7 @@ public class Board extends JPanel {
         g.drawLine(x + 1, y + squareHeight() - 1, x + squareWidth() - 1, y + squareHeight() - 1);
         g.drawLine(x + squareWidth() - 1, y + squareHeight() - 1, x + squareWidth() - 1, y + 1);
     }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {}
 }
