@@ -1,8 +1,8 @@
 package kr.ac.jbnu.se.tetris;
 
-import javafx.scene.layout.Background;
-import sun.audio.AudioPlayer;
-import sun.audio.AudioStream;
+// import javafx.scene.layout.Background;
+// import sun.audio.AudioPlayer;
+// import sun.audio.AudioStream;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -17,8 +17,6 @@ public class Setting extends JFrame {
 
     //AudioStream BGM; 실질적인 배경음악이 들어가는 객체
     //AudioPlayer a = AudioPlayer.player; //-> AudioPlayer, 배경음악 재생시 필요한 객체
-
-
 
 
     Setting() throws IOException {
@@ -39,10 +37,12 @@ public class Setting extends JFrame {
     }
 
     public void setButton() {
+        // musicOn = new JButton(new ImageIcon("TetrisCode/image/musicOn.png"));
         musicOn = new JButton(new ImageIcon("image\\musicOn.png"));
         bt = new Button(musicOn);
         musicOn.setBounds(50,30,100,100);
 
+        // musicOff = new JButton(new ImageIcon("TetrisCode/image/musicOff.png"));
         musicOff = new JButton(new ImageIcon("image\\musicOff.png"));
         bt = new Button(musicOff);
         musicOff.setBounds(50,180,100,100);
