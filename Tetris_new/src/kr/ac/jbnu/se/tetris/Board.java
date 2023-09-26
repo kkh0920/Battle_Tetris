@@ -23,7 +23,7 @@ public class Board extends JPanel implements ActionListener {
     
     int numLinesRemoved = 0;
 
-    Shape curPiece;
+    Shape curPiece; 
     JLabel statusbar;
     Tetrominoes[][] board;
 
@@ -36,7 +36,7 @@ public class Board extends JPanel implements ActionListener {
         
         board = new Tetrominoes[BoardHeight][BoardWidth];
         statusbar = parent.getStatusBar();
-        curPiece = new Shape();
+        curPiece = new Shape(); // 생성자에서 객체 생성 (합성 관계)
 
         isFallingFinished = false;
         numLinesRemoved = 0;
