@@ -34,7 +34,6 @@ public class TetrisGameManager extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         setFocusable(true);
-        System.out.println(p2_down + " " + p2_dropDown + " " + p2_up);
     }
 
     public void settingOpponent(boolean isComputer) throws CloneNotSupportedException {
@@ -113,6 +112,7 @@ public class TetrisGameManager extends JFrame {
             if (keycode == KeyEvent.VK_LEFT) {
                 if (p1Board.tryMove(p1CurPiece, p1CurPiece.curX() - 1, p1CurPiece.curY()))
                     p1Board.move(p1CurPiece, p1CurPiece.curX() - 1, p1CurPiece.curY());
+
             }
             if (keycode == KeyEvent.VK_RIGHT) {
                 if (p1Board.tryMove(p1CurPiece, p1CurPiece.curX() + 1, p1CurPiece.curY()))
@@ -131,7 +131,7 @@ public class TetrisGameManager extends JFrame {
             if (keycode == KeyEvent.VK_SPACE) {
                 p1Board.dropDown();
             }
-            if (keycode == 'l' || keycode == 'L') {
+            if (keycode == 25) {
                 p1Board.oneLineDown();
             }
 
@@ -163,7 +163,7 @@ public class TetrisGameManager extends JFrame {
             if (keycode == p2_dropDown) {
                 p2Board.dropDown();
             }
-            if (keycode == 'z' || keycode == 'Z') {
+            if (keycode == KeyEvent.VK_CONTROL) {
                 p2Board.oneLineDown();
             }
         }
