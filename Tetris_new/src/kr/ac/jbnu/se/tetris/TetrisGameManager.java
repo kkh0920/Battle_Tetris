@@ -8,10 +8,10 @@ import javax.swing.JFrame;
 
 public class TetrisGameManager extends JFrame {
     
-    int p1_up = 38, p1_down = 40, p1_left = 39, p1_right = 37,
+    static int
         p2_up = 119, p2_down = 115, p2_left = 97, p2_right = 100,
-        p2_up_upper = p2_up - 32, p2_down_upper = p2_down - 32, 
-        p2_left_upper = p2_left - 32, p2_right_upper = p2_right-32;
+        p2_up_upper = p2_up - 32, p2_down_upper = p2_down - 32, p2_left_upper = p2_left - 32, p2_right_upper = p2_right-32,
+        p2_dropDown = 16;
 
     Select home;
 
@@ -34,6 +34,7 @@ public class TetrisGameManager extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         setFocusable(true);
+        System.out.println(p2_down + " " + p2_dropDown + " " + p2_up);
     }
 
     public void settingOpponent(boolean isComputer) throws CloneNotSupportedException {
@@ -141,25 +142,25 @@ public class TetrisGameManager extends JFrame {
 
             Shape p2CurPiece = p2Board.getCurPiece();
 
-            if (keycode == 'a' || keycode == 'A') {
+            if (keycode == p2_left || keycode == p2_left_upper) {
                 if (p2Board.tryMove(p2CurPiece, p2CurPiece.curX() - 1, p2CurPiece.curY()))
                     p2Board.move(p2CurPiece, p2CurPiece.curX() - 1, p2CurPiece.curY());
             }
-            if (keycode == 'd' || keycode == 'D') {
+            if (keycode == p2_right || keycode == p2_right_upper) {
                 if (p2Board.tryMove(p2CurPiece, p2CurPiece.curX() + 1, p2CurPiece.curY()))
                     p2Board.move(p2CurPiece, p2CurPiece.curX() + 1, p2CurPiece.curY());
             }     
-            if (keycode == 'w' || keycode == 'W') {
+            if (keycode == p2_up || keycode == p2_up_upper) {
                 Shape leftRotated = p2CurPiece.rotateLeft();
                 if (p2Board.tryMove(leftRotated, p2CurPiece.curX(), p2CurPiece.curY()))
                     p2Board.move(leftRotated, p2CurPiece.curX(), p2CurPiece.curY());
             }
-            if (keycode == 's' || keycode == 'S') {
+            if (keycode == p2_down || keycode == p2_down_upper) {
                 Shape rightRotated = p2CurPiece.rotateRight();
                 if (p2Board.tryMove(rightRotated, p2CurPiece.curX(), p2CurPiece.curY()))
                     p2Board.move(rightRotated, p2CurPiece.curX(), p2CurPiece.curY());
             }
-            if (keycode == KeyEvent.VK_SHIFT) {
+            if (keycode == p2_dropDown) {
                 p2Board.dropDown();
             }
             if (keycode == 'z' || keycode == 'Z') {
