@@ -22,7 +22,7 @@ public class Tetris extends JPanel {
         statusbar = new JLabel("0");
 
         if(isComputer)
-            board = new BoardAI(this);
+            board = new BoardAI(this, 80);
         else
             board = new BoardPlayer(this);
 
