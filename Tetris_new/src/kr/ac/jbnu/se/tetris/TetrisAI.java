@@ -7,8 +7,8 @@ public class TetrisAI {
 
     BoardAI board;
 
-    Queue<Shape> shape;
-    Queue<String> route;
+    Queue<Shape> shapeQueue;
+    Queue<String> routeQueue;
 
     boolean[][][] visited;
     
@@ -31,9 +31,9 @@ public class TetrisAI {
     public String findBestRoute() throws CloneNotSupportedException {
         initFindRoute();
 
-        while(!shape.isEmpty()) {
-            Shape piece = (Shape) shape.poll().clone();
-            String curRoute = route.poll();
+        while(!shapeQueue.isEmpty()) {
+            Shape piece = (Shape) shapeQueue.poll().clone();
+            String curRoute = routeQueue.poll();
 
             int curX = piece.curX();
             int curY = piece.curY();
@@ -47,10 +47,10 @@ public class TetrisAI {
 
     
     private void initFindRoute() throws CloneNotSupportedException {
-        shape = new LinkedList<>();
-        route = new LinkedList<>();
+        shapeQueue = new LinkedList<>();
+        routeQueue = new LinkedList<>();
         
-        maxWeight = 0;
+        maxWeight = -1000;
         bestRoute = "";
         visited = new boolean[board.BoardHeight][board.BoardWidth][4];
         curPiece = (Shape) board.curPiece.clone();
@@ -58,10 +58,10 @@ public class TetrisAI {
         for(int i = 0; i < 4; i++){
             visited[curPiece.curY()][curPiece.curX()][curPiece.getRotateIndex()] = true;
 
-            route.add(bestRoute);
+            routeQueue.add(bestRoute);
             bestRoute += "3";
             
-            shape.add(curPiece);
+            shapeQueue.add(curPiece);
             curPiece = curPiece.rotateRight();
         }
     }
@@ -77,7 +77,7 @@ public class TetrisAI {
             if(visited[nY][nX][nPiece.getRotateIndex()])
                 continue;
             if(!board.tryMove(nPiece, nX, nY)){
-                int weight = getWeight(nPiece, curX, curY);
+                int weight = getWeight(nPiece);
                 if(maxWeight <= weight){
                     bestRoute = curRoute;
                     maxWeight = weight;
@@ -88,12 +88,13 @@ public class TetrisAI {
             nPiece.moveTo(nX, nY);
             visited[nY][nX][nPiece.getRotateIndex()] = true;
 
-            route.add(curRoute + Integer.toString(i));
-            shape.add(nPiece);
+            routeQueue.add(curRoute + Integer.toString(i));
+            shapeQueue.add(nPiece);
         }
     }
 
-    private void fineRoute_rotate(Shape rPiece, String curRoute, int curX, int curY) {
+    private void fineRoute_rotate(Shape piece, String curRoute, int curX, int curY) {
+        Shape rPiece = piece;
         for(int i = 0; i < 3; i++) {
             rPiece = rPiece.rotateRight();
         
@@ -101,7 +102,7 @@ public class TetrisAI {
                 continue;
             if(!board.tryMove(rPiece, curX, curY)){
                 rPiece = rPiece.rotateLeft();
-                int weight = getWeight(rPiece, curX, curY);
+                int weight = getWeight(rPiece);
                 if(maxWeight < weight){
                     bestRoute = curRoute;
                     maxWeight = weight;
@@ -111,20 +112,20 @@ public class TetrisAI {
 
             visited[curY][curX][rPiece.getRotateIndex()] = true;
 
-            route.add(curRoute + "3");
-            shape.add(rPiece);
+            routeQueue.add(curRoute + "3");
+            shapeQueue.add(rPiece);
         }
     }
 
-    private int getWeight(Shape nPiece, int curX, int curY){
+    private int getWeight(Shape nPiece){
         boolean[][] isCurPiece = new boolean[board.BoardHeight][board.BoardWidth];
 
         for(int i = 0; i < 4; i++){
-            int blockX = curX + nPiece.x(i);
-            int blockY = curY - nPiece.y(i);
+            int blockX = nPiece.curX() + nPiece.x(i);
+            int blockY = nPiece.curY() - nPiece.y(i);
 
             if(blockX < 0 || blockX >= board.BoardWidth || blockY < 0 || blockY >= board.BoardHeight)
-                return -1;
+                return -1001;
             
             isCurPiece[blockY][blockX] = true;
         }
@@ -132,22 +133,22 @@ public class TetrisAI {
         int weight = 0;
 
         for(int i = 0; i < 4; i++){
-            int blockX = curX + nPiece.x(i);
-            int blockY = curY - nPiece.y(i);
+            int blockX = nPiece.curX() + nPiece.x(i);
+            int blockY = nPiece.curY() - nPiece.y(i);
             
             for(int j = 0; j < 4; j++){ 
                 int x = blockX + dx[j];
                 int y = blockY + dy[j];
 
-                if(x + 1 < 0 || x > board.BoardWidth || y + 1 < 0 || y > board.BoardHeight - 1)
-                    continue;
+                if(x + 1 < 0 || x > board.BoardWidth || y + 1 < 0 || y > board.BoardHeight)
+                    return -1001;
 
-                if(x + 1 == 0 || x == board.BoardWidth || y + 1 == 0 || y == board.BoardHeight - 1) {
+                if(x + 1 == 0 || x == board.BoardWidth || y + 1 == 0 || y == board.BoardHeight) {
                     weight += board.boardWeight[y + 1][x + 1];
                     continue;
                 }
 
-                if(j == 2 && board.board[y][x] == Tetrominoes.NoShape) {
+                if(j != 3 && board.board[y][x] == Tetrominoes.NoShape) {
                     weight -= board.boardWeight[y + 1][x + 1];
                 }
                 else if(!isCurPiece[y][x] && board.board[y][x] != Tetrominoes.NoShape) {
