@@ -9,7 +9,7 @@ public class BoardPlayer extends Board {
     
     public BoardPlayer(Tetris parent) {
         super(parent);
-        //TODO Auto-generated constructor stub
+        //TODO Auto-generated constructor stub 
         
         player = new Player();
         timer = new Timer(400, this);
