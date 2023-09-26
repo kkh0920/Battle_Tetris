@@ -37,6 +37,8 @@ public class Shape implements Cloneable {
                 coords[i][j] = coordsTable[shape.ordinal()][i][j];
             }
         }
+
+        rotateIndex = 0;
         
         pieceShape = shape;
     }
