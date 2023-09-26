@@ -148,7 +148,7 @@ public class TetrisAI {
                     continue;
                 }
 
-                if(j != 3 && board.board[y][x] == Tetrominoes.NoShape) {
+                if(board.board[y][x] == Tetrominoes.NoShape) {
                     weight -= board.boardWeight[y + 1][x + 1];
                 }
                 else if(!isCurPiece[y][x] && board.board[y][x] != Tetrominoes.NoShape) {
