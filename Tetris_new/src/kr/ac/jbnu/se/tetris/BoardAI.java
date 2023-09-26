@@ -14,7 +14,7 @@ public class BoardAI extends Board {
 
     int index = 0;
 
-    public BoardAI(Tetris parent) throws CloneNotSupportedException {
+    public BoardAI(Tetris parent, int moveDelay) throws CloneNotSupportedException {
         super(parent);
         //TODO Auto-generated constructor stub 
 
@@ -25,7 +25,7 @@ public class BoardAI extends Board {
 
         bestRoute = computer.findBestRoute();
 
-        timer = new Timer(90, this);
+        timer = new Timer(moveDelay, this);
         
         start();
     }
