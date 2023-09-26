@@ -7,15 +7,16 @@ import java.awt.event.KeyEvent;
 import javax.swing.JFrame;
 
 public class TetrisGameManager extends JFrame {
+    
     int p1_up = 38, p1_down = 40, p1_left = 39, p1_right = 37,
-    p2_up = 119, p2_down = 115, p2_left = 97, p2_right = 100,
-    p2_up_upper = p2_up - 32, p2_down_upper = p2_down - 32, p2_left_upper = p2_left - 32, p2_right_upper = p2_right-32;
+        p2_up = 119, p2_down = 115, p2_left = 97, p2_right = 100,
+        p2_up_upper = p2_up - 32, p2_down_upper = p2_down - 32, 
+        p2_left_upper = p2_left - 32, p2_right_upper = p2_right-32;
+
+    Select home;
 
     Tetris player1Panel;
     Tetris player2Panel;
-
-    Board p1Board;
-    Board p2Board;
 
     boolean isPaused = false;
 
@@ -37,10 +38,10 @@ public class TetrisGameManager extends JFrame {
 
     public void settingOpponent(boolean isComputer) throws CloneNotSupportedException {
         player1Panel = new Tetris(false);
-        player2Panel = new Tetris(isComputer);
+        player2Panel = new Tetris(isComputer); // 생성자에서 객체를 생성하면 합성 관계
 
-        p1Board = player1Panel.getBoard();
-        p2Board = player2Panel.getBoard(); 
+        Board p1Board = player1Panel.getBoard();
+        Board p2Board = player2Panel.getBoard(); 
 
         p1Board.setOpponent(p2Board);
         p2Board.setOpponent(p1Board);
@@ -50,6 +51,9 @@ public class TetrisGameManager extends JFrame {
     }
 
     public void pause() {
+        Board p1Board = player1Panel.getBoard();
+        Board p2Board = player2Panel.getBoard();
+        
         if (!p1Board.isStarted || !p2Board.isStarted)
             return;
 
@@ -73,8 +77,8 @@ public class TetrisGameManager extends JFrame {
 
         public void keyPressed(KeyEvent e) {
 
-            Board player1Board = player1Panel.getBoard();
-            Board player2Board = player2Panel.getBoard();
+            Board p1Board = player1Panel.getBoard();
+            Board p2Board = player2Panel.getBoard();
             
             /*
             
@@ -87,8 +91,8 @@ public class TetrisGameManager extends JFrame {
             */
 
             if (!p1Board.isStarted || !p2Board.isStarted || 
-                    player1Board.curPiece.getShape() == Tetrominoes.NoShape ||
-                                player2Board.curPiece.getShape() == Tetrominoes.NoShape) {
+                    p1Board.curPiece.getShape() == Tetrominoes.NoShape ||
+                                p2Board.curPiece.getShape() == Tetrominoes.NoShape) {
                 return;
             }
 
@@ -103,31 +107,31 @@ public class TetrisGameManager extends JFrame {
 
             // player1 키 입력
 
-            Shape p1CurPiece = player1Board.getCurPiece();
+            Shape p1CurPiece = p1Board.getCurPiece();
 
             if (keycode == KeyEvent.VK_LEFT) {
-                if (player1Board.tryMove(p1CurPiece, p1CurPiece.curX() - 1, p1CurPiece.curY()))
-                    player1Board.move(p1CurPiece, p1CurPiece.curX() - 1, p1CurPiece.curY());
+                if (p1Board.tryMove(p1CurPiece, p1CurPiece.curX() - 1, p1CurPiece.curY()))
+                    p1Board.move(p1CurPiece, p1CurPiece.curX() - 1, p1CurPiece.curY());
             }
             if (keycode == KeyEvent.VK_RIGHT) {
-                if (player1Board.tryMove(p1CurPiece, p1CurPiece.curX() + 1, p1CurPiece.curY()))
-                    player1Board.move(p1CurPiece, p1CurPiece.curX() + 1, p1CurPiece.curY());
+                if (p1Board.tryMove(p1CurPiece, p1CurPiece.curX() + 1, p1CurPiece.curY()))
+                    p1Board.move(p1CurPiece, p1CurPiece.curX() + 1, p1CurPiece.curY());
             }
             if (keycode == KeyEvent.VK_UP) {
                 Shape leftRotated = p1CurPiece.rotateLeft();
-                if (player1Board.tryMove(leftRotated, p1CurPiece.curX(), p1CurPiece.curY()))
-                    player1Board.move(leftRotated, p1CurPiece.curX(), p1CurPiece.curY());
+                if (p1Board.tryMove(leftRotated, p1CurPiece.curX(), p1CurPiece.curY()))
+                    p1Board.move(leftRotated, p1CurPiece.curX(), p1CurPiece.curY());
             }
             if (keycode == KeyEvent.VK_DOWN) {
                 Shape rightRotated = p1CurPiece.rotateRight();
-                if (player1Board.tryMove(rightRotated, p1CurPiece.curX(), p1CurPiece.curY()))
-                    player1Board.move(rightRotated, p1CurPiece.curX(), p1CurPiece.curY());
+                if (p1Board.tryMove(rightRotated, p1CurPiece.curX(), p1CurPiece.curY()))
+                    p1Board.move(rightRotated, p1CurPiece.curX(), p1CurPiece.curY());
             }
             if (keycode == KeyEvent.VK_SPACE) {
-                player1Board.dropDown();
+                p1Board.dropDown();
             }
             if (keycode == 'l' || keycode == 'L') {
-                player1Board.oneLineDown();
+                p1Board.oneLineDown();
             }
 
             // player2 키 입력
@@ -135,31 +139,31 @@ public class TetrisGameManager extends JFrame {
             if(player2Panel.isComputer())
                 return;
 
-            Shape p2CurPiece = player2Board.getCurPiece();
+            Shape p2CurPiece = p2Board.getCurPiece();
 
             if (keycode == 'a' || keycode == 'A') {
-                if (player2Board.tryMove(p2CurPiece, p2CurPiece.curX() - 1, p2CurPiece.curY()))
-                    player2Board.move(p2CurPiece, p2CurPiece.curX() - 1, p2CurPiece.curY());
+                if (p2Board.tryMove(p2CurPiece, p2CurPiece.curX() - 1, p2CurPiece.curY()))
+                    p2Board.move(p2CurPiece, p2CurPiece.curX() - 1, p2CurPiece.curY());
             }
             if (keycode == 'd' || keycode == 'D') {
-                if (player2Board.tryMove(p2CurPiece, p2CurPiece.curX() + 1, p2CurPiece.curY()))
-                    player2Board.move(p2CurPiece, p2CurPiece.curX() + 1, p2CurPiece.curY());
+                if (p2Board.tryMove(p2CurPiece, p2CurPiece.curX() + 1, p2CurPiece.curY()))
+                    p2Board.move(p2CurPiece, p2CurPiece.curX() + 1, p2CurPiece.curY());
             }     
             if (keycode == 'w' || keycode == 'W') {
                 Shape leftRotated = p2CurPiece.rotateLeft();
-                if (player2Board.tryMove(leftRotated, p2CurPiece.curX(), p2CurPiece.curY()))
-                    player2Board.move(leftRotated, p2CurPiece.curX(), p2CurPiece.curY());
+                if (p2Board.tryMove(leftRotated, p2CurPiece.curX(), p2CurPiece.curY()))
+                    p2Board.move(leftRotated, p2CurPiece.curX(), p2CurPiece.curY());
             }
             if (keycode == 's' || keycode == 'S') {
                 Shape rightRotated = p2CurPiece.rotateRight();
-                if (player2Board.tryMove(rightRotated, p2CurPiece.curX(), p2CurPiece.curY()))
-                    player2Board.move(rightRotated, p2CurPiece.curX(), p2CurPiece.curY());
+                if (p2Board.tryMove(rightRotated, p2CurPiece.curX(), p2CurPiece.curY()))
+                    p2Board.move(rightRotated, p2CurPiece.curX(), p2CurPiece.curY());
             }
             if (keycode == KeyEvent.VK_SHIFT) {
-                player2Board.dropDown();
+                p2Board.dropDown();
             }
             if (keycode == 'z' || keycode == 'Z') {
-                player2Board.oneLineDown();
+                p2Board.oneLineDown();
             }
         }
     }
