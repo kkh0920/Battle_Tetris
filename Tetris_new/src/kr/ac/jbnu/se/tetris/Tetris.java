@@ -9,9 +9,13 @@ import javax.swing.JPanel;
 
 public class Tetris extends JPanel {
 
-    JLabel statusbar;
-    Board board;
-    boolean isComputer;
+    private JLabel statusbar;
+    
+    private Board board;
+    
+    private boolean isComputer;
+
+    public int[][] nextPiece;
 
     public Tetris(boolean isComputer) throws CloneNotSupportedException {
         setPreferredSize(new Dimension(200, 450));
@@ -26,7 +30,9 @@ public class Tetris extends JPanel {
         else
             board = new BoardPlayer(this);
 
-        add(board, BorderLayout.WEST);
+        nextPiece = new int[4][2];
+
+        add(board);
         add(statusbar, BorderLayout.SOUTH);
     }
     
