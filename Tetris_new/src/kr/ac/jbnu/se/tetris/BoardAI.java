@@ -6,13 +6,13 @@ import javax.swing.Timer;
 
 public class BoardAI extends Board {
     
-    int[][] boardWeight;
+    private int[][] boardWeight;
 
-    TetrisAI computer;
+    private TetrisAI computer;
 
-    String bestRoute = "";
+    private String bestRoute = "";
 
-    int index = 0;
+    private int index = 0;
 
     public BoardAI(Tetris parent, int moveDelay) throws CloneNotSupportedException {
         super(parent);
@@ -28,6 +28,10 @@ public class BoardAI extends Board {
         timer = new Timer(moveDelay, this);
         
         start();
+    }
+
+    public int[][] getBoardWeight(){
+        return boardWeight;
     }
 
     private void initBoardWeight() {
