@@ -42,9 +42,9 @@ public class Shape implements Cloneable {
     }
 
     public Object clone() throws CloneNotSupportedException { // CloneNotSupportedException는 checked exception 이라 반드시 예외처리
-        return super.clone(); // 기본적으로 부모의 clone을 그대로 불러와 반환
+        return (Shape) super.clone(); // 기본적으로 부모의 clone을 그대로 불러와 반환
     }
-    
+
     public Tetrominoes getShape() {
         return pieceShape;
     }
@@ -96,8 +96,19 @@ public class Shape implements Cloneable {
         curY = y;
     }
 
+    public void setRotateIndex(int i){
+        rotateIndex = i;
+    }
     public int getRotateIndex(){
         return rotateIndex;
+    }
+
+    public Shape copy(){
+        Shape s = new Shape();
+        s.setShape(this.getShape());
+        s.moveTo(this.curX, this.curY);
+        s.setRotateIndex(this.rotateIndex);
+        return s;
     }
 
     public Shape rotateLeft() {
@@ -106,13 +117,12 @@ public class Shape implements Cloneable {
 
         Shape result = new Shape();
 
+        result.setShape(pieceShape);
         result.moveTo(curX, curY);
         result.rotateIndex = rotateIndex + 1;
         
         if(result.rotateIndex < 0)
             result.rotateIndex = 3;
-
-        result.pieceShape = pieceShape;
 
         for (int i = 0; i < 4; ++i) {
             result.setX(i, y(i));
@@ -127,13 +137,12 @@ public class Shape implements Cloneable {
 
         Shape result = new Shape();
         
+        result.setShape(pieceShape);
         result.moveTo(curX, curY);
         result.rotateIndex = rotateIndex + 1;
 
         if(result.rotateIndex > 3)
             result.rotateIndex = 0;
-
-        result.pieceShape = pieceShape;
 
         for (int i = 0; i < 4; ++i) {
             result.setX(i, -y(i));
