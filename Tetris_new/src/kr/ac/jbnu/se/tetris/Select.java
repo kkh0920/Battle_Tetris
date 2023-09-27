@@ -56,35 +56,27 @@ public class Select extends JFrame {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
     }
 
-    public void addButton() {
+    public void setButton() {
+        
         // ai = new JButton(new ImageIcon("TetrisCode/image/AImodes.png"));
         ai = new JButton(new ImageIcon("image\\AImodes.png"));
-
-        // versus = new JButton(new ImageIcon("TetrisCode/image/2P_modes.png"));
-        versus = new JButton(new ImageIcon("image\\2P_modes.png"));
-
-        // setting = new JButton(new ImageIcon("TetrisCode/image/settings.png"));
-        setting = new JButton(new ImageIcon("image\\settings.png"));
-
-        // tutorial = new JButton(new ImageIcon("TetrisCode/image/Tetris.png"));
-        tutorial = new JButton(new ImageIcon("image\\Tetris.png"));
-    }
-
-    public void setButton() {
-        addButton();
-
         ai.setBounds(250,-20,Bt_W,Bt_H);
         bt = new Button(ai);
 
+        // versus = new JButton(new ImageIcon("TetrisCode/image/2P_modes.png"));
+        versus = new JButton(new ImageIcon("image\\2P_modes.png"));
         versus.setBounds(250,80,Bt_W,Bt_H);
         bt = new Button(versus);
 
+        // setting = new JButton(new ImageIcon("TetrisCode/image/settings.png"));
+        setting = new JButton(new ImageIcon("image\\settings.png"));
         setting.setBounds(250,180,Bt_W,Bt_H);
         bt = new Button(setting);
 
+        // tutorial = new JButton(new ImageIcon("TetrisCode/image/Tetris.png"));
+        tutorial = new JButton(new ImageIcon("image\\Tetris.png"));
         tutorial.setBounds(30,100,150,98);
         bt = new Button(tutorial);
-
         buttonAction();
     }
 
@@ -130,11 +122,13 @@ public class Select extends JFrame {
                 } catch (IOException e1) {
                     // TODO Auto-generated catch block
                     e1.printStackTrace();
-                } catch (UnsupportedAudioFileException ex) {
-                    throw new RuntimeException(ex);
-                } catch (LineUnavailableException ex) {
-                    throw new RuntimeException(ex);
-                }
+                } catch (LineUnavailableException e1) {
+                    // TODO Auto-generated catch block
+                    e1.printStackTrace();
+                } catch (UnsupportedAudioFileException e1) {
+                    // TODO Auto-generated catch block
+                    e1.printStackTrace();
+                } 
             }
         });
     }

@@ -1,8 +1,8 @@
 package kr.ac.jbnu.se.tetris;
 
-import javafx.scene.layout.Background;
-import sun.audio.AudioPlayer;
-import sun.audio.AudioStream;
+// import javafx.scene.layout.Background;
+// import sun.audio.AudioPlayer;
+// import sun.audio.AudioStream;
 
 import javax.sound.sampled.*;
 import javax.swing.*;
@@ -19,9 +19,6 @@ public class Setting extends JFrame {
     Button bt;
 
     Music music;
-
-
-
 
     Setting() throws IOException, LineUnavailableException, UnsupportedAudioFileException {
         setFrame();
@@ -40,10 +37,13 @@ public class Setting extends JFrame {
 
     public void addButton() {
 
+        // musicOn = new JButton(new ImageIcon("TetrisCode/image/musicOn.png"));
         musicOn = new JButton(new ImageIcon("image\\musicOn.png"));
 
+        // musicOff = new JButton(new ImageIcon("TetrisCode/image/musicOff.png"));
         musicOff = new JButton(new ImageIcon("image\\musicOff.png"));
 
+        // backselect = new JButton(new ImageIcon("TetrisCode/image/back.png"));
         backselect = new JButton(new ImageIcon("image\\back.png"));
     }
 

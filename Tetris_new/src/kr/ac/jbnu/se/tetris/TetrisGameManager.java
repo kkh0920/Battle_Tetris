@@ -8,12 +8,13 @@ import javax.swing.JFrame;
 
 public class TetrisGameManager extends JFrame {
     
-    static int
-        p2_up = 119, p2_down = 115, p2_left = 97, p2_right = 100,
-        p2_up_upper = p2_up - 32, p2_down_upper = p2_down - 32, p2_left_upper = p2_left - 32, p2_right_upper = p2_right-32,
-        p2_dropDown = 16;
+    static public int p1_up = 38, p1_down = 40, p1_left = 39, p1_right = 37,
+                        p2_up = 119, p2_down = 115, p2_left = 97, p2_right = 100,
 
-    Select home;
+                        p2_up_upper = p2_up - 32, p2_down_upper = p2_down - 32, 
+                        p2_left_upper = p2_left - 32, p2_right_upper = p2_right-32,
+                        
+                        p2_dropDown = KeyEvent.VK_SHIFT;
 
     Tetris player1Panel;
     Tetris player2Panel;
@@ -142,25 +143,25 @@ public class TetrisGameManager extends JFrame {
 
             Shape p2CurPiece = p2Board.getCurPiece();
 
-            if (keycode == p2_left || keycode == p2_left_upper) {
+            if (keycode == 'a' || keycode == 'A') {
                 if (p2Board.tryMove(p2CurPiece, p2CurPiece.curX() - 1, p2CurPiece.curY()))
                     p2Board.move(p2CurPiece, p2CurPiece.curX() - 1, p2CurPiece.curY());
             }
-            if (keycode == p2_right || keycode == p2_right_upper) {
+            if (keycode == 'd' || keycode == 'D') {
                 if (p2Board.tryMove(p2CurPiece, p2CurPiece.curX() + 1, p2CurPiece.curY()))
                     p2Board.move(p2CurPiece, p2CurPiece.curX() + 1, p2CurPiece.curY());
             }     
-            if (keycode == p2_up || keycode == p2_up_upper) {
+            if (keycode == 'w' || keycode == 'W') {
                 Shape leftRotated = p2CurPiece.rotateLeft();
                 if (p2Board.tryMove(leftRotated, p2CurPiece.curX(), p2CurPiece.curY()))
                     p2Board.move(leftRotated, p2CurPiece.curX(), p2CurPiece.curY());
             }
-            if (keycode == p2_down || keycode == p2_down_upper) {
+            if (keycode == 's' || keycode == 'S') {
                 Shape rightRotated = p2CurPiece.rotateRight();
                 if (p2Board.tryMove(rightRotated, p2CurPiece.curX(), p2CurPiece.curY()))
                     p2Board.move(rightRotated, p2CurPiece.curX(), p2CurPiece.curY());
             }
-            if (keycode == p2_dropDown) {
+            if (keycode == KeyEvent.VK_SHIFT) {
                 p2Board.dropDown();
             }
             if (keycode == KeyEvent.VK_CONTROL) {

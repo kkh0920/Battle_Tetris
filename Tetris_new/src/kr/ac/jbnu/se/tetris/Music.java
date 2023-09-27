@@ -16,6 +16,7 @@ public class Music{
     }
 
     public void setMusic() throws IOException, LineUnavailableException, UnsupportedAudioFileException {
+        // file = new File("TetrisCode/bgm/bgm.wav");
         file = new File("bgm\\bgm.wav");
         clip = AudioSystem.getClip();
         clip.open(AudioSystem.getAudioInputStream(file));
