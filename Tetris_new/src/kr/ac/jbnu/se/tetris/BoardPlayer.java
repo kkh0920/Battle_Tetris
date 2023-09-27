@@ -5,7 +5,7 @@ import javax.swing.Timer;
 
 public class BoardPlayer extends Board {
 
-    Player player;
+    private Player player;
     
     public BoardPlayer(Tetris parent) {
         super(parent);
