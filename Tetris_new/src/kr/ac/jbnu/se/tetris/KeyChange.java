@@ -5,6 +5,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.security.Key;
+import java.util.Locale;
 
 public class KeyChange extends JFrame implements ActionListener {
     String up,down,left,right,dropdown;
@@ -39,7 +40,7 @@ public class KeyChange extends JFrame implements ActionListener {
         left_in = new JTextField();
         right_in = new JTextField();
         dropdown_in = new JTextField();
-        explain = new TextArea("문자를 꼭 입력해주셔야 하고, \n순서대로 위,아래,왼쪽,오른쪽,DropDown(한번에 내리기)입니다. \n하나씩 변경이 가능하고, " +
+        explain = new TextArea("2P만 변경 가능합니다. \n순서대로 위,아래,왼쪽,오른쪽,DropDown(한번에 내리기)입니다. \n하나씩 변경이 가능하고, " +
                 "\nESC,SHIFT등 Function Key는 입력이 불가능합니다.\n 그리고 소문자만 입력 가능합니다.");
     }
 
@@ -98,25 +99,35 @@ public class KeyChange extends JFrame implements ActionListener {
         if(e.getSource() == bt1) {
             invert1 = up.charAt(0);
             TetrisGameManager.p2_up = invert1;
+            invert1 = Character.toUpperCase(invert1);
+            TetrisGameManager.p2_up_upper = invert1;
             JOptionPane.showMessageDialog(null, "UP, 변경된 키 : " + invert1);
         }
         else if(e.getSource() == bt2) {
             invert2 = down.charAt(0);
             TetrisGameManager.p2_down = invert2;
+            invert2 = Character.toUpperCase(invert2);
+            TetrisGameManager.p2_down_upper = invert2;
             JOptionPane.showMessageDialog(null, "DOWN, 현재 변경된 키 : " + invert2);
         }
         else if(e.getSource() == bt3) {
             invert3 = left.charAt(0);
             TetrisGameManager.p2_left = invert3;
+            invert3 = Character.toUpperCase(invert3);
+            TetrisGameManager.p2_left_upper = invert3;
             JOptionPane.showMessageDialog(null, "LEFT, 현재 변경된 키 : " + invert3);
         }
         else if(e.getSource() == bt4) {
             invert4 = right.charAt(0);
             TetrisGameManager.p2_right = invert4;
+            invert4 = Character.toUpperCase(invert4);
+            TetrisGameManager.p2_right_upper = invert4;
             JOptionPane.showMessageDialog(null, "RIGHT, 현재 변경된 키 : " + invert4);
         }
         else if(e.getSource() == bt5) {
             invert5 = dropdown.charAt(0);
+            TetrisGameManager.p2_dropDown = invert5;
+            invert5 = Character.toUpperCase(invert5);
             TetrisGameManager.p2_dropDown = invert5;
             JOptionPane.showMessageDialog(null, "DROPDOWN, 현재 변경된 키 : " + invert5);
         }
