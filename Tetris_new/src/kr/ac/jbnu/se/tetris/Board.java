@@ -12,25 +12,26 @@ import javax.swing.Timer;
 
 public class Board extends JPanel implements ActionListener {
 
-    final int BoardWidth = 10;
-    final int BoardHeight = 22;
+    protected final int BoardWidth = 10;
+    protected final int BoardHeight = 22;
 
-    final int PreferredSizeWidth = 200;
-    final int PreferredSizeHeight = 400;
+    private final int PreferredSizeWidth = 200;
+    private final int PreferredSizeHeight = 400;
 
-    boolean isFallingFinished = false;
-    boolean isStarted = false;
+    protected Tetrominoes[][] board;
+
+    protected boolean isFallingFinished = false;
+    protected boolean isStarted = false;
+
+    protected Shape curPiece, nextPiece; 
+
+    protected Timer timer;
+
+    private int numLinesRemoved = 0;
+    private JLabel statusbar;
     
-    int numLinesRemoved = 0;
-
-    Shape curPiece; 
-    JLabel statusbar;
-    Tetrominoes[][] board;
-
-    Timer timer;
-
-    Board opponent;
-
+    private Board opponent;
+    
     public Board(Tetris parent) {
         setPreferredSize(new Dimension(PreferredSizeWidth, PreferredSizeHeight));
         
@@ -42,6 +43,7 @@ public class Board extends JPanel implements ActionListener {
         numLinesRemoved = 0;
         clearBoard();
 
+        nextPiece.setRandomShape();
         newPiece();
     }
 
@@ -63,7 +65,8 @@ public class Board extends JPanel implements ActionListener {
     }
 
     public boolean newPiece() { // 새로운 떨어지는 블록 생성
-        curPiece.setRandomShape();
+        curPiece = nextPiece;
+        nextPiece.setRandomShape();
 
         int initPosX = BoardWidth / 2;
         int initPosY = BoardHeight - 2 + curPiece.minY();
@@ -78,6 +81,9 @@ public class Board extends JPanel implements ActionListener {
 
     // -------------------------------- get 메소드 --------------------------------
 
+    public Shape getNextPiece(){
+        return nextPiece;
+    }
     public Shape getCurPiece(){ // 현재 떨어지고 있는 도형
         return curPiece;
     }
