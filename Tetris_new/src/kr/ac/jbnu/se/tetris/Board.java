@@ -18,33 +18,40 @@ public class Board extends JPanel implements ActionListener {
     private final int PreferredSizeWidth = 200;
     private final int PreferredSizeHeight = 400;
 
+    protected Tetris parent;
+
     protected Tetrominoes[][] board;
 
-    protected boolean isFallingFinished = false;
+    protected boolean isFallingFinished;
     protected boolean isStarted = false;
 
     protected Shape curPiece, nextPiece; 
 
     protected Timer timer;
 
+    protected Board opponent;
+
     private int numLinesRemoved = 0;
     private JLabel statusbar;
-    
-    private Board opponent;
-    
+
+    private BlockPreview blockPreview;
+
     public Board(Tetris parent) {
         setPreferredSize(new Dimension(PreferredSizeWidth, PreferredSizeHeight));
         
+        this.parent = parent;
         board = new Tetrominoes[BoardHeight][BoardWidth];
         statusbar = parent.getStatusBar();
         curPiece = new Shape(); // 생성자에서 객체 생성 (합성 관계)
+        nextPiece = new Shape();
 
-        isFallingFinished = false;
+        isFallingFinished = true;
         numLinesRemoved = 0;
         clearBoard();
 
+        blockPreview = new BlockPreview(this);
+    
         nextPiece.setRandomShape();
-        newPiece();
     }
 
     public void setOpponent(Board opponent){
@@ -65,9 +72,8 @@ public class Board extends JPanel implements ActionListener {
     }
 
     public boolean newPiece() { // 새로운 떨어지는 블록 생성
-        curPiece = nextPiece;
-        nextPiece.setRandomShape();
-
+        curPiece = nextPiece.copy();
+    
         int initPosX = BoardWidth / 2;
         int initPosY = BoardHeight - 2 + curPiece.minY();
 
@@ -76,11 +82,17 @@ public class Board extends JPanel implements ActionListener {
 
         move(curPiece, initPosX, initPosY);
 
+        nextPiece.setRandomShape();
+        blockPreview.setNextPiece(nextPiece);
+
         return true;
     }
 
     // -------------------------------- get 메소드 --------------------------------
 
+    public BlockPreview getBlockPreview(){
+        return blockPreview;
+    }
     public Shape getNextPiece(){
         return nextPiece;
     }

@@ -22,8 +22,17 @@ public class BoardPlayer extends Board {
         if (isFallingFinished) {
             isFallingFinished = false;
             if (!newPiece()) {
+                if(opponent.isStarted){
+                    // 플레이어 혹은 ai가 승리한 경우
+
+                }
+                opponent.isStarted = false;
+                opponent.timer.stop();
+                
                 isStarted = false;
                 timer.stop();
+
+                parent.gameManager().gameOverFrame().setVisible(true);
             }
         } 
         else {

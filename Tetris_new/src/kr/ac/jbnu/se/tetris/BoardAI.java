@@ -35,33 +35,39 @@ public class BoardAI extends Board {
     }
 
     private void initBoardWeight() {
-        int weight = 23;
         for(int i = 0; i < BoardHeight + 2; i++){
             for(int j = 0; j < BoardWidth + 2; j++){
-                boardWeight[i][j] = weight;
+                boardWeight[i][j] = 50;
             }
-            System.out.println();
         }
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         if (isFallingFinished) {
-
             isFallingFinished = false;
             index = 0;
             if (!newPiece()) {
+                if(opponent.isStarted){
+                    // 플레이어가 승리한 경우
+                    
+                }       
+                opponent.isStarted = false;
+                opponent.timer.stop();
+
                 isStarted = false;
                 timer.stop();
-            }
 
-            try {
-                bestRoute = computer.findBestRoute();
-            } catch (CloneNotSupportedException e1) {
-                // TODO Auto-generated catch block
-                e1.printStackTrace();
+                parent.gameManager().gameOverFrame().setVisible(true);
             }
-
+            else {
+                try {
+                    bestRoute = computer.findBestRoute();
+                } catch (CloneNotSupportedException e1) {
+                    // TODO Auto-generated catch block
+                    e1.printStackTrace();
+                }
+            }
         } 
         else {
             moveToBestRoute(index++);

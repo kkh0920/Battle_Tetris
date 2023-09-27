@@ -82,17 +82,20 @@ public class Select extends JFrame {
     }
 
     public void buttonAction() {
+        Select select = this;
         ai.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 setVisible(false);
                 try {
-                    game = new TetrisGameManager(true);
+                    game = new TetrisGameManager(select);
+                    game.start(true);
                     game.setVisible(true);
                 } catch (CloneNotSupportedException e1) {
                     // TODO Auto-generated catch block
                     e1.printStackTrace();
-                }   
+                }
+                
             }
         });
 
@@ -101,7 +104,8 @@ public class Select extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 setVisible(false);
                 try {
-                    game = new TetrisGameManager(false);
+                    game = new TetrisGameManager(select);
+                    game.start(false);
                     game.setVisible(true);
                 } catch (CloneNotSupportedException e1) {
                     // TODO Auto-generated catch block
