@@ -8,23 +8,19 @@ import javax.swing.JFrame;
 
 public class TetrisGameManager extends JFrame {
     
-    static public int p1_up = 38, p1_down = 40, p1_left = 39, p1_right = 37,
-                        p2_up = 119, p2_down = 115, p2_left = 97, p2_right = 100,
+    static int p2_up = 'w', p2_down = 's', p2_left = 'a', p2_right = 'd',
+                p2_up_upper = 'W', p2_down_upper = 'S', p2_left_upper = 'A', p2_right_upper = 'D',
+                p2_dropDown = KeyEvent.VK_SHIFT;
 
-                        p2_up_upper = p2_up - 32, p2_down_upper = p2_down - 32, 
-                        p2_left_upper = p2_left - 32, p2_right_upper = p2_right-32,
-                        
-                        p2_dropDown = KeyEvent.VK_SHIFT;
+    private Tetris player1Panel;
+    private Tetris player2Panel;
 
-    Tetris player1Panel;
-    Tetris player2Panel;
-
-    boolean isPaused = false;
+    private boolean isPaused = false;
 
     public TetrisGameManager(boolean isComputer) throws CloneNotSupportedException{
         settingFrame();
 
-        settingOpponent(isComputer);
+        start(isComputer);
 
         addKeyListener(new PlayerKeyListener());
     }
@@ -37,9 +33,12 @@ public class TetrisGameManager extends JFrame {
         setFocusable(true);
     }
 
-    public void settingOpponent(boolean isComputer) throws CloneNotSupportedException {
+    public void start(boolean isComputer) throws CloneNotSupportedException {
         player1Panel = new Tetris(false);
-        player2Panel = new Tetris(isComputer); // 생성자에서 객체를 생성하면 합성 관계
+        player2Panel = new Tetris(isComputer); 
+
+        // 생성자에서 객체를 생성하면 합성 관계
+        // 매개변수 등을 통해 생성하면 집합 관계
 
         Board p1Board = player1Panel.getBoard();
         Board p2Board = player2Panel.getBoard(); 
@@ -59,6 +58,7 @@ public class TetrisGameManager extends JFrame {
             return;
 
         isPaused = !isPaused;
+        
         if (isPaused) {
             p1Board.timer.stop();
             p2Board.timer.stop();
@@ -92,8 +92,8 @@ public class TetrisGameManager extends JFrame {
             */
 
             if (!p1Board.isStarted || !p2Board.isStarted || 
-                    p1Board.curPiece.getShape() == Tetrominoes.NoShape ||
-                                p2Board.curPiece.getShape() == Tetrominoes.NoShape) {
+                    p1Board.getCurPiece().getShape() == Tetrominoes.NoShape ||
+                                p2Board.getCurPiece().getShape() == Tetrominoes.NoShape) {
                 return;
             }
 
@@ -143,25 +143,25 @@ public class TetrisGameManager extends JFrame {
 
             Shape p2CurPiece = p2Board.getCurPiece();
 
-            if (keycode == 'a' || keycode == 'A') {
+            if (keycode == p2_left || keycode == p2_left_upper) {
                 if (p2Board.tryMove(p2CurPiece, p2CurPiece.curX() - 1, p2CurPiece.curY()))
                     p2Board.move(p2CurPiece, p2CurPiece.curX() - 1, p2CurPiece.curY());
             }
-            if (keycode == 'd' || keycode == 'D') {
+            if (keycode == p2_right || keycode == p2_right_upper) {
                 if (p2Board.tryMove(p2CurPiece, p2CurPiece.curX() + 1, p2CurPiece.curY()))
                     p2Board.move(p2CurPiece, p2CurPiece.curX() + 1, p2CurPiece.curY());
             }     
-            if (keycode == 'w' || keycode == 'W') {
+            if (keycode == p2_up || keycode == p2_up_upper) {
                 Shape leftRotated = p2CurPiece.rotateLeft();
                 if (p2Board.tryMove(leftRotated, p2CurPiece.curX(), p2CurPiece.curY()))
                     p2Board.move(leftRotated, p2CurPiece.curX(), p2CurPiece.curY());
             }
-            if (keycode == 's' || keycode == 'S') {
+            if (keycode == p2_down || keycode == p2_down_upper) {
                 Shape rightRotated = p2CurPiece.rotateRight();
                 if (p2Board.tryMove(rightRotated, p2CurPiece.curX(), p2CurPiece.curY()))
                     p2Board.move(rightRotated, p2CurPiece.curX(), p2CurPiece.curY());
             }
-            if (keycode == KeyEvent.VK_SHIFT) {
+            if (keycode == p2_dropDown) {
                 p2Board.dropDown();
             }
             if (keycode == KeyEvent.VK_CONTROL) {
