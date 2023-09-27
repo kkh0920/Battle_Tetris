@@ -5,22 +5,21 @@ import java.util.Queue;
 
 public class TetrisAI {
 
-    BoardAI board;
+    private BoardAI board;
 
-    Queue<Shape> shapeQueue;
-    Queue<String> routeQueue;
+    private Queue<Shape> shapeQueue;
+    private Queue<String> routeQueue;
 
-    boolean[][][] visited;
+    private boolean[][][] visited;
     
-    Shape curPiece;
+    private Shape curPiece;
 
     // 0 : 왼쪽 / 1 : 오른쪽 / 2 : 아래 / 3 : right 회전
-    String bestRoute;
-    
-    int maxWeight;
+    private String bestRoute;
 
-    int[] dx;
-    int[] dy;
+    private int maxWeight;
+    
+    private int[] dx, dy;
     
     public TetrisAI(BoardAI board) {
         this.board = board;
@@ -131,6 +130,7 @@ public class TetrisAI {
         }
 
         int weight = 0;
+        int[][] boardWeight = board.getBoardWeight();
 
         for(int i = 0; i < 4; i++){
             int blockX = nPiece.curX() + nPiece.x(i);
@@ -144,15 +144,15 @@ public class TetrisAI {
                     return -1001;
 
                 if(x + 1 == 0 || x == board.BoardWidth || y + 1 == 0 || y == board.BoardHeight) {
-                    weight += board.boardWeight[y + 1][x + 1];
+                    weight += boardWeight[y + 1][x + 1];
                     continue;
                 }
 
                 if(board.board[y][x] == Tetrominoes.NoShape) {
-                    weight -= board.boardWeight[y + 1][x + 1];
+                    weight -= boardWeight[y + 1][x + 1];
                 }
                 else if(!isCurPiece[y][x] && board.board[y][x] != Tetrominoes.NoShape) {
-                    weight += board.boardWeight[y + 1][x + 1];
+                    weight += boardWeight[y + 1][x + 1];
                 }
             }
         }
