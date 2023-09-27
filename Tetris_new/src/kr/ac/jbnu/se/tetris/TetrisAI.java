@@ -44,12 +44,11 @@ public class TetrisAI {
         return bestRoute;
     }
 
-    
     private void initFindRoute() throws CloneNotSupportedException {
         shapeQueue = new LinkedList<>();
         routeQueue = new LinkedList<>();
         
-        maxWeight = -1000;
+        maxWeight = -10000;
         bestRoute = "";
         visited = new boolean[board.BoardHeight][board.BoardWidth][4];
         curPiece = (Shape) board.curPiece.clone();
@@ -121,11 +120,7 @@ public class TetrisAI {
 
         for(int i = 0; i < 4; i++){
             int blockX = nPiece.curX() + nPiece.x(i);
-            int blockY = nPiece.curY() - nPiece.y(i);
-
-            if(blockX < 0 || blockX >= board.BoardWidth || blockY < 0 || blockY >= board.BoardHeight)
-                return -1001;
-            
+            int blockY = nPiece.curY() - nPiece.y(i);            
             isCurPiece[blockY][blockX] = true;
         }
 
@@ -139,9 +134,6 @@ public class TetrisAI {
             for(int j = 0; j < 4; j++){ 
                 int x = blockX + dx[j];
                 int y = blockY + dy[j];
-
-                if(x + 1 < 0 || x > board.BoardWidth || y + 1 < 0 || y > board.BoardHeight)
-                    return -1001;
 
                 if(x + 1 == 0 || x == board.BoardWidth || y + 1 == 0 || y == board.BoardHeight) {
                     weight += boardWeight[y + 1][x + 1];
