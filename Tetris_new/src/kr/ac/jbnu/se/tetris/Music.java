@@ -8,7 +8,7 @@ import java.io.File;
 import java.io.IOException;
 
 public class Music{
-    
+
     private File file;
     private Clip clip;
 
