@@ -8,8 +8,9 @@ import java.io.File;
 import java.io.IOException;
 
 public class Music{
-    static File file;
-    static Clip clip;
+    
+    private File file;
+    private Clip clip;
 
     Music() throws UnsupportedAudioFileException, LineUnavailableException, IOException {
         setMusic();
