@@ -87,10 +87,10 @@ public class TetrisGameManager extends JFrame {
 
         JLabel gameOverText = new JLabel("게임 종료!");
 
-        JButton button2 = new JButton("재시작");
-        JButton button3 = new JButton("메인화면");
+        JButton retryBtn = new JButton("재시작");
+        JButton homeBtn = new JButton("메인화면");
 
-        button2.addActionListener(new ActionListener() {
+        retryBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
@@ -108,7 +108,7 @@ public class TetrisGameManager extends JFrame {
             }
             
         });
-        button3.addActionListener(new ActionListener() {
+        homeBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 g.dispose();
@@ -126,12 +126,12 @@ public class TetrisGameManager extends JFrame {
         gameOverDialog.setLayout(null);
 
         gameOverText.setBounds(60, 10, 150, 30);
-        button2.setBounds(10, 45, 150, 35);
-        button3.setBounds(10, 90, 150, 35);
+        retryBtn.setBounds(10, 45, 150, 35);
+        homeBtn.setBounds(10, 90, 150, 35);
 
         gameOverDialog.add(gameOverText);
-        gameOverDialog.add(button2);
-        gameOverDialog.add(button3);
+        gameOverDialog.add(retryBtn);
+        gameOverDialog.add(homeBtn);
     }
 
 
@@ -140,11 +140,11 @@ public class TetrisGameManager extends JFrame {
 
         JLabel pauseText = new JLabel("일시 정지");
         
-        JButton button1 = new JButton("계속하기");
-        JButton button2 = new JButton("재시작");
-        JButton button3 = new JButton("메인화면");
+        JButton resumeBtn = new JButton("계속하기");
+        JButton retryBtn = new JButton("재시작");
+        JButton homeBtn = new JButton("메인화면");
 
-        button1.addActionListener(new ActionListener() {
+        resumeBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // TODO Auto-generated method stub
@@ -152,10 +152,9 @@ public class TetrisGameManager extends JFrame {
             }
             
         });
-        button2.addActionListener(new ActionListener() {
+        retryBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                
                 try {
                     g.dispose();
                     
@@ -170,7 +169,7 @@ public class TetrisGameManager extends JFrame {
                 }
             }
         });
-        button3.addActionListener(new ActionListener() {
+        homeBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 g.dispose();
@@ -187,14 +186,14 @@ public class TetrisGameManager extends JFrame {
         pauseDialog.setLayout(null);
 
         pauseText.setBounds(60, 5, 150, 30);
-        button1.setBounds(10, 40, 150, 35);
-        button2.setBounds(10, 85, 150, 35);
-        button3.setBounds(10, 130, 150, 35);
+        resumeBtn.setBounds(10, 40, 150, 35);
+        retryBtn.setBounds(10, 85, 150, 35);
+        homeBtn.setBounds(10, 130, 150, 35);
 
         pauseDialog.add(pauseText);
-        pauseDialog.add(button1);
-        pauseDialog.add(button2);
-        pauseDialog.add(button3);
+        pauseDialog.add(resumeBtn);
+        pauseDialog.add(retryBtn);
+        pauseDialog.add(homeBtn);
     }
 
     public class PlayerKeyListener extends KeyAdapter {
