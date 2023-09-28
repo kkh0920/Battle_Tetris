@@ -6,10 +6,14 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 
 public class TetrisGameManager extends JFrame {
     
+    final int Frame_X = 700, Frame_Y = 450;
+
     public static int p2_up = 'w', p2_down = 's', p2_left = 'a', p2_right = 'd',
                         p2_up_upper = 'W', p2_down_upper = 'S', p2_left_upper = 'A', p2_right_upper = 'D',
                         p2_dropDown = KeyEvent.VK_SHIFT;
@@ -20,26 +24,26 @@ public class TetrisGameManager extends JFrame {
     private boolean isPaused = false;
     private boolean opponentIsComputer;
 
-    private JFrame pauseFrame, gameOverFrame;
+    private JDialog pauseDialog, gameOverDialog;
 
-    public TetrisGameManager(Select select) throws CloneNotSupportedException {
+    public TetrisGameManager(Select select) {
         setFrame();
-        setPauseFrame(select);
-        setGameOverFrame(select);
+        setPauseDialog(select);
+        setGameOverDialog(select);
         addKeyListener(new PlayerKeyListener());
     }
 
     public void setFrame() {
         setTitle("Tetris");
-        setSize(670, 460);
+        setSize(Frame_X, Frame_Y);
         setResizable(false);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         setFocusable(true);
     }
 
-    public JFrame gameOverFrame(){
-        return gameOverFrame;
+    public JDialog gameOverDialog(){
+        return gameOverDialog;
     }
 
     public void start(boolean isComputer) throws CloneNotSupportedException {
@@ -47,9 +51,6 @@ public class TetrisGameManager extends JFrame {
         player2Panel = new Tetris(this, isComputer); 
 
         opponentIsComputer = isComputer;
-
-        // 생성자에서 객체를 생성하면 합성 관계
-        // 매개변수 등을 통해 생성하면 집합 관계
 
         Board p1Board = player1Panel.getBoard();
         Board p2Board = player2Panel.getBoard(); 
@@ -69,8 +70,6 @@ public class TetrisGameManager extends JFrame {
             return;
 
         isPaused = !isPaused;
-    
-        pauseFrame.setVisible(isPaused);
 
         if (isPaused) {
             p1Board.timer.stop();
@@ -79,16 +78,17 @@ public class TetrisGameManager extends JFrame {
             p1Board.start();
             p2Board.start();
         }
+    
+        pauseDialog.setVisible(isPaused); 
     }
 
-    public void setGameOverFrame(Select select){
+    private void setGameOverDialog(Select select){
         TetrisGameManager g = this;
+
+        JLabel gameOverText = new JLabel("게임 종료!");
 
         JButton button2 = new JButton("재시작");
         JButton button3 = new JButton("메인화면");
-
-        button2.setSize(100, 30);
-        button3.setSize(100, 30);
 
         button2.addActionListener(new ActionListener() {
             @Override
@@ -96,7 +96,7 @@ public class TetrisGameManager extends JFrame {
                 try {
                     g.dispose();
 
-                    gameOverFrame.setVisible(false);
+                    gameOverDialog.setVisible(false);
                     
                     TetrisGameManager game = new TetrisGameManager(select);
                     game.start(opponentIsComputer);
@@ -113,32 +113,36 @@ public class TetrisGameManager extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 g.dispose();
 
-                gameOverFrame.setVisible(false);
+                gameOverDialog.setVisible(false);
 
                 select.setVisible(true);
             }
         });
 
-        gameOverFrame = new JFrame();
-        gameOverFrame.setUndecorated(true);
-        gameOverFrame.setSize(150, 60);
-        gameOverFrame.setLocationRelativeTo(null); 
+        gameOverDialog = new JDialog(this, "게임 오버", true);
+        gameOverDialog.setUndecorated(true);
+        gameOverDialog.setSize(170, 135);
+        gameOverDialog.setLocationRelativeTo(null); 
+        gameOverDialog.setLayout(null);
 
-        gameOverFrame.add(button2, BorderLayout.NORTH);
-        gameOverFrame.add(button3, BorderLayout.SOUTH);
+        gameOverText.setBounds(60, 10, 150, 30);
+        button2.setBounds(10, 45, 150, 35);
+        button3.setBounds(10, 90, 150, 35);
+
+        gameOverDialog.add(gameOverText);
+        gameOverDialog.add(button2);
+        gameOverDialog.add(button3);
     }
 
 
-    public void setPauseFrame(Select select) {
+    private void setPauseDialog(Select select) {
         TetrisGameManager g = this;
+
+        JLabel pauseText = new JLabel("일시 정지");
         
         JButton button1 = new JButton("계속하기");
         JButton button2 = new JButton("재시작");
         JButton button3 = new JButton("메인화면");
-
-        button1.setSize(100, 30);  
-        button2.setSize(100, 30);
-        button3.setSize(100, 30);
 
         button1.addActionListener(new ActionListener() {
             @Override
@@ -155,7 +159,7 @@ public class TetrisGameManager extends JFrame {
                 try {
                     g.dispose();
                     
-                    pauseFrame.setVisible(false);
+                    pauseDialog.setVisible(false);
 
                     TetrisGameManager game = new TetrisGameManager(select);
                     game.start(opponentIsComputer);
@@ -172,18 +176,25 @@ public class TetrisGameManager extends JFrame {
                 g.dispose();
 
                 select.setVisible(true);
-                pauseFrame.setVisible(false);
+                pauseDialog.setVisible(false);
             }
         });
 
-        pauseFrame = new JFrame();
-        pauseFrame.setUndecorated(true);
-        pauseFrame.setSize(150, 90);
-        pauseFrame.setLocationRelativeTo(null); 
+        pauseDialog = new JDialog(this, "일시정지", true);
+        pauseDialog.setUndecorated(true);
+        pauseDialog.setSize(170, 175);
+        pauseDialog.setLocationRelativeTo(null); 
+        pauseDialog.setLayout(null);
 
-        pauseFrame.add(button1, BorderLayout.NORTH);
-        pauseFrame.add(button2, BorderLayout.CENTER);
-        pauseFrame.add(button3, BorderLayout.SOUTH);
+        pauseText.setBounds(60, 5, 150, 30);
+        button1.setBounds(10, 40, 150, 35);
+        button2.setBounds(10, 85, 150, 35);
+        button3.setBounds(10, 130, 150, 35);
+
+        pauseDialog.add(pauseText);
+        pauseDialog.add(button1);
+        pauseDialog.add(button2);
+        pauseDialog.add(button3);
     }
 
     public class PlayerKeyListener extends KeyAdapter {

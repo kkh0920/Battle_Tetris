@@ -58,7 +58,7 @@ public class BoardAI extends Board {
                 isStarted = false;
                 timer.stop();
 
-                parent.gameManager().gameOverFrame().setVisible(true);
+                parent.gameManager().gameOverDialog().setVisible(true);
             }
             else {
                 try {

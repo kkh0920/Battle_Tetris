@@ -6,7 +6,6 @@ import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
@@ -15,8 +14,8 @@ public class Board extends JPanel implements ActionListener {
     protected final int BoardWidth = 10;
     protected final int BoardHeight = 22;
 
-    private final int PreferredSizeWidth = 200;
-    private final int PreferredSizeHeight = 400;
+    protected final int PreferredSizeWidth = 200;
+    protected final int PreferredSizeHeight = 400;
 
     protected Tetris parent;
 
@@ -32,7 +31,6 @@ public class Board extends JPanel implements ActionListener {
     protected Board opponent;
 
     private int numLinesRemoved = 0;
-    private JLabel statusbar;
 
     private BlockPreview blockPreview;
 
@@ -40,8 +38,9 @@ public class Board extends JPanel implements ActionListener {
         setPreferredSize(new Dimension(PreferredSizeWidth, PreferredSizeHeight));
         
         this.parent = parent;
+
         board = new Tetrominoes[BoardHeight][BoardWidth];
-        statusbar = parent.getStatusBar();
+        
         curPiece = new Shape(); // 생성자에서 객체 생성 (합성 관계)
         nextPiece = new Shape();
 
@@ -108,19 +107,6 @@ public class Board extends JPanel implements ActionListener {
     Tetrominoes shapeAt(int x, int y) { // (x, y)에 있는 블럭의 Tetrominoes 타입
         return board[y][x];
     }
-
-
-    // -------------------------------- 일시 정시 시 ---------------------------------
-
-    public void setTextPause() {
-        statusbar.setText("paused");
-        repaint();
-    }
-    public void setTextResume(){
-        statusbar.setText(String.valueOf(numLinesRemoved));
-        repaint();
-    }
-
 
     // -------------------------------- 블록 하강 및 점수 획득 --------------------------------
 
@@ -190,7 +176,7 @@ public class Board extends JPanel implements ActionListener {
 
         if (numFullLines > 0) {
             numLinesRemoved += numFullLines;
-            statusbar.setText(String.valueOf(numLinesRemoved));
+            parent.getStatusBar().setText(String.valueOf(numLinesRemoved));
             curPiece.setShape(Tetrominoes.NoShape);
             repaint();
         }

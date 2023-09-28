@@ -8,7 +8,7 @@ import javax.swing.JPanel;
 
 public class BlockPreview extends JPanel {
 
-    private final int panelWidth = 60, panelHeight = 80, width = 3, height = 4;
+    protected final int panelWidth = 60, panelHeight = 80, width = 3, height = 4;
 
     private Tetrominoes[][] nextPiece;
 

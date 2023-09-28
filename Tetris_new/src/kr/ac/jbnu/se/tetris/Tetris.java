@@ -8,37 +8,22 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 public class Tetris extends JPanel {
+
+    final int Frame_X = 350, Frame_Y = 450, Status_X = 60, Status_Y = 30;
     
     private TetrisGameManager parent;
 
+    private JPanel statusPanel;
     private JLabel statusbar;
     
     private Board board;
 
-    private JPanel panel;
-
     public Tetris(TetrisGameManager parent, boolean isComputer) throws CloneNotSupportedException {
-        setPreferredSize(new Dimension(350, 450));
-        setBackground(new Color(230, 230, 230));
-
         this.parent = parent;
-
-        panel = new JPanel();
-        panel.setPreferredSize(new Dimension(75, 120));
-    
-        statusbar = new JLabel("0");
-
-        if(isComputer)
-            board = new BoardAI(this, 80);
-        else
-            board = new BoardPlayer(this);
-
-        panel.add(board.getBlockPreview(), BorderLayout.NORTH);
-        panel.add(statusbar, BorderLayout.SOUTH);
-
-        add(board, BorderLayout.WEST);
-        add(panel, BorderLayout.EAST);
+        board = isComputer ? new BoardAI(this, 70) : new BoardPlayer(this);
+        setTetrisLayout();
     }
+
     public TetrisGameManager gameManager(){
         return parent;
     }
@@ -47,6 +32,27 @@ public class Tetris extends JPanel {
     }
     public Board getBoard() {
         return board;
+    }
+
+    private void setTetrisLayout(){
+        setPreferredSize(new Dimension(Frame_X, Frame_Y));
+        setBackground(new Color(220, 220, 220));
+        setLayout(null);
+
+        BlockPreview blockPreview = board.getBlockPreview();
+
+        statusbar = new JLabel("0");
+
+        statusPanel = new JPanel();
+        statusPanel.add(statusbar, BorderLayout.CENTER);
+
+        board.setBounds(10, 10, board.PreferredSizeWidth, board.PreferredSizeHeight);
+        blockPreview.setBounds(20 + board.PreferredSizeWidth, 10, blockPreview.panelWidth, blockPreview.panelHeight);
+        statusPanel.setBounds(20 + board.PreferredSizeWidth, 10 + board.PreferredSizeHeight - Status_Y, Status_X, Status_Y);
+        
+        add(board, BorderLayout.SOUTH);
+        add(blockPreview, BorderLayout.NORTH);
+        add(statusPanel);
     }
 }
 
