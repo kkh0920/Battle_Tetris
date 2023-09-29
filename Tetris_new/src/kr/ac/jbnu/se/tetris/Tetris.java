@@ -20,7 +20,7 @@ public class Tetris extends JPanel {
 
     public Tetris(TetrisGameManager parent, boolean isComputer) throws CloneNotSupportedException {
         this.parent = parent;
-        board = isComputer ? new BoardAI(this, 70) : new BoardPlayer(this);
+        board = isComputer ? new BoardAI(this, 80) : new BoardPlayer(this);
         setTetrisLayout();
     }
 
