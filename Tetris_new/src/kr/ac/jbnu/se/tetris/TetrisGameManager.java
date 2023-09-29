@@ -202,16 +202,6 @@ public class TetrisGameManager extends JFrame {
             Board p1Board = player1Panel.getBoard();
             Board p2Board = player2Panel.getBoard();
             
-            /*
-            
-            세가지 경우에서 키 입력을 제한
-
-            1. 게임이 시작되지 않았을 때
-            2. 떨어지고 있는 블록이 없을 때
-            3. pause 상태일 때
-
-            */
-
             if (!p1Board.isStarted || !p2Board.isStarted || 
                     p1Board.getCurPiece().getShape() == Tetrominoes.NoShape ||
                                 p2Board.getCurPiece().getShape() == Tetrominoes.NoShape) {
