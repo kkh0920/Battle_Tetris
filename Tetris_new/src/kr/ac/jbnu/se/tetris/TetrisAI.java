@@ -48,7 +48,7 @@ public class TetrisAI {
         shapeQueue = new LinkedList<>();
         routeQueue = new LinkedList<>();
         
-        maxWeight = -10000;
+        maxWeight = -10;
         bestRoute = "";
         visited = new boolean[board.BoardHeight][board.BoardWidth][4];
         curPiece = (Shape) board.curPiece.clone();
@@ -117,7 +117,7 @@ public class TetrisAI {
 
     private int getWeight(Shape nPiece){
         boolean[][] isCurPiece = new boolean[board.BoardHeight][board.BoardWidth];
-
+        
         for(int i = 0; i < 4; i++){
             int blockX = nPiece.curX() + nPiece.x(i);
             int blockY = nPiece.curY() - nPiece.y(i);            
@@ -125,7 +125,6 @@ public class TetrisAI {
         }
 
         int weight = 0;
-        int[][] boardWeight = board.getBoardWeight();
 
         for(int i = 0; i < 4; i++){
             int blockX = nPiece.curX() + nPiece.x(i);
@@ -136,15 +135,15 @@ public class TetrisAI {
                 int y = blockY + dy[j];
 
                 if(x + 1 == 0 || x == board.BoardWidth || y + 1 == 0 || y == board.BoardHeight) {
-                    weight += boardWeight[y + 1][x + 1];
+                    weight++;
                     continue;
                 }
 
                 if(board.board[y][x] == Tetrominoes.NoShape) {
-                    weight -= boardWeight[y + 1][x + 1];
+                    weight--;
                 }
                 else if(!isCurPiece[y][x] && board.board[y][x] != Tetrominoes.NoShape) {
-                    weight += boardWeight[y + 1][x + 1];
+                    weight++;
                 }
             }
         }
