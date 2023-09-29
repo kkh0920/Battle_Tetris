@@ -5,8 +5,6 @@ import java.awt.event.ActionEvent;
 import javax.swing.Timer;
 
 public class BoardAI extends Board {
-    
-    private int[][] boardWeight;
 
     private TetrisAI computer;
 
@@ -17,10 +15,6 @@ public class BoardAI extends Board {
     public BoardAI(Tetris parent, int moveDelay) throws CloneNotSupportedException {
         super(parent);
         //TODO Auto-generated constructor stub 
-
-        boardWeight = new int[BoardHeight + 2][BoardWidth + 2];
-        initBoardWeight();
-
         computer = new TetrisAI(this);
 
         bestRoute = computer.findBestRoute();
@@ -30,18 +24,6 @@ public class BoardAI extends Board {
         start();
     }
 
-    public int[][] getBoardWeight(){
-        return boardWeight;
-    }
-
-    private void initBoardWeight() {
-        for(int i = 0; i < BoardHeight + 2; i++){
-            for(int j = 0; j < BoardWidth + 2; j++){
-                boardWeight[i][j] = 50;
-            }
-        }
-    }
-
     @Override
     public void actionPerformed(ActionEvent e) {
         if (isFallingFinished) {
@@ -49,9 +31,11 @@ public class BoardAI extends Board {
             index = 0;
             if (!newPiece()) {
                 if(opponent.isStarted){
-                    // 플레이어가 승리한 경우
-                    
-                }       
+                    // ai가 패배한 경우
+                }
+                else{
+                    // ai가 승리한 경우
+                }
                 opponent.isStarted = false;
                 opponent.timer.stop();
 
