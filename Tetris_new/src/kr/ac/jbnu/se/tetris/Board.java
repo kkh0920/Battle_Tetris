@@ -150,6 +150,8 @@ public class Board extends JPanel implements ActionListener {
         removeFullLines();
     }
     private void removeFullLines() { // 한 줄 제거 가능 여부 탐색(점수 획득)
+        curPiece.setShape(Tetrominoes.NoShape);
+        
         int numFullLines = 0;
 
         for (int i = BoardHeight - 1; i >= 0; --i) {
@@ -177,9 +179,8 @@ public class Board extends JPanel implements ActionListener {
         if (numFullLines > 0) {
             numLinesRemoved += numFullLines;
             parent.getStatusBar().setText(String.valueOf(numLinesRemoved));
-            curPiece.setShape(Tetrominoes.NoShape);
-            repaint();
         }
+        repaint();
     }
 
 
@@ -209,12 +210,33 @@ public class Board extends JPanel implements ActionListener {
                         curPiece.getShape());
             }
         }
+
+        if(curPiece.getShape() == Tetrominoes.NoShape)
+            return;
+
+        // 블록이 떨어질 곳 표시
+        int nX = curPiece.curX();
+        int nY = curPiece.curY();
+        while(nY >= 0){
+            if(!tryMove(curPiece, nX, nY))
+                break;
+            nY--;
+        }
+        nY++;
+        for(int i = 0; i < 4; i++){
+            int x = nX + curPiece.x(i);
+            int y = nY - curPiece.y(i);
+            drawSquare(g, 0 + x * squareWidth(), boardTop + (BoardHeight - y - 1) * squareHeight(),
+                    Tetrominoes.NoShape);
+        }
     }
+
     private void drawSquare(Graphics g, int x, int y, Tetrominoes shape) {
-        Color colors[] = { new Color(255, 255, 255), new Color(204, 102, 102), 
+        Color colors[] = { new Color(100, 100, 100, 40), new Color(204, 102, 102), 
                             new Color(102, 204, 102), new Color(102, 102, 204), 
                             new Color(204, 204, 102), new Color(204, 102, 204), 
                             new Color(102, 204, 204), new Color(218, 170, 0) };
+        
         
         Color color = colors[shape.ordinal()];
 
