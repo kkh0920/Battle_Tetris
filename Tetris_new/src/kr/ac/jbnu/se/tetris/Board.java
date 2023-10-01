@@ -1,11 +1,16 @@
 package kr.ac.jbnu.se.tetris;
 
-import java.awt.Color;
+import java.awt.AlphaComposite;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
@@ -210,11 +215,11 @@ public class Board extends JPanel implements ActionListener {
                         curPiece.getShape());
             }
         }
-
+        
+        // 블록이 떨어질 위치 표시
         if(curPiece.getShape() == Tetrominoes.NoShape)
             return;
 
-        // 블록이 떨어질 곳 표시
         int nX = curPiece.curX();
         int nY = curPiece.curY();
         while(nY >= 0){
@@ -232,24 +237,59 @@ public class Board extends JPanel implements ActionListener {
     }
 
     private void drawSquare(Graphics g, int x, int y, Tetrominoes shape) {
-        Color colors[] = { new Color(100, 100, 100, 40), new Color(204, 102, 102), 
-                            new Color(102, 204, 102), new Color(102, 102, 204), 
-                            new Color(204, 204, 102), new Color(204, 102, 204), 
-                            new Color(102, 204, 204), new Color(218, 170, 0) };
+        BufferedImage blockImage = getImage(getImageFile(shape));
+
+        int imageSize = squareWidth(); // 이미지 크기를 블록 크기에 맞게 조정합니다.
         
-        
-        Color color = colors[shape.ordinal()];
+        if(shape == Tetrominoes.NoShape){
+            Graphics2D g2d = (Graphics2D) g;
+            AlphaComposite alphaComposite = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.3f);
+            g2d.setComposite(alphaComposite);
+            g2d.drawImage(blockImage, x, y - 2, imageSize, imageSize, null);
+            g2d.setComposite(AlphaComposite.SrcOver);
+        }
+        else
+            g.drawImage(blockImage, x, y - 2, imageSize, imageSize, null);
+    }
 
-        g.setColor(color);
-        g.fillRect(x + 1, y + 1, squareWidth() - 2, squareHeight() - 2);
+    public static BufferedImage getImage(String filePath) {
+        try {
+            return ImageIO.read(new File(filePath));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null; // 예외 발생 시 null 반환
+    }
 
-        g.setColor(color.brighter());
-        g.drawLine(x, y + squareHeight() - 1, x, y);
-        g.drawLine(x, y, x + squareWidth() - 1, y);
-
-        g.setColor(color.darker());
-        g.drawLine(x + 1, y + squareHeight() - 1, x + squareWidth() - 1, y + squareHeight() - 1);
-        g.drawLine(x + squareWidth() - 1, y + squareHeight() - 1, x + squareWidth() - 1, y + 1);
+    public static String getImageFile(Tetrominoes shape) {
+        String imgPath = "";
+        switch (shape) {
+            case NoShape:
+                imgPath = "image/blocks/lockBlock.png";
+                break;
+            case ZShape:
+                imgPath = "image/blocks/Block1.png";
+                break;
+            case SShape:
+                imgPath = "image/blocks/Block2.png";
+                break;
+            case LineShape:
+                imgPath = "image/blocks/Block3.png";
+                break;
+            case TShape:
+                imgPath = "image/blocks/Block4.png";
+                break;
+            case SquareShape:
+                imgPath = "image/blocks/Block5.png";
+                break;
+            case LShape:
+                imgPath = "image/blocks/Block6.png";
+                break;
+            case MirroredLShape:
+                imgPath = "image/blocks/Block7.png";
+                break;
+        }
+        return imgPath;
     }
 
     @Override

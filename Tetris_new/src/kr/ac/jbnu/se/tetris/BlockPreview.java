@@ -1,9 +1,13 @@
 package kr.ac.jbnu.se.tetris;
 
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.image.BufferedImage;
 
+import java.io.File;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
 public class BlockPreview extends JPanel {
@@ -70,22 +74,50 @@ public class BlockPreview extends JPanel {
     }
 
     private void drawSquare(Graphics g, int x, int y, Tetrominoes shape) {
-        Color colors[] = { new Color(255, 255, 255), new Color(204, 102, 102), 
-                            new Color(102, 204, 102), new Color(102, 102, 204), 
-                            new Color(204, 204, 102), new Color(204, 102, 204), 
-                            new Color(102, 204, 204), new Color(218, 170, 0) };
+        BufferedImage blockImage = getImage(getImageFile(shape));
         
-        Color color = colors[shape.ordinal()];
+        int imageSize = squareWidth(); // 이미지 크기를 블록 크기에 맞게 조정합니다.
 
-        g.setColor(color);
-        g.fillRect(x + 1, y + 1, squareWidth() - 2, squareHeight() - 2);
+        g.drawImage(blockImage, x, y, imageSize, imageSize, null);
+    }
 
-        g.setColor(color.brighter());
-        g.drawLine(x, y + squareHeight() - 1, x, y);
-        g.drawLine(x, y, x + squareWidth() - 1, y);
+    public static BufferedImage getImage(String filePath) {
+        try {
+            return ImageIO.read(new File(filePath));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null; // 예외 발생 시 null 반환
+    }
 
-        g.setColor(color.darker());
-        g.drawLine(x + 1, y + squareHeight() - 1, x + squareWidth() - 1, y + squareHeight() - 1);
-        g.drawLine(x + squareWidth() - 1, y + squareHeight() - 1, x + squareWidth() - 1, y + 1);
+    public static String getImageFile(Tetrominoes shape) {
+        String imgPath = "";
+        switch (shape) {
+            case NoShape:
+                imgPath = "image/blocks/lockBlock.png";
+                break;
+            case ZShape:
+                imgPath = "image/blocks/Block1.png";
+                break;
+            case SShape:
+                imgPath = "image/blocks/Block2.png";
+                break;
+            case LineShape:
+                imgPath = "image/blocks/Block3.png";
+                break;
+            case TShape:
+                imgPath = "image/blocks/Block4.png";
+                break;
+            case SquareShape:
+                imgPath = "image/blocks/Block5.png";
+                break;
+            case LShape:
+                imgPath = "image/blocks/Block6.png";
+                break;
+            case MirroredLShape:
+                imgPath = "image/blocks/Block7.png";
+                break;
+        }
+        return imgPath;
     }
 }
