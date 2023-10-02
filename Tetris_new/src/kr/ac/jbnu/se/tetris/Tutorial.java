@@ -7,16 +7,16 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 public class Tutorial extends JFrame{
     Backgrounds background;
-
-    static final String tutorialpng = "image\\Tutorial.png";
+    int Frame_X = 315, Frame_Y = 430;
+    static final String tutorialpng = "image\\tutorials.png";
     Tutorial() throws IOException {
         setFrame();
     }
 
     public void setFrame() throws IOException {
-        background = new Backgrounds(tutorialpng, Select.Frame_X, Select.Frame_Y);
+        background = new Backgrounds(tutorialpng, Frame_X, Frame_Y);
         add(background.getPane());
-        setSize(Select.Frame_X, Select.Frame_Y);
+        setSize(Frame_X, Frame_Y);
         setLayout(null);
         setResizable(false);
         setLocationRelativeTo(null);
