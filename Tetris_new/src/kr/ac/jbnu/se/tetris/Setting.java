@@ -28,7 +28,7 @@ public class Setting extends JFrame {
     }
 
     public void setFrame() throws IOException {
-        backgrounds = new Backgrounds();
+        backgrounds = new Backgrounds(Backgrounds.png, Select.Frame_X, Select.Frame_Y);
         setButton();
         add(musicButton); add(changekey); add(backselect); add(backgrounds.getPane());
         setSize(Select.Frame_X, Select.Frame_Y);

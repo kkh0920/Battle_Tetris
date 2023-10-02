@@ -3,6 +3,10 @@ package kr.ac.jbnu.se.tetris;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.io.FileInputStream;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -15,7 +19,9 @@ public class Tetris extends JPanel {
 
     private JPanel statusPanel;
     private JLabel statusbar;
-    
+    FileWriter MaxScore;
+    String writescore;
+    int cmpscore;
     private Board board;
 
     public Tetris(TetrisGameManager parent, boolean isComputer) throws CloneNotSupportedException {
@@ -53,6 +59,10 @@ public class Tetris extends JPanel {
         add(board, BorderLayout.SOUTH);
         add(blockPreview, BorderLayout.NORTH);
         add(statusPanel);
+    }
+    public void FileWriter() throws IOException {
+        MaxScore = new FileWriter("Score\\MaxScore.txt");
+
     }
 }
 
