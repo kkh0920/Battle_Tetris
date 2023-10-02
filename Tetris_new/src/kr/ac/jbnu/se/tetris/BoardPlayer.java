@@ -1,6 +1,7 @@
 package kr.ac.jbnu.se.tetris;
 
 import java.awt.event.ActionEvent;
+import java.io.IOException;
 import javax.swing.Timer;
 
 public class BoardPlayer extends Board {
@@ -38,7 +39,11 @@ public class BoardPlayer extends Board {
             }
         } 
         else {
-            oneLineDown();
+            try {
+                oneLineDown();
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
         }
     }
 }

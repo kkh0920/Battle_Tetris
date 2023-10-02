@@ -5,6 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.io.IOException;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
@@ -46,7 +47,7 @@ public class TetrisGameManager extends JFrame {
         return gameOverDialog;
     }
 
-    public void start(boolean isComputer) throws CloneNotSupportedException {
+    public void start(boolean isComputer) throws CloneNotSupportedException, IOException {
         player1Panel = new Tetris(this, false);
         player2Panel = new Tetris(this, isComputer); 
 
@@ -79,7 +80,8 @@ public class TetrisGameManager extends JFrame {
             p2Board.start();
         }
     
-        pauseDialog.setVisible(isPaused); 
+        pauseDialog.setVisible(isPaused);
+
     }
 
     private void setGameOverDialog(Select select){
@@ -104,6 +106,8 @@ public class TetrisGameManager extends JFrame {
                 } catch (CloneNotSupportedException e1) {
                     // TODO Auto-generated catch block
                     e1.printStackTrace();
+                } catch (IOException ex) {
+                    throw new RuntimeException(ex);
                 }
             }
             
@@ -166,6 +170,8 @@ public class TetrisGameManager extends JFrame {
                 } catch (CloneNotSupportedException e1) {
                     // TODO Auto-generated catch block
                     e1.printStackTrace();
+                } catch (IOException ex) {
+                    throw new RuntimeException(ex);
                 }
             }
         });
@@ -241,10 +247,18 @@ public class TetrisGameManager extends JFrame {
                     p1Board.move(rightRotated, p1CurPiece.curX(), p1CurPiece.curY());
             }
             if (keycode == KeyEvent.VK_SPACE) {
-                p1Board.dropDown();
+                try {
+                    p1Board.dropDown();
+                } catch (IOException ex) {
+                    throw new RuntimeException(ex);
+                }
             }
             if (keycode == 'm' || keycode == 'M') {
-                p1Board.oneLineDown();
+                try {
+                    p1Board.oneLineDown();
+                } catch (IOException ex) {
+                    throw new RuntimeException(ex);
+                }
             }
 
             // player2 키 입력
@@ -273,10 +287,18 @@ public class TetrisGameManager extends JFrame {
                     p2Board.move(rightRotated, p2CurPiece.curX(), p2CurPiece.curY());
             }
             if (keycode == p2_dropDown) {
-                p2Board.dropDown();
+                try {
+                    p2Board.dropDown();
+                } catch (IOException ex) {
+                    throw new RuntimeException(ex);
+                }
             }
             if (keycode == KeyEvent.VK_CONTROL) {
-                p2Board.oneLineDown();
+                try {
+                    p2Board.oneLineDown();
+                } catch (IOException ex) {
+                    throw new RuntimeException(ex);
+                }
             }
         }
     }

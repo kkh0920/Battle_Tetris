@@ -96,8 +96,10 @@ public class Select extends JFrame {
                 } catch (CloneNotSupportedException e1) {
                     // TODO Auto-generated catch block
                     e1.printStackTrace();
+                } catch (IOException ex) {
+                    throw new RuntimeException(ex);
                 }
-                
+
             }
         });
 
@@ -112,6 +114,8 @@ public class Select extends JFrame {
                 } catch (CloneNotSupportedException e1) {
                     // TODO Auto-generated catch block
                     e1.printStackTrace();
+                } catch (IOException ex) {
+                    throw new RuntimeException(ex);
                 }
             }
         });

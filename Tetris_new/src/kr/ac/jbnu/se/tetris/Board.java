@@ -36,6 +36,7 @@ public class Board extends JPanel implements ActionListener {
     protected Board opponent;
 
     private int numLinesRemoved = 0;
+    static boolean checkfulllines = false;
 
     private BlockPreview blockPreview;
 
@@ -131,13 +132,13 @@ public class Board extends JPanel implements ActionListener {
         }
         return true;
     }
-    public void oneLineDown() { // curPiece 한줄 드롭
+    public void oneLineDown() throws IOException { // curPiece 한줄 드롭
         if (!tryMove(curPiece, curPiece.curX(), curPiece.curY() - 1))
             pieceDropped();	
         else
             move(curPiece, curPiece.curX(), curPiece.curY() - 1);
     }
-    public void dropDown() { // curPiece 한번에 드롭
+    public void dropDown() throws IOException { // curPiece 한번에 드롭
         int newY = curPiece.curY();
         while (newY > 0) {
             if (!tryMove(curPiece, curPiece.curX(), --newY))
@@ -146,7 +147,7 @@ public class Board extends JPanel implements ActionListener {
         }
         pieceDropped();
     }
-    private void pieceDropped() { // 블록이 완전히 떨어지면, 해당 블록을 board에 그리는 식
+    private void pieceDropped() throws IOException { // 블록이 완전히 떨어지면, 해당 블록을 board에 그리는 식
         for (int i = 0; i < 4; ++i) {
             int x = curPiece.curX() + curPiece.x(i);
             int y = curPiece.curY() - curPiece.y(i);
@@ -154,7 +155,7 @@ public class Board extends JPanel implements ActionListener {
         }
         removeFullLines();
     }
-    private void removeFullLines() { // 한 줄 제거 가능 여부 탐색(점수 획득)
+    private void removeFullLines() throws IOException { // 한 줄 제거 가능 여부 탐색(점수 획득)
         curPiece.setShape(Tetrominoes.NoShape);
         
         int numFullLines = 0;
@@ -168,6 +169,7 @@ public class Board extends JPanel implements ActionListener {
                 }
             }
             if (lineIsFull) {
+                checkfulllines = true;
                 ++numFullLines;
                 for (int k = i; k < BoardHeight - 1; ++k) {
                     for (int j = 0; j < BoardWidth; ++j){
@@ -184,6 +186,11 @@ public class Board extends JPanel implements ActionListener {
         if (numFullLines > 0) {
             numLinesRemoved += numFullLines;
             parent.getStatusBar().setText(String.valueOf(numLinesRemoved));
+        }
+        if(numLinesRemoved > parent.cmpscore){
+            parent.cmpscore = numLinesRemoved;
+            parent.writescore = String.valueOf(parent.cmpscore);
+            parent.FileWriter();
         }
         repaint();
     }
