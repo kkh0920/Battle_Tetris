@@ -17,7 +17,8 @@ class Button {
 }
 
 public class Select extends JFrame {
-    
+
+
     static final int Frame_X = 430, Frame_Y = 336;
 
     private int Bt_W = 100, Bt_H = 133;
@@ -30,6 +31,7 @@ public class Select extends JFrame {
     private JButton ai, versus, tutorial, settingBtn;
     
     private Setting setting;
+    private Tutorial tuto;
     
     Button bt;
 
@@ -47,7 +49,7 @@ public class Select extends JFrame {
     }
 
     public void setFrame() throws IOException {
-        background = new Backgrounds();
+        background = new Backgrounds(background.png, Frame_X, Frame_Y);
         setButton();
         add(ai); add(versus); add(settingBtn);add(tutorial); add(background.getPane());
         setSize(Frame_X, Frame_Y);
@@ -119,6 +121,17 @@ public class Select extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 setVisible(false);
                 setting.setVisible(true);
+            }
+        });
+        tutorial.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    tuto = new Tutorial();
+                } catch (IOException ex) {
+                    throw new RuntimeException(ex);
+                }
+                tuto.setVisible(true);
             }
         });
     }

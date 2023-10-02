@@ -14,24 +14,25 @@ public class Backgrounds extends JFrame {
     private BackG background;
     
     private JLayeredPane layeredPane = new JLayeredPane();
-    
-    Backgrounds() throws IOException {
-        DrawBackGround();
+    static final String png = "image\\backg.png";
+
+    Backgrounds(String image, int x, int y) throws IOException {
+        DrawBackGround(image, x, y);
     }
 
     public JLayeredPane getPane(){
         return layeredPane;
     }
 
-    private void DrawBackGround() throws IOException { // LayerdPane에 이미지를 덮어씌우는 메소드
-        layeredPane.setSize(Select.Frame_X, Select.Frame_Y);
+    private void DrawBackGround(String image, int x, int y) throws IOException { // LayerdPane에 이미지를 덮어씌우는 메소드
+        layeredPane.setSize(x, y);
         layeredPane.setLayout(null);
 
         // img = ImageIO.read(new File("TetrisCode/image/backg.png"));
-        img = ImageIO.read(new File("image\\backg.png"));
+        img = ImageIO.read(new File(image));
 
         background = new BackG();
-        background.setSize(Select.Frame_X, Select.Frame_Y);
+        background.setSize(x, y);
         layeredPane.add(background);
     }
 
