@@ -94,7 +94,7 @@ public class BlockPreview extends JPanel {
         String imgPath = "";
         switch (shape) {
             case NoShape:
-                imgPath = "image/blocks/lockBlock.png";
+                imgPath = "image/blocks/Block0.png";
                 break;
             case ZShape:
                 imgPath = "image/blocks/Block1.png";
@@ -116,6 +116,9 @@ public class BlockPreview extends JPanel {
                 break;
             case MirroredLShape:
                 imgPath = "image/blocks/Block7.png";
+                break;
+            case LockBlock:
+                imgPath = "image/blocks/lockBlock.png";
                 break;
         }
         return imgPath;

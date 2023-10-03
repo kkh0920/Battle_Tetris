@@ -9,6 +9,7 @@ import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.concurrent.ThreadLocalRandom;
 
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
@@ -66,6 +67,16 @@ public class Board extends JPanel implements ActionListener {
     public void start(){
         isStarted = true;
         timer.start();
+    }
+
+    public void gameOver(){
+        opponent.isStarted = false;
+        opponent.timer.stop();
+
+        isStarted = false;
+        timer.stop();
+
+        parent.gameManager().gameOverDialog().setVisible(true);
     }
 
     private void clearBoard() { // 보드 클리어
@@ -183,9 +194,12 @@ public class Board extends JPanel implements ActionListener {
 
         isFallingFinished = true;
 
+        boolean isBlockOvered = false;
+
         if (numFullLines > 0) {
             numLinesRemoved += numFullLines;
             parent.getStatusBar().setText(String.valueOf(numLinesRemoved));
+            isBlockOvered = attackOpponent(numFullLines);
         }
         if(numLinesRemoved > parent.cmpscore){
             parent.cmpscore = numLinesRemoved;
@@ -193,6 +207,46 @@ public class Board extends JPanel implements ActionListener {
             parent.FileWriter();
         }
         repaint();
+
+        if(isBlockOvered)
+            gameOver();
+    }
+
+    private boolean attackOpponent(int attackCount){
+        boolean isBlockOvered = false;
+        
+        for (int i = BoardHeight - 1; i >= 0; i--) {
+            for (int j = 0; j < BoardWidth; j++) {
+                if(opponent.board[i][j] == Tetrominoes.NoShape)
+                    continue;
+
+                if (i + attackCount >= BoardHeight) {
+                    isBlockOvered = true;
+                } else {
+                    opponent.board[i + attackCount][j] = opponent.board[i][j];
+                }
+                opponent.board[i][j] = Tetrominoes.NoShape;
+            }
+        }  
+
+        Shape opponentPiece = opponent.curPiece;
+        for(int i = 0; i < attackCount; i++){
+            if(opponent.tryMove(opponentPiece, opponentPiece.curX(), opponentPiece.curY() + 1))
+                opponent.move(opponentPiece, opponentPiece.curX(), opponentPiece.curY() + 1);
+        }
+        
+        ThreadLocalRandom r = ThreadLocalRandom.current();
+        int x = r.nextInt(BoardWidth);
+
+        for (int i = 0; i < attackCount; i++) {
+            for (int j = 0; j < BoardWidth; j++) {
+                opponent.board[i][j] = Tetrominoes.LockBlock;
+            }
+            opponent.board[i][x] = Tetrominoes.NoShape;
+        }
+        
+
+        return isBlockOvered;
     }
 
 
@@ -272,7 +326,7 @@ public class Board extends JPanel implements ActionListener {
         String imgPath = "";
         switch (shape) {
             case NoShape:
-                imgPath = "image/blocks/lockBlock.png";
+                imgPath = "image/blocks/Block0.png";
                 break;
             case ZShape:
                 imgPath = "image/blocks/Block1.png";
@@ -294,6 +348,9 @@ public class Board extends JPanel implements ActionListener {
                 break;
             case MirroredLShape:
                 imgPath = "image/blocks/Block7.png";
+                break;
+            case LockBlock:
+                imgPath = "image/blocks/lockBlock.png";
                 break;
         }
         return imgPath;

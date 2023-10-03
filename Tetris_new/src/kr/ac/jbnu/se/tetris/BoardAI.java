@@ -37,13 +37,7 @@ public class BoardAI extends Board {
                 else{
                     // ai가 승리한 경우
                 }
-                opponent.isStarted = false;
-                opponent.timer.stop();
-
-                isStarted = false;
-                timer.stop();
-
-                parent.gameManager().gameOverDialog().setVisible(true);
+                gameOver();
             }
             else {
                 try {
