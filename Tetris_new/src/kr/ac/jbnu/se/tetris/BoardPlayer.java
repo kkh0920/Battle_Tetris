@@ -12,7 +12,7 @@ public class BoardPlayer extends Board {
         //TODO Auto-generated constructor stub 
         
         player = new Player();
-        timer = new Timer(400, this);
+        timer = new Timer(800, this);
         
         start();
     }
@@ -28,13 +28,7 @@ public class BoardPlayer extends Board {
                 else{
                     // 싱대 플레이어 혹은 ai가 패배한 경우
                 }
-                opponent.isStarted = false;
-                opponent.timer.stop();
-                
-                isStarted = false;
-                timer.stop();
-
-                parent.gameManager().gameOverDialog().setVisible(true);
+                gameOver();
             }
         } 
         else {
