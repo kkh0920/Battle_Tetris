@@ -37,6 +37,6 @@
 10. 테트리스 AI 개발(BFS 활용) ✔️
 
 ## 개선 전 클래스 다이어그램
-<img width="625" alt="스크린샷 2023-09-23 오전 10 46 35" src="https://github.com/kkh0920/Java_Swing_Tetris/assets/65442366/cbb66c11-a538-4139-935d-67e5c8935dff">
+<img width="688" alt="스크린샷 2023-10-02 오후 7 03 35" src="https://github.com/kkh0920/Java_Swing_Tetris/assets/65442366/e7398e49-8500-4942-980b-1223a0ac3074">
 
 ## 개선 후 클래스 다이어그램
