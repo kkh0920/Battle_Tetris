@@ -14,7 +14,6 @@ import javax.swing.JLabel;
 public class TetrisGameManager extends JFrame {
     
     final int Frame_X = 700, Frame_Y = 450;
-
     public static int p2_up = 'w', p2_down = 's', p2_left = 'a', p2_right = 'd',
                         p2_up_upper = 'W', p2_down_upper = 'S', p2_left_upper = 'A', p2_right_upper = 'D',
                         p2_dropDown = KeyEvent.VK_SHIFT;
@@ -49,12 +48,12 @@ public class TetrisGameManager extends JFrame {
 
     public void start(boolean isComputer) throws CloneNotSupportedException, IOException {
         player1Panel = new Tetris(this, false);
-        player2Panel = new Tetris(this, isComputer); 
+        player2Panel = new Tetris(this, isComputer);
 
         opponentIsComputer = isComputer;
 
         Board p1Board = player1Panel.getBoard();
-        Board p2Board = player2Panel.getBoard(); 
+        Board p2Board = player2Panel.getBoard();
 
         p1Board.setOpponent(p2Board);
         p2Board.setOpponent(p1Board);
@@ -79,7 +78,7 @@ public class TetrisGameManager extends JFrame {
             p1Board.start();
             p2Board.start();
         }
-    
+
         pauseDialog.setVisible(isPaused);
 
     }
@@ -99,7 +98,7 @@ public class TetrisGameManager extends JFrame {
                     g.dispose();
 
                     gameOverDialog.setVisible(false);
-                    
+
                     TetrisGameManager game = new TetrisGameManager(select);
                     game.start(opponentIsComputer);
                     game.setVisible(true);
@@ -110,7 +109,7 @@ public class TetrisGameManager extends JFrame {
                     throw new RuntimeException(ex);
                 }
             }
-            
+
         });
         homeBtn.addActionListener(new ActionListener() {
             @Override
@@ -126,7 +125,7 @@ public class TetrisGameManager extends JFrame {
         gameOverDialog = new JDialog(this, "게임 오버", true);
         gameOverDialog.setUndecorated(true);
         gameOverDialog.setSize(170, 135);
-        gameOverDialog.setLocationRelativeTo(null); 
+        gameOverDialog.setLocationRelativeTo(null);
         gameOverDialog.setLayout(null);
 
         gameOverText.setBounds(60, 10, 150, 30);
@@ -143,7 +142,7 @@ public class TetrisGameManager extends JFrame {
         TetrisGameManager g = this;
 
         JLabel pauseText = new JLabel("일시 정지");
-        
+
         JButton resumeBtn = new JButton("계속하기");
         JButton retryBtn = new JButton("재시작");
         JButton homeBtn = new JButton("메인화면");
@@ -154,14 +153,14 @@ public class TetrisGameManager extends JFrame {
                 // TODO Auto-generated method stub
                 pause();
             }
-            
+
         });
         retryBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
                     g.dispose();
-                    
+
                     pauseDialog.setVisible(false);
 
                     TetrisGameManager game = new TetrisGameManager(select);
