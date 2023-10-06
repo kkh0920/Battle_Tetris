@@ -8,8 +8,8 @@ public class Tutorial extends JFrame {
 
     private Backgrounds background;
     
-    // static final String tutorialpng = "TetrisCode/image/tutorials.png";
-    static final String tutorialpng = "image\\tutorials.png";
+    // private String tutorialpng = "TetrisCode/image/tutorials.png";
+    private String tutorialpng = "image\\tutorials.png";
     
     Tutorial() throws IOException {
         setFrame();
