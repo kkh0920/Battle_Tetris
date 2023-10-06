@@ -18,9 +18,8 @@ public class BoardPlayer extends Board implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (isFallingFinished) {
             isFallingFinished = false;
-            if (!newPiece()) {
+            if (!newPiece())
                 gameOver();
-            }
         } 
         else {
             oneLineDown();
