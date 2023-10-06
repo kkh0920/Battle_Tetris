@@ -20,7 +20,7 @@ public class BlockImage {
 
     public static BufferedImage getImage(String filePath) {
         try {
-            ImageIO.read(new File(filePath));
+            return ImageIO.read(new File(filePath));
         } catch (IOException e) {
             e.printStackTrace();
         }
