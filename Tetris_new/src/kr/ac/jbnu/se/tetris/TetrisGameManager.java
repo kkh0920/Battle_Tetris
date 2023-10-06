@@ -13,7 +13,7 @@ import javax.swing.JLabel;
 
 public class TetrisGameManager extends JFrame {
     
-    final int Frame_X = 740, Frame_Y = 550;
+    final int Frame_X = 710, Frame_Y = 550;
 
     public static int p2_up = 'w', p2_down = 's', p2_left = 'a', p2_right = 'd',
                         p2_up_upper = 'W', p2_down_upper = 'S', p2_left_upper = 'A', p2_right_upper = 'D',
@@ -113,7 +113,7 @@ public class TetrisGameManager extends JFrame {
     }
 
     private void setLayoutLocation() {
-        timer.setBounds(320, 10, 100, 25);
+        timer.setBounds(305, 10, 100, 25);
         maxScorePanel.setBounds(30, 10, 90, 25);
         player1Panel.setBounds(20, 45, player1Panel.frameX(), player1Panel.frameY());
         player2Panel.setBounds(player2Panel.frameX() + 60, 45, player2Panel.frameX(), player2Panel.frameY());
