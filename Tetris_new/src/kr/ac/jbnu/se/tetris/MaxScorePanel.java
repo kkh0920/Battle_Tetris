@@ -16,7 +16,7 @@ public class MaxScorePanel extends JPanel {
     private BufferedReader scoreReading;
     private String maxScore;
 
-    public MaxScorePanel(){
+    public MaxScorePanel() {
         setMaxScorePanel();
     }
 
