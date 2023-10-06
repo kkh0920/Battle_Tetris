@@ -91,10 +91,10 @@ public class Shape implements Cloneable {
         return m;
     }
 
-    public int curX(){
+    public int curX() {
         return curX;
     }
-    public int curY(){
+    public int curY() {
         return curY;
     }
     public void moveTo(int x, int y){ // setCurX, setCurY
