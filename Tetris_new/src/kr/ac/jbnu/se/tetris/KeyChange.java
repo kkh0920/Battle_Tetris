@@ -19,12 +19,13 @@ public class KeyChange extends JFrame implements ActionListener {
 
     KeyChange() {
         setFrame();
-        setTextfield();
-        setButton();
-        addComponent();
+
     }
 
     public void setFrame() {
+        setTextfield();
+        setButton();
+        addComponent();
         setSize(450,450);
         setLocationRelativeTo(null);
         setLayout(null);

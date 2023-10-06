@@ -12,41 +12,38 @@ import java.io.IOException;
 import java.util.concurrent.ThreadLocalRandom;
 
 import javax.imageio.ImageIO;
-import javax.swing.JPanel;
-import javax.swing.Timer;
+import javax.swing.*;
 
-public class Board extends JPanel implements ActionListener {
+public class Board extends JPanel implements ActionListener{
 
     protected final int BoardWidth = 10;
     protected final int BoardHeight = 22;
 
     protected final int PreferredSizeWidth = 200;
     protected final int PreferredSizeHeight = 400;
-
+    static int second = 0;
     protected Tetris parent;
 
     protected Tetrominoes[][] board;
+    private int hp;
 
     protected boolean isFallingFinished;
     protected boolean isStarted = false;
 
-    protected Shape curPiece, nextPiece; 
+    protected Shape curPiece, nextPiece;
 
     protected Timer timer;
-
     protected Board opponent;
 
     private int numLinesRemoved = 0;
-
     private BlockPreview blockPreview;
-
     public Board(Tetris parent) {
         setPreferredSize(new Dimension(PreferredSizeWidth, PreferredSizeHeight));
-        
+
         this.parent = parent;
 
         board = new Tetrominoes[BoardHeight][BoardWidth];
-        
+
         curPiece = new Shape(); // 생성자에서 객체 생성 (합성 관계)
         nextPiece = new Shape();
 
@@ -55,7 +52,7 @@ public class Board extends JPanel implements ActionListener {
         clearBoard();
 
         blockPreview = new BlockPreview(this);
-    
+
         nextPiece.setRandomShape();
     }
 
@@ -79,7 +76,7 @@ public class Board extends JPanel implements ActionListener {
     }
 
     private void clearBoard() { // 보드 클리어
-        for (int i = 0; i < BoardHeight; ++i) { 
+        for (int i = 0; i < BoardHeight; ++i) {
             for(int j = 0; j < BoardWidth; ++j) {
                 board[i][j] = Tetrominoes.NoShape;
             }
@@ -88,7 +85,7 @@ public class Board extends JPanel implements ActionListener {
 
     public boolean newPiece() { // 새로운 떨어지는 블록 생성
         curPiece = nextPiece.copy();
-    
+
         int initPosX = BoardWidth / 2;
         int initPosY = BoardHeight - 2 + curPiece.minY();
 
@@ -123,6 +120,14 @@ public class Board extends JPanel implements ActionListener {
     Tetrominoes shapeAt(int x, int y) { // (x, y)에 있는 블럭의 Tetrominoes 타입
         return board[y][x];
     }
+    public void getHPvalue(int t) {
+        for(int i = hp; i <= 100; i++) {
+            if(hp > t) break;
+            hp = i;
+            parent.jprogressBar.setValue(hp);
+            parent.jprogressBar.setString("체력 : " + (100-hp));
+        }
+    }
 
     // -------------------------------- 블록 하강 및 점수 획득 --------------------------------
 
@@ -142,13 +147,13 @@ public class Board extends JPanel implements ActionListener {
         }
         return true;
     }
-    public void oneLineDown() { // curPiece 한줄 드롭
+    public void oneLineDown() throws IOException { // curPiece 한줄 드롭
         if (!tryMove(curPiece, curPiece.curX(), curPiece.curY() - 1))
-            pieceDropped();	
+            pieceDropped();
         else
             move(curPiece, curPiece.curX(), curPiece.curY() - 1);
     }
-    public void dropDown() { // curPiece 한번에 드롭
+    public void dropDown() throws IOException { // curPiece 한번에 드롭
         int newY = curPiece.curY();
         while (newY > 0) {
             if (!tryMove(curPiece, curPiece.curX(), --newY))
@@ -157,17 +162,17 @@ public class Board extends JPanel implements ActionListener {
         }
         pieceDropped();
     }
-    private void pieceDropped() { // 블록이 완전히 떨어지면, 해당 블록을 board에 그리는 식
+    private void pieceDropped() throws IOException { // 블록이 완전히 떨어지면, 해당 블록을 board에 그리는 식
         for (int i = 0; i < 4; ++i) {
             int x = curPiece.curX() + curPiece.x(i);
             int y = curPiece.curY() - curPiece.y(i);
-            board[y][x] = curPiece.getShape(); 
+            board[y][x] = curPiece.getShape();
         }
         removeFullLines();
     }
-    private void removeFullLines() { // 한 줄 제거 가능 여부 탐색(점수 획득)
+    private void removeFullLines() throws IOException { // 한 줄 제거 가능 여부 탐색(점수 획득)
         curPiece.setShape(Tetrominoes.NoShape);
-        
+
         int numFullLines = 0;
 
         for (int i = BoardHeight - 1; i >= 0; --i) {
@@ -194,10 +199,21 @@ public class Board extends JPanel implements ActionListener {
 
         boolean isBlockOvered = false;
 
+
+
+
+
         if (numFullLines > 0) {
             numLinesRemoved += numFullLines;
             parent.getStatusBar().setText(String.valueOf(numLinesRemoved));
             isBlockOvered = attackOpponent(numFullLines);
+            opponent.getHPvalue(numLinesRemoved+2);
+        }
+
+        if(numLinesRemoved > parent.cmpscore){
+            parent.cmpscore = numLinesRemoved;
+            parent.writescore = String.valueOf(parent.cmpscore);
+            parent.FileWriter();
         }
         repaint();
 
@@ -207,7 +223,7 @@ public class Board extends JPanel implements ActionListener {
 
     private boolean attackOpponent(int attackCount){
         boolean isBlockOvered = false;
-        
+
         for (int i = BoardHeight - 1; i >= 0; i--) {
             for (int j = 0; j < BoardWidth; j++) {
                 if(opponent.board[i][j] == Tetrominoes.NoShape)
@@ -220,14 +236,14 @@ public class Board extends JPanel implements ActionListener {
                 }
                 opponent.board[i][j] = Tetrominoes.NoShape;
             }
-        }  
+        }
 
         Shape opponentPiece = opponent.curPiece;
         for(int i = 0; i < attackCount; i++){
             if(opponent.tryMove(opponentPiece, opponentPiece.curX(), opponentPiece.curY() + 1))
                 opponent.move(opponentPiece, opponentPiece.curX(), opponentPiece.curY() + 1);
         }
-        
+
         ThreadLocalRandom r = ThreadLocalRandom.current();
         int x = r.nextInt(BoardWidth);
 
@@ -237,10 +253,10 @@ public class Board extends JPanel implements ActionListener {
             }
             opponent.board[i][x] = Tetrominoes.NoShape;
         }
-        
 
         return isBlockOvered;
     }
+
 
 
     // -------------------------------- 블록 페인트 --------------------------------
@@ -259,7 +275,7 @@ public class Board extends JPanel implements ActionListener {
                     drawSquare(g, 0 + j * squareWidth(), boardTop + i * squareHeight(), shape);
             }
         }
-        
+
         // 떨어지는 블록 paint
         if (curPiece.getShape() != Tetrominoes.NoShape) {
             for (int i = 0; i < 4; ++i) {
@@ -269,7 +285,7 @@ public class Board extends JPanel implements ActionListener {
                         curPiece.getShape());
             }
         }
-        
+
         // 블록이 떨어질 위치 표시
         if(curPiece.getShape() == Tetrominoes.NoShape)
             return;
@@ -294,7 +310,7 @@ public class Board extends JPanel implements ActionListener {
         BufferedImage blockImage = getImage(getImageFile(shape));
 
         int imageSize = squareWidth(); // 이미지 크기를 블록 크기에 맞게 조정합니다.
-        
+
         if(shape == Tetrominoes.NoShape){
             Graphics2D g2d = (Graphics2D) g;
             AlphaComposite alphaComposite = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.3f);
@@ -351,4 +367,5 @@ public class Board extends JPanel implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {}
+
 }

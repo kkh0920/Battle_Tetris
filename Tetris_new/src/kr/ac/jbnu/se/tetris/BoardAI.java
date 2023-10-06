@@ -1,6 +1,7 @@
 package kr.ac.jbnu.se.tetris;
 
 import java.awt.event.ActionEvent;
+import java.io.IOException;
 
 import javax.swing.Timer;
 
@@ -48,11 +49,15 @@ public class BoardAI extends Board {
             }
         } 
         else {
-            moveToBestRoute(index++);
+            try {
+                moveToBestRoute(index++);
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
         }
     }
 
-    private void moveToBestRoute(int i){
+    private void moveToBestRoute(int i) throws IOException {
         if(i >= bestRoute.length()){
             dropDown();
             return;
