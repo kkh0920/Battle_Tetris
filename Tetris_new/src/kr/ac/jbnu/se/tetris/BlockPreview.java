@@ -13,7 +13,7 @@ public class BlockPreview extends JPanel {
 
     private Shape piece;
 
-    BlockPreview(Board board){
+    BlockPreview(Board board) {
         setPreferredSize(new Dimension(PanelWidth, PanelHeight));
         nextPiece = new Tetrominoes[height][width];
         initNextPiece();
