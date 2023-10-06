@@ -10,11 +10,11 @@ public class BlockImage {
 
     BufferedImage blockImage;
 
-    public BlockImage(Tetrominoes shape){
+    public BlockImage(Tetrominoes shape) {
         blockImage = getImage(getImageFile(shape));
     }
 
-    public BufferedImage getImage(){
+    public BufferedImage getImage() {
         return blockImage;
     }
 
