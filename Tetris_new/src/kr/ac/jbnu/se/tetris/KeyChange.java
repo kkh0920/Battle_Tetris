@@ -1,6 +1,7 @@
 package kr.ac.jbnu.se.tetris;
 
 import javax.swing.*;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -19,7 +20,6 @@ public class KeyChange extends JFrame implements ActionListener {
 
     KeyChange() {
         setFrame();
-
     }
 
     public void setFrame() {

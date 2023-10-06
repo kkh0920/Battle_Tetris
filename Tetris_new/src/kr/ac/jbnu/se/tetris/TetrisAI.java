@@ -27,7 +27,7 @@ public class TetrisAI {
         dy = new int[] { 0, 0, -1, 1 };
     }
 
-    public String findBestRoute() throws CloneNotSupportedException {
+    public String findBestRoute() {
         initFindRoute();
 
         while(!shapeQueue.isEmpty()) {
@@ -44,13 +44,13 @@ public class TetrisAI {
         return bestRoute;
     }
 
-    private void initFindRoute() throws CloneNotSupportedException {
+    private void initFindRoute() {
         shapeQueue = new LinkedList<>();
         routeQueue = new LinkedList<>();
         
         maxWeight = -10;
         bestRoute = "";
-        visited = new boolean[board.BoardHeight][board.BoardWidth][4];
+        visited = new boolean[board.height()][board.width()][4];
         curPiece = (Shape) board.curPiece.clone();
 
         for(int i = 0; i < 4; i++){
@@ -64,13 +64,13 @@ public class TetrisAI {
         }
     }
 
-    private void findRoute_move(Shape piece, String curRoute, int curX, int curY) throws CloneNotSupportedException {
+    private void findRoute_move(Shape piece, String curRoute, int curX, int curY) {
         for(int i = 0; i < 3; i++) {
             Shape nPiece = (Shape) piece.clone();
             int nX = curX + dx[i];
             int nY = curY + dy[i];
             
-            if(nX < 0 || nX >= board.BoardWidth || nY < 0 || nY >= board.BoardHeight)
+            if(nX < 0 || nX >= board.width() || nY < 0 || nY >= board.height())
                 continue;
             if(visited[nY][nX][nPiece.getRotateIndex()])
                 continue;
@@ -116,7 +116,7 @@ public class TetrisAI {
     }
 
     private int getWeight(Shape nPiece){
-        boolean[][] isCurPiece = new boolean[board.BoardHeight][board.BoardWidth];
+        boolean[][] isCurPiece = new boolean[board.height()][board.width()];
         
         for(int i = 0; i < 4; i++){
             int blockX = nPiece.curX() + nPiece.x(i);
@@ -134,7 +134,7 @@ public class TetrisAI {
                 int x = blockX + dx[j];
                 int y = blockY + dy[j];
 
-                if(x + 1 == 0 || x == board.BoardWidth || y + 1 == 0 || y == board.BoardHeight) {
+                if(x + 1 == 0 || x == board.width() || y + 1 == 0 || y == board.height()) {
                     weight++;
                     continue;
                 }

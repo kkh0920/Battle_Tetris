@@ -3,6 +3,7 @@ package kr.ac.jbnu.se.tetris;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.*;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
@@ -17,7 +18,6 @@ class Button {
 }
 
 public class Select extends JFrame {
-
 
     static final int Frame_X = 430, Frame_Y = 336;
 
@@ -35,11 +35,11 @@ public class Select extends JFrame {
     
     Button bt;
 
-    Select() throws IOException, UnsupportedAudioFileException, LineUnavailableException {
+    Select() throws UnsupportedAudioFileException, LineUnavailableException {
         setFrame();
 
         setting = new Setting(this);
-
+        
         music = new Music();
         music.startMusic();
     }
@@ -48,15 +48,17 @@ public class Select extends JFrame {
         return music;
     }
 
-    public void setFrame() throws IOException {
-        background = new Backgrounds(background.png, Frame_X, Frame_Y);
-        setButton();
-        add(ai); add(versus); add(settingBtn);add(tutorial); add(background.getPane());
+    public void setFrame() {
         setSize(Frame_X, Frame_Y);
         setLayout(null);
         setResizable(false);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
+
+        // background = new Backgrounds("TetrisCode/image/backg.png", Frame_X, Frame_Y);
+        background = new Backgrounds("image\\backg.png", Frame_X, Frame_Y);
+        setButton();
+        add(ai); add(versus); add(settingBtn);add(tutorial); add(background.getPane());
     }
 
     public void setButton() {
@@ -89,16 +91,9 @@ public class Select extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 setVisible(false);
-                try {
-                    game = new TetrisGameManager(select);
-                    game.start(true);
-                    game.setVisible(true);
-                } catch (CloneNotSupportedException e1) {
-                    // TODO Auto-generated catch block
-                    e1.printStackTrace();
-                } catch (IOException ex) {
-                    throw new RuntimeException(ex);
-                }
+                game = new TetrisGameManager(select);
+                game.start(true);
+                game.setVisible(true);
 
             }
         });
@@ -107,16 +102,9 @@ public class Select extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 setVisible(false);
-                try {
-                    game = new TetrisGameManager(select);
-                    game.start(false);
-                    game.setVisible(true);
-                } catch (CloneNotSupportedException e1) {
-                    // TODO Auto-generated catch block
-                    e1.printStackTrace();
-                } catch (IOException ex) {
-                    throw new RuntimeException(ex);
-                }
+                game = new TetrisGameManager(select);
+                game.start(false);
+                game.setVisible(true);
             }
         });
 

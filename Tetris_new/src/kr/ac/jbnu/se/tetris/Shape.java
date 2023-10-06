@@ -41,8 +41,14 @@ public class Shape implements Cloneable {
         pieceShape = shape;
     }
 
-    public Object clone() throws CloneNotSupportedException { // CloneNotSupportedException는 checked exception 이라 반드시 예외처리
-        return (Shape) super.clone(); // 기본적으로 부모의 clone을 그대로 불러와 반환
+    public Object clone() { // CloneNotSupportedException는 checked exception 이라 반드시 예외처리
+        try {
+            return (Shape) super.clone(); // 기본적으로 부모의 clone을 그대로 불러와 반환
+        } catch (CloneNotSupportedException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } 
+        return null;
     }
 
     public Tetrominoes getShape() {

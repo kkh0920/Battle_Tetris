@@ -1,13 +1,8 @@
 package kr.ac.jbnu.se.tetris;
 
-// import javafx.scene.layout.Background;
-// import sun.audio.AudioPlayer;
-// import sun.audio.AudioStream;
-
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.*;
 
 public class Setting extends JFrame {
 
@@ -21,24 +16,26 @@ public class Setting extends JFrame {
 
     Button bt;
 
-    Setting(Select home) throws IOException {
+    Setting(Select home) {
         this.home = home;
         keyChange = new KeyChange();
         setFrame();
     }
 
-    public void setFrame() throws IOException {
-        backgrounds = new Backgrounds(Backgrounds.png, Select.Frame_X, Select.Frame_Y);
-        setButton();
-        add(musicButton); add(changekey); add(backselect); add(backgrounds.getPane());
+    private void setFrame() {
         setSize(Select.Frame_X, Select.Frame_Y);
         setLayout(null);
         setResizable(false);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
+
+        // backgrounds = new Backgrounds("TetrisCode/image/backg.png", Select.Frame_X, Select.Frame_Y);
+        backgrounds = new Backgrounds("image\\backg.png", Select.Frame_X, Select.Frame_Y);
+        setButton();
+        add(musicButton); add(changekey); add(backselect); add(backgrounds.getPane());
     }
 
-    public void addButton() {
+    private void addButton() {
         // musicButton = new JButton(new ImageIcon("TetrisCode/image/musicOn.png"));
         musicButton = new JButton(new ImageIcon("image\\musicOn.png"));
 
@@ -48,7 +45,7 @@ public class Setting extends JFrame {
         backselect = new JButton(new ImageIcon("image\\back.png"));
     }
 
-    public void setButton() {
+    private void setButton() {
         addButton();
         
         bt = new Button(musicButton);
@@ -76,7 +73,7 @@ public class Setting extends JFrame {
         }
     }
 
-    public void buttonAction() {
+    private void buttonAction() {
             musicButton.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {

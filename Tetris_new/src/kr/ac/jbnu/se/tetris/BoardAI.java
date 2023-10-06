@@ -1,11 +1,13 @@
 package kr.ac.jbnu.se.tetris;
 
 import java.awt.event.ActionEvent;
-import java.io.IOException;
+import java.awt.event.ActionListener;
 
 import javax.swing.Timer;
 
-public class BoardAI extends Board {
+public class BoardAI extends Board implements ActionListener {
+
+    private final int moveDelay = 80;
 
     private TetrisAI computer;
 
@@ -13,7 +15,7 @@ public class BoardAI extends Board {
 
     private int index = 0;
 
-    public BoardAI(Tetris parent, int moveDelay) throws CloneNotSupportedException {
+    public BoardAI(Tetris parent) {
         super(parent);
         //TODO Auto-generated constructor stub 
         computer = new TetrisAI(this);
@@ -30,34 +32,16 @@ public class BoardAI extends Board {
         if (isFallingFinished) {
             isFallingFinished = false;
             index = 0;
-            if (!newPiece()) {
-                if(opponent.isStarted){
-                    // ai가 패배한 경우
-                }
-                else{
-                    // ai가 승리한 경우
-                }
+            if (!newPiece())
                 gameOver();
-            }
-            else {
-                try {
-                    bestRoute = computer.findBestRoute();
-                } catch (CloneNotSupportedException e1) {
-                    // TODO Auto-generated catch block
-                    e1.printStackTrace();
-                }
-            }
+            else 
+                bestRoute = computer.findBestRoute();
         } 
-        else {
-            try {
-                moveToBestRoute(index++);
-            } catch (IOException ex) {
-                throw new RuntimeException(ex);
-            }
-        }
+        else
+            moveToBestRoute(index++);
     }
 
-    private void moveToBestRoute(int i) throws IOException {
+    private void moveToBestRoute(int i) {
         if(i >= bestRoute.length()){
             dropDown();
             return;

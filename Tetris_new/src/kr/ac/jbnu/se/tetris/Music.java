@@ -12,15 +12,21 @@ public class Music{
     private File file;
     private Clip clip;
 
-    Music() throws UnsupportedAudioFileException, LineUnavailableException, IOException {
+    Music() throws UnsupportedAudioFileException, LineUnavailableException {
         setMusic();
     }
 
-    public void setMusic() throws IOException, LineUnavailableException, UnsupportedAudioFileException {
+    public void setMusic() throws LineUnavailableException, UnsupportedAudioFileException {
         // file = new File("TetrisCode/bgm/bgm.wav");
         file = new File("bgm\\bgm.wav");
+        
         clip = AudioSystem.getClip();
-        clip.open(AudioSystem.getAudioInputStream(file));
+        try {
+            clip.open(AudioSystem.getAudioInputStream(file));
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
     }
 
     public void stopMusic() {
