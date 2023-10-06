@@ -7,7 +7,7 @@ import javax.sound.sampled.UnsupportedAudioFileException;
 
 public class Main { 
     public static void main(String[] args) throws IOException, UnsupportedAudioFileException, LineUnavailableException {
-        Select home = new Select(); // 메인
+        Select home = new Select();
         home.setVisible(true);
     }
 }
