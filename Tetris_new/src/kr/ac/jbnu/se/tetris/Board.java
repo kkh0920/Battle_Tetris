@@ -286,7 +286,7 @@ public class Board extends JPanel {
             increasedHp = 100;
         curHp.setValue(increasedHp);
     }
-    private int decreaseOthertHp(int count){
+    private int decreaseOthertHp(int count) {
         int attackCount = 0;
 
         JProgressBar otherHp = opponent.parent.getHealthBar();
