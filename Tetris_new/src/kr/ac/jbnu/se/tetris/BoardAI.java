@@ -42,7 +42,7 @@ public class BoardAI extends Board implements ActionListener {
     }
 
     private void moveToBestRoute(int i) {
-        if(i >= bestRoute.length()){
+        if(i >= bestRoute.length()) {
             dropDown();
             return;
         }
