@@ -2,7 +2,7 @@ package kr.ac.jbnu.se.tetris;
 import java.io.IOException;
 import javax.swing.JFrame;
 
-public class Tutorial extends JFrame{
+public class Tutorial extends JFrame {
     
     private final int tutorial_Frame_X = 315, tutorial_Frame_Y = 430;
 
