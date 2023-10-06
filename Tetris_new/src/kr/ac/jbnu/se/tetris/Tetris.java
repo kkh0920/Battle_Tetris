@@ -30,7 +30,7 @@ public class Tetris extends JPanel {
 
     // -------------------------------------- get 메소드 --------------------------------------
 
-    public TetrisGameManager gameManager(){
+    public TetrisGameManager gameManager() {
         return parent;
     }
     public JLabel getStatusBar() {
