@@ -6,7 +6,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class KeyChange extends JFrame implements ActionListener {
+public class KeyChange extends JFrame implements ActionListener { 
 
     private String up, down, left, right, dropdown;
     
