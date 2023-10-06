@@ -8,7 +8,7 @@ public class Tetris extends JPanel {
 
     private TetrisGameManager parent;
 
-    final int Frame_X = 330, Frame_Y = 460, Status_X = 60, Status_Y = 30;
+    final int Frame_X = 315, Frame_Y = 460, Status_X = 60, Status_Y = 30;
     
     // 체력바
     private JProgressBar healthBar;
