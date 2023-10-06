@@ -8,7 +8,7 @@ import javax.imageio.ImageIO;
 
 public class BlockImage {
 
-    BufferedImage blockImage;
+    private BufferedImage blockImage;
 
     public BlockImage(Tetrominoes shape) {
         blockImage = getImage(getImageFile(shape));
@@ -18,7 +18,7 @@ public class BlockImage {
         return blockImage;
     }
 
-    public static BufferedImage getImage(String filePath) {
+    public BufferedImage getImage(String filePath) {
         try {
             return ImageIO.read(new File(filePath));
         } catch (IOException e) {
@@ -27,7 +27,7 @@ public class BlockImage {
         return null; // 예외 발생 시 null 반환
     }
 
-    public static String getImageFile(Tetrominoes shape) {
+    public String getImageFile(Tetrominoes shape) {
         String imgPath = "";
         switch (shape) {
             case NoShape:
