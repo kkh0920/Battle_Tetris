@@ -59,7 +59,7 @@ public class Setting extends JFrame {
         buttonAction();
     }
 
-    private void pauseMusic(){
+    private void pauseMusic() {
         isMusicStarted = !isMusicStarted;
         if(isMusicStarted){
             // musicButton.setIcon(new ImageIcon("TetrisCode/image/musicOn.png"));
