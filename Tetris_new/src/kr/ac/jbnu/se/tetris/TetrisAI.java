@@ -115,7 +115,7 @@ public class TetrisAI {
         }
     }
 
-    private int getWeight(Shape nPiece){
+    private int getWeight(Shape nPiece) {
         boolean[][] isCurPiece = new boolean[board.height()][board.width()];
         
         for(int i = 0; i < 4; i++){
