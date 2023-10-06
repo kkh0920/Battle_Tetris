@@ -39,7 +39,7 @@ public class Backgrounds extends JFrame {
         layeredPane.add(background);
     }
 
-    class BackG extends JPanel { // Panel에 이미지를 나타내기 위해서,
+    class BackG extends JPanel { // Panel에 이미지를 나타내기 위해서
         public void paint(Graphics g){
             g.drawImage(img, 0, 0, null);
         }
