@@ -17,7 +17,6 @@ public class BoardAI extends Board implements ActionListener {
 
     public BoardAI(Tetris parent) {
         super(parent);
-        //TODO Auto-generated constructor stub 
         computer = new TetrisAI(this);
 
         bestRoute = computer.findBestRoute();
@@ -42,7 +41,7 @@ public class BoardAI extends Board implements ActionListener {
     }
 
     private void moveToBestRoute(int i) {
-        if(i >= bestRoute.length()) {
+        if(i >= bestRoute.length()){
             dropDown();
             return;
         }
