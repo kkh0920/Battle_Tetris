@@ -14,12 +14,12 @@ public class TimerPanel extends JPanel {
     private int second = 0, minute = 0;
     private JLabel timernum;
 
-    public TimerPanel(){
+    public TimerPanel() {
         timernum = new JLabel();
         add(timernum, BorderLayout.CENTER);
     }
 
-    public void startTimer(){
+    public void startTimer() {
         Runnable task = new Runnable() {
             @Override
             public void run() {
