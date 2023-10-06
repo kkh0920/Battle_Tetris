@@ -128,7 +128,7 @@ public class TetrisGameManager extends JFrame {
 
     // -------------------------------------- 게임 종료 및 일시 정지 UI 설정 --------------------------------------
 
-    private void setGameOverDialog(Select select){
+    private void setGameOverDialog(Select select) {
         TetrisGameManager g = this;
 
         JLabel gameOverText = new JLabel("게임 종료!");
