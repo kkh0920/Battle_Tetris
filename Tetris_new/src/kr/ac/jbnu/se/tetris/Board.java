@@ -5,6 +5,8 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.concurrent.ThreadLocalRandom;
 
 import javax.swing.*;
@@ -37,6 +39,10 @@ public class Board extends JPanel {
     // 상대편 보드
     protected Board opponent;
 
+    protected int bombstack = 1;
+    private static boolean bombcheck;
+    private static int numcheck = 10;
+
     // 공격 데미지 및 hp 회복량
     private final int HealthRecover = 9;
     private final int AttackDamage = 15;
@@ -54,7 +60,7 @@ public class Board extends JPanel {
         isFallingFinished = true;
         numLinesRemoved = 0;
         clearBoard();
-        
+
         nextPiece.setRandomShape();
     }
 
@@ -74,6 +80,9 @@ public class Board extends JPanel {
             if(numLinesRemoved > prevMaxScore)
                 maxScorePanel.FileWriter(numLinesRemoved);
         }
+
+        numcheck = 10;
+        bombcheck = false;
 
         opponent.isStarted = false;
         opponent.timer.stop();
@@ -110,7 +119,38 @@ public class Board extends JPanel {
         nextPiece.setRandomShape();
         parent.getBlockPreview().setNextPiece(nextPiece);
 
+        if(bombcheck){
+            bombstack++;
+            parent.getBombBar().setText("\uD83D\uDCA3 X " + bombstack);
+            bombcheck = false;
+        }
+
         return true;
+    }
+
+    public void bombBlock() {
+        int stack = 0;
+        int x = curPiece.curX();
+        int y = curPiece.curY();
+
+        for(int i = y+1; i >= y-1; i--){
+            for(int j = x-1; j <= x+1; j++){
+                if(i < 0) break;
+
+                else if(board[i][j] != Tetrominoes.NoShape){
+                    board[i][j] = Tetrominoes.NoShape;
+                    stack++;
+                }
+            }
+        }
+
+        if(stack-2 != 0){
+            numLinesRemoved += stack-2;
+            parent.getStatusBar().setText(String.valueOf(numLinesRemoved));
+
+            decreaseOthertHp(stack - 2);
+        }
+
     }
 
     // -------------------------------- get 메소드 --------------------------------
@@ -137,9 +177,10 @@ public class Board extends JPanel {
         return isStarted;
     }
 
-    public Shape getNextPiece(){
+/*    public Shape getNextPiece(){ // 사용 안함으로 되어있습니다. 확인해주세요
         return nextPiece;
-    }
+    }*/
+
     public Shape getCurPiece(){ // 현재 떨어지고 있는 도형
         return curPiece;
     }
@@ -153,6 +194,9 @@ public class Board extends JPanel {
     
     private Tetrominoes shapeAt(int x, int y) { // (x, y)에 있는 블럭의 Tetrominoes 타입
         return board[y][x];
+    }
+    public int returnbombstack() {
+        return bombstack;
     }
 
     // -------------------------------- 블록 이동, 점수 획득, 상대방 공격 --------------------------------
@@ -189,11 +233,16 @@ public class Board extends JPanel {
         pieceDropped();
     }
     private void pieceDropped() { // 블록이 완전히 떨어지면, 해당 블록을 board에 그리는 식
+        String X = String.valueOf(curPiece.getShape());
         for (int i = 0; i < 4; ++i) {
             int x = curPiece.curX() + curPiece.x(i);
             int y = curPiece.curY() - curPiece.y(i);
             board[y][x] = curPiece.getShape();
         }
+
+        if(X == "BombBlock")
+            bombBlock();
+
         removeFullLines();
     }
     private void removeFullLines() { // 한 줄 제거 가능 여부 탐색(점수 획득)
@@ -224,11 +273,17 @@ public class Board extends JPanel {
         isFallingFinished = true;
 
         boolean isBlockOvered = false;
+        int X = Integer.parseInt(parent.getStatusBar().getText());
 
         if (numFullLines > 0) {
             numLinesRemoved += numFullLines;
             parent.getStatusBar().setText(String.valueOf(numLinesRemoved));
             isBlockOvered = attackOpponent(numFullLines); // 지운 줄 수 만큼 상대방 공격
+        }
+
+        if(X > numcheck){
+            bombcheck = true;
+            numcheck += 10;
         }
 
         repaint();
@@ -299,6 +354,7 @@ public class Board extends JPanel {
 
         return attackCount;
     }
+
 
 
     // -------------------------------- 블록 페인트 --------------------------------

@@ -54,6 +54,9 @@ public class BlockImage {
             case MirroredLShape:
                 imgPath = "image/blocks/Block7.png";
                 break;
+            case BombBlock:
+                imgPath = "image/blocks/BombIcon.png";
+                break;
             case LockBlock:
                 imgPath = "image/blocks/lockBlock.png";
                 break;

@@ -22,13 +22,14 @@ public class Shape implements Cloneable {
     public void setShape(Tetrominoes shape) {
 
         coordsTable = new int[][][] { { { 0, 0 }, { 0, 0 }, { 0, 0 }, { 0, 0 } },
-                                        { { 0, -1 }, { 0, 0 }, { -1, 0 }, { -1, 1 } }, 
-                                        { { 0, -1 }, { 0, 0 }, { 1, 0 }, { 1, 1 } },
-                                        { { 0, -1 }, { 0, 0 }, { 0, 1 }, { 0, 2 } }, 
-                                        { { -1, 0 }, { 0, 0 }, { 1, 0 }, { 0, 1 } },
-                                        { { 0, 0 }, { 1, 0 }, { 0, 1 }, { 1, 1 } }, 
-                                        { { -1, -1 }, { 0, -1 }, { 0, 0 }, { 0, 1 } },
-                                        { { 1, -1 }, { 0, -1 }, { 0, 0 }, { 0, 1 } } };
+                                    { { 0, -1 }, { 0, 0 }, { -1, 0 }, { -1, 1 } },
+                                    { { 0, -1 }, { 0, 0 }, { 1, 0 }, { 1, 1 } },
+                                    { { 0, -1 }, { 0, 0 }, { 0, 1 }, { 0, 2 } },
+                                    { { -1, 0 }, { 0, 0 }, { 1, 0 }, { 0, 1 } },
+                                    { { 0, 0 }, { 1, 0 }, { 0, 1 }, { 1, 1 } },
+                                    { { -1, -1 }, { 0, -1 }, { 0, 0 }, { 0, 1 } },
+                                    { { 1, -1 }, { 0, -1 }, { 0, 0 }, { 0, 1 } },
+                                    { { 0, -1 }, { 0, 0 }, { 0, 0 }, { 0, 0 } } };
 
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 2; ++j) {
@@ -74,6 +75,12 @@ public class Shape implements Cloneable {
         Tetrominoes[] values = Tetrominoes.values();
         rotateIndex = 0;
         setShape(values[x]);
+    }
+
+    public void setBombBlock() {
+        int bombnum = 8;
+        Tetrominoes[] bomb = Tetrominoes.values();
+        setShape(bomb[bombnum]);
     }
 
     public int minX() {

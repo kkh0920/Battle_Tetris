@@ -21,7 +21,11 @@ public class BoardPlayer extends Board implements ActionListener {
             if (!newPiece())
                 gameOver();
         } 
-        else {
+        else {/*
+            if(bombstack >= 1){
+                nextPiece.setBombBlock();
+                parent.getBlockPreview().setNextPiece(nextPiece);
+            }*/
             oneLineDown();
         }
     }

@@ -1,6 +1,8 @@
 package kr.ac.jbnu.se.tetris;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.*;
 import javax.swing.plaf.basic.BasicProgressBarUI;
 
@@ -21,8 +23,8 @@ public class Tetris extends JPanel {
 
     // 점수 패널
     private JPanel statusPanel;
-    private JLabel statusbar;
-
+    private JLabel statusbar, bombLabel;
+    Button button;
     public Tetris(TetrisGameManager parent, boolean isComputer) {
         this.parent = parent;    
         setTetrisLayout(isComputer);
@@ -35,6 +37,9 @@ public class Tetris extends JPanel {
     }
     public JLabel getStatusBar() {
         return statusbar;
+    }
+    public JLabel getBombBar() {
+        return bombLabel;
     }
     public Board getBoard() {
         return board;
@@ -63,6 +68,7 @@ public class Tetris extends JPanel {
         blockPreview =  new BlockPreview(board); // 2. Next 블록 프리뷰
         setHealthBar(); // 3. 체력바
         setScorePanel(); // 4. 스코어 패널
+        setBombLabel();
 
         setLayoutLocation(); // 각 컴포넌트 위치 조정
 
@@ -86,12 +92,19 @@ public class Tetris extends JPanel {
         statusPanel = new JPanel();
         statusPanel.add(statusbar, BorderLayout.CENTER);
     }
+
+    private void setBombLabel() {
+        bombLabel = new JLabel();
+        bombLabel.setFont(bombLabel.getFont().deriveFont(18.0f));
+        bombLabel.setText("\uD83D\uDCA3 X 1");
+    }
     
     private void setLayoutLocation() {
         healthBar.setBounds(20, 15, board.panelWidth(), 15);
         board.setBounds(20, 40, board.panelWidth(), board.panelHeight());
         blockPreview.setBounds(35 + board.panelWidth(), 40, blockPreview.panelWidth(), blockPreview.panelHeight());
         statusPanel.setBounds(35 + board.panelWidth(), 40 + board.panelHeight() - Status_Y, Status_X, Status_Y);
+        bombLabel.setBounds(45 + board.panelWidth(), 250, 70, 70);
     }
 
     private void addComponent(){
@@ -99,6 +112,8 @@ public class Tetris extends JPanel {
         add(blockPreview);
         add(healthBar);
         add(statusPanel);
+        add(bombLabel);
     }
+
 }
 
