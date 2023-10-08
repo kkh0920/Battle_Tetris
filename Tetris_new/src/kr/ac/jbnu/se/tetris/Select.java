@@ -44,7 +44,7 @@ public class Select extends JFrame {
         music.startMusic();
     }
 
-    public Music getMusic() {
+    public Music getMusic(){
         return music;
     }
 
