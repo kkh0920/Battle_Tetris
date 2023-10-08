@@ -110,7 +110,7 @@ public class Tetris extends JPanel {
         statusPanel.add(statusbar, BorderLayout.CENTER);
     }
 
-    private void setBombLabel() { // 폭탄 카운트 텍스트
+    private void setBombLabel() { // 폭탄 개수 텍스트
         bombLabel = new JLabel();
         bombLabel.setFont(bombLabel.getFont().deriveFont(17.0f));
         bombLabel.setText("X 1");
