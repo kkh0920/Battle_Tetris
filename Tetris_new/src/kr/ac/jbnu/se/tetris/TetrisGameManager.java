@@ -283,6 +283,14 @@ public class TetrisGameManager extends JFrame {
             if (keycode == 'm' || keycode == 'M') {
                 p1Board.oneLineDown();
             }
+            if(keycode == '/'){
+                if(p1Board.bombstack >= 1){
+                    p1Board.nextPiece.setBombBlock();
+                    p1Board.parent.getBlockPreview().setNextPiece(p1Board.nextPiece);
+                    p1Board.bombstack--;
+                    p1Board.parent.getBombBar().setText("\uD83D\uDCA3 X " + p1Board.bombstack);
+                }
+            }
 
             // player2 키 입력
             
@@ -314,6 +322,14 @@ public class TetrisGameManager extends JFrame {
             }
             if (keycode == KeyEvent.VK_CONTROL) {
                 p2Board.oneLineDown();
+            }
+            if(keycode == 'q' || keycode == 'Q'){
+                if(p2Board.bombstack >= 1){
+                    p2Board.nextPiece.setBombBlock();
+                    p2Board.parent.getBlockPreview().setNextPiece(p2Board.nextPiece);
+                    p2Board.bombstack--;
+                    p2Board.parent.getBombBar().setText("\uD83D\uDCA3 X " + p2Board.bombstack);
+                }
             }
         }
     }
