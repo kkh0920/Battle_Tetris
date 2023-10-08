@@ -7,7 +7,7 @@ import javax.sound.sampled.UnsupportedAudioFileException;
 import java.io.File;
 import java.io.IOException;
 
-public class Music {
+public class Music{
 
     private File file;
     private Clip clip;
@@ -19,7 +19,6 @@ public class Music {
     public void setMusic() throws LineUnavailableException, UnsupportedAudioFileException {
         // file = new File("TetrisCode/bgm/bgm.wav");
         file = new File("bgm\\bgm.wav");
-
         clip = AudioSystem.getClip();
         try {
             clip.open(AudioSystem.getAudioInputStream(file));
