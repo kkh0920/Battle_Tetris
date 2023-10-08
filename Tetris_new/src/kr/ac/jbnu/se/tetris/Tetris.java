@@ -31,7 +31,7 @@ public class Tetris extends JPanel {
 
     public Tetris(TetrisGameManager parent, boolean isComputer) {
         this.parent = parent;    
-        this.isComputer = isComputer;
+        this.isComputer = isComputer; 
         setTetrisLayout(isComputer);
     }
 
@@ -110,7 +110,7 @@ public class Tetris extends JPanel {
         statusPanel.add(statusbar, BorderLayout.CENTER);
     }
 
-    private void setBombLabel() {
+    private void setBombLabel() { // 폭탄 카운트 텍스트
         bombLabel = new JLabel();
         bombLabel.setFont(bombLabel.getFont().deriveFont(17.0f));
         bombLabel.setText("X 1");
@@ -130,14 +130,14 @@ public class Tetris extends JPanel {
         add(blockPreview);
         add(healthBar);
         add(statusPanel);
-        if(!isComputer) add(bombLabel);
+        if(!isComputer) add(bombLabel); // 플레이어 패널만 폭탄 카운트 생성
     }
     
     @Override
     public void paint(Graphics g) {
         // TODO Auto-generated method stub
         super.paint(g);
-        if(!isComputer) {
+        if(!isComputer) { // 플레이어 패널만 폭탄 아이콘 생성
             BlockImage image = new BlockImage(Tetrominoes.BombBlock);
             g.drawImage(image.getImage(), 32 + board.panelWidth(), 40 + board.panelHeight() - Status_Y - 52, 
                         30, 30, null);
