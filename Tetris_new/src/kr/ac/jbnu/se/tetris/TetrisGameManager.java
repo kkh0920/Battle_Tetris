@@ -13,7 +13,7 @@ import javax.swing.JLabel;
 
 public class TetrisGameManager extends JFrame {
     
-    final int Frame_X = 710, Frame_Y = 550;
+    final int Frame_X = 750, Frame_Y = 590;
 
     public static int p2_up = 'w', p2_down = 's', p2_left = 'a', p2_right = 'd',
                         p2_up_upper = 'W', p2_down_upper = 'S', p2_left_upper = 'A', p2_right_upper = 'D',
@@ -113,7 +113,7 @@ public class TetrisGameManager extends JFrame {
     }
 
     private void setLayoutLocation() {
-        timer.setBounds(305, 10, 100, 25);
+        timer.setBounds(325, 10, 100, 25);
         maxScorePanel.setBounds(30, 10, 90, 25);
         player1Panel.setBounds(20, 45, player1Panel.frameX(), player1Panel.frameY());
         player2Panel.setBounds(player2Panel.frameX() + 60, 45, player2Panel.frameX(), player2Panel.frameY());
@@ -283,13 +283,9 @@ public class TetrisGameManager extends JFrame {
             if (keycode == 'm' || keycode == 'M') {
                 p1Board.oneLineDown();
             }
+
             if(keycode == '/'){
-                if(p1Board.bombstack >= 1){
-                    p1Board.nextPiece.setBombBlock();
-                    p1Board.parent.getBlockPreview().setNextPiece(p1Board.nextPiece);
-                    p1Board.bombstack--;
-                    p1Board.parent.getBombBar().setText("\uD83D\uDCA3 X " + p1Board.bombstack);
-                }
+                player1Panel.useBomb();
             }
 
             // player2 키 입력
@@ -323,13 +319,9 @@ public class TetrisGameManager extends JFrame {
             if (keycode == KeyEvent.VK_CONTROL) {
                 p2Board.oneLineDown();
             }
+
             if(keycode == 'q' || keycode == 'Q'){
-                if(p2Board.bombstack >= 1){
-                    p2Board.nextPiece.setBombBlock();
-                    p2Board.parent.getBlockPreview().setNextPiece(p2Board.nextPiece);
-                    p2Board.bombstack--;
-                    p2Board.parent.getBombBar().setText("\uD83D\uDCA3 X " + p2Board.bombstack);
-                }
+                player2Panel.useBomb();
             }
         }
     }
