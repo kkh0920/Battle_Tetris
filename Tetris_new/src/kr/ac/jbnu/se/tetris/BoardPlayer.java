@@ -7,9 +7,14 @@ import javax.swing.Timer;
 
 public class BoardPlayer extends Board implements ActionListener {
 
+    // 폭탄
+    private final int BombCutlineScore = 10;
+    private int cutlineCheck;
+
     public BoardPlayer(Tetris parent) {
         super(parent);
         //TODO Auto-generated constructor stub 
+        cutlineCheck = BombCutlineScore;
         timer = new Timer(500, this);        
         start();
     }
@@ -18,14 +23,16 @@ public class BoardPlayer extends Board implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (isFallingFinished) {
             isFallingFinished = false;
+            
+            if(numLinesRemoved >= cutlineCheck) { // 점수 기준 넘어가면 폭탄 획득
+                parent.acquireBomb();
+                cutlineCheck += BombCutlineScore;
+            }
+
             if (!newPiece())
                 gameOver();
-        } 
-        else {/*
-            if(bombstack >= 1){
-                nextPiece.setBombBlock();
-                parent.getBlockPreview().setNextPiece(nextPiece);
-            }*/
+
+        } else {
             oneLineDown();
         }
     }
