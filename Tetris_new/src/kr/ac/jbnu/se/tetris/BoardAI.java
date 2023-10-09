@@ -7,7 +7,7 @@ import javax.swing.Timer;
 
 public class BoardAI extends Board implements ActionListener {
 
-    private final int moveDelay = 80;
+    public static int computerMoveDeley = 80;
 
     private TetrisAI computer;
 
@@ -21,7 +21,7 @@ public class BoardAI extends Board implements ActionListener {
 
         bestRoute = computer.findBestRoute();
 
-        timer = new Timer(moveDelay, this);
+        timer = new Timer(computerMoveDeley, this);
         
         start();
     }
