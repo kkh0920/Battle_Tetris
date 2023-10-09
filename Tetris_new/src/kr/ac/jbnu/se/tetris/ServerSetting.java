@@ -2,8 +2,6 @@ package kr.ac.jbnu.se.tetris;
 
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
-import javax.swing.*;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.*;
@@ -18,7 +16,7 @@ public class ServerSetting implements ServerInfo {
     static PreparedStatement preparedStatement = null;
     ResultSet resultset = null;
     protected static boolean visible = true;
-    FileReader reader = new FileReader("serv.properties");
+    FileReader reader = new FileReader("kr/ac/jbnu/se/tetris/serv.properties");
     Properties properties = new Properties();
 
     ServerSetting(String id, String pw) throws SQLException, UnsupportedAudioFileException, LineUnavailableException, IOException {
