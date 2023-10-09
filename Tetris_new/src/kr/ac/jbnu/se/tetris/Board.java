@@ -41,7 +41,7 @@ public class Board extends JPanel {
     // 상대편 보드
     protected Board opponent;
 
-    public Board(Tetris parent) {
+    protected Board(Tetris parent) {
         setPreferredSize(new Dimension(PanelWidth, PanelHeight));
 
         this.parent = parent;
@@ -56,6 +56,10 @@ public class Board extends JPanel {
         clearBoard();
 
         nextPiece.setRandomShape();
+    }
+
+    public void setOpponent(Board opponent) {
+        this.opponent = opponent;
     }
 
     public void start(){
@@ -82,10 +86,6 @@ public class Board extends JPanel {
         timer.stop();
 
         parent.gameManager().gameOverDialog().setVisible(true);
-    }
-
-    public void setOpponent(Board opponent) {
-        this.opponent = opponent;
     }
 
     private void clearBoard() { // 보드 클리어
