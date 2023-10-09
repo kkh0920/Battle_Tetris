@@ -8,15 +8,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 
-class Button {
-    Button(JButton jb) { // 버튼의 이미지를 나타내기 위해 테두리 등을 제거 (부드럽게 나타내기 .. )
-        jb.setBorderPainted(false);
-        jb.setContentAreaFilled(false);
-        jb.setFocusPainted(false);
-        jb.setOpaque(false);
-    }
-}
-
 public class Select extends JFrame {
 
     static final int Frame_X = 430, Frame_Y = 336;
@@ -26,21 +17,17 @@ public class Select extends JFrame {
     private Backgrounds background;
     private Music music;
 
-    private SelectLevel level;
-
-    private TetrisGameManager game;
+    private SelectLevel selectLevel;
 
     private JButton ai, versus, tutorial, settingBtn;
     
     private Setting setting;
     private Tutorial tuto;
-    
-    Button bt;
 
     Select() throws UnsupportedAudioFileException, LineUnavailableException {
         setFrame();
 
-        level = new SelectLevel(this);
+        selectLevel = new SelectLevel(this);
         setting = new Setting(this);
         
         music = new Music();
@@ -69,23 +56,31 @@ public class Select extends JFrame {
         // ai = new JButton(new ImageIcon("TetrisCode/image/AImodes.png"));
         ai = new JButton(new ImageIcon("image\\AImodes.png"));
         ai.setBounds(250,-20,Bt_W,Bt_H);
-        bt = new Button(ai);
+        setButtonBorder(ai);
 
         // versus = new JButton(new ImageIcon("TetrisCode/image/2P_modes.png"));
         versus = new JButton(new ImageIcon("image\\2P_modes.png"));
         versus.setBounds(250,80,Bt_W,Bt_H);
-        bt = new Button(versus);
+        setButtonBorder(versus);
 
         // settingBtn = new JButton(new ImageIcon("TetrisCode/image/settings.png"));
         settingBtn = new JButton(new ImageIcon("image\\settings.png"));
         settingBtn.setBounds(250,180,Bt_W,Bt_H);
-        bt = new Button(settingBtn);
+        setButtonBorder(settingBtn);
 
         // tutorial = new JButton(new ImageIcon("TetrisCode/image/Tetris.png"));
         tutorial = new JButton(new ImageIcon("image\\Tetris.png"));
         tutorial.setBounds(30,100,150,98);
-        bt = new Button(tutorial);
+        setButtonBorder(tutorial);
+
         buttonAction();
+    }
+
+    private void setButtonBorder(JButton jb){ // 버튼의 이미지를 나타내기 위해 테두리 등을 제거 (부드럽게 나타내기 .. )
+        jb.setBorderPainted(false);
+        jb.setContentAreaFilled(false);
+        jb.setFocusPainted(false);
+        jb.setOpaque(false);
     }
 
     public void buttonAction() {
@@ -94,7 +89,7 @@ public class Select extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 setVisible(false);
-                level.setVisible(true);
+                selectLevel.setVisible(true);
             }
         });
 
@@ -102,7 +97,10 @@ public class Select extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 setVisible(false);
-                game = new TetrisGameManager(select);
+
+                TetrisGameManager.level = 0; // 플레이어 대전인 경우 0 레벨 설정
+                
+                TetrisGameManager game = new TetrisGameManager(select);
                 game.start(false);
                 game.setVisible(true);
             }

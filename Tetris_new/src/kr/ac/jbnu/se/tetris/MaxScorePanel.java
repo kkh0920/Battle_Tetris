@@ -10,6 +10,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 public class MaxScorePanel extends JPanel {
+
     private JLabel maxScoreLabel;
     private FileWriter scoreWriter;
 
@@ -25,9 +26,13 @@ public class MaxScorePanel extends JPanel {
     }
 
     private void setMaxScorePanel() {  
+        int i = TetrisGameManager.level;      
+        if(i == 0)
+            return;
+
         try {
-            // scoreReading = new BufferedReader(new FileReader("TetrisCode/Score/MaxScore.txt"));
-            scoreReading = new BufferedReader(new FileReader("Score\\MaxScore.txt"));
+            // scoreReading = new BufferedReader(new FileReader("TetrisCode/Score/MaxScore" + i + ".txt"));
+            scoreReading = new BufferedReader(new FileReader("Score\\MaxScore" + i + ".txt"));
             maxScore = scoreReading.readLine();
         } catch (IOException e) {
             // TODO Auto-generated catch block
@@ -38,9 +43,13 @@ public class MaxScorePanel extends JPanel {
     }
 
     public void FileWriter(int score) {
+        int i = TetrisGameManager.level;
+        if(i == 0)
+            return;
+
         try {
-            // scoreWriter = new FileWriter("TetrisCode/Score/MaxScore.txt");
-            scoreWriter = new FileWriter("Score\\MaxScore.txt");
+            // scoreWriter = new FileWriter("TetrisCode/Score/MaxScore" + i + ".txt");
+            scoreWriter = new FileWriter("Score\\MaxScore" + i + ".txt");
             scoreWriter.write(Integer.toString(score));
             scoreWriter.close();
         } catch (IOException e) {
