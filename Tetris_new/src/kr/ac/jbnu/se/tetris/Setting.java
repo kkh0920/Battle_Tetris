@@ -74,24 +74,24 @@ public class Setting extends JFrame {
     }
 
     private void buttonAction() {
-            musicButton.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    pauseMusic();
-                }
-            });
-            changekey.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    keyChange.setVisible(true);
-                }
-            });
-            backselect.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {           
-                    setVisible(false);
-                    home.setVisible(true);
-                }
-            });
-        }
+        musicButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                pauseMusic();
+            }
+        });
+        changekey.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                keyChange.setVisible(true);
+            }
+        });
+        backselect.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {           
+                setVisible(false);
+                home.setVisible(true);
+            }
+        });
+    }
 }
