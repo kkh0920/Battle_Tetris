@@ -13,11 +13,13 @@ import javax.swing.JLabel;
 
 public class TetrisGameManager extends JFrame {
     
-    final int Frame_X = 750, Frame_Y = 590;
+    public static int level = 0;
 
     public static int p2_up = 'w', p2_down = 's', p2_left = 'a', p2_right = 'd',
                         p2_up_upper = 'W', p2_down_upper = 'S', p2_left_upper = 'A', p2_right_upper = 'D',
                         p2_dropDown = KeyEvent.VK_SHIFT;
+
+    private final int Frame_X = 750, Frame_Y = 590;
 
     private boolean isPaused = false;
     private boolean opponentIsComputer;
@@ -60,8 +62,8 @@ public class TetrisGameManager extends JFrame {
 
     public void start(boolean isComputer) {
         opponentIsComputer = isComputer;
-
-        maxScorePanel = new MaxScorePanel(); // 1. 최대 점수
+        
+        maxScorePanel = new MaxScorePanel(); // 1. 최대 점수 패널     
         timer = new TimerPanel(); // 2. 타이머
         player1Panel = new Tetris(this, false); // 3. 테트리스 패널 1
         player2Panel = new Tetris(this, isComputer); // 4. 테트리스 패널 2
@@ -187,7 +189,6 @@ public class TetrisGameManager extends JFrame {
         resumeBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // TODO Auto-generated method stub
                 pause();
             }
 
@@ -325,5 +326,4 @@ public class TetrisGameManager extends JFrame {
             }
         }
     }
-
 }
