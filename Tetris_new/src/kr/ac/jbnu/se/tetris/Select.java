@@ -26,6 +26,8 @@ public class Select extends JFrame {
     private Backgrounds background;
     private Music music;
 
+    private SelectLevel level;
+
     private TetrisGameManager game;
 
     private JButton ai, versus, tutorial, settingBtn;
@@ -38,6 +40,7 @@ public class Select extends JFrame {
     Select() throws UnsupportedAudioFileException, LineUnavailableException {
         setFrame();
 
+        level = new SelectLevel(this);
         setting = new Setting(this);
         
         music = new Music();
@@ -91,10 +94,7 @@ public class Select extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 setVisible(false);
-                game = new TetrisGameManager(select);
-                game.start(true);
-                game.setVisible(true);
-
+                level.setVisible(true);
             }
         });
 
