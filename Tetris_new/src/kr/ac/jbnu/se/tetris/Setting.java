@@ -14,8 +14,6 @@ public class Setting extends JFrame {
 
     private KeyChange keyChange;
 
-    Button bt;
-
     Setting(Select home) {
         this.home = home;
         keyChange = new KeyChange();
@@ -48,13 +46,13 @@ public class Setting extends JFrame {
     private void setButton() {
         addButton();
         
-        bt = new Button(musicButton);
         musicButton.setBounds(50, 60, 100, 100);
+        setButtonBorder(musicButton);
 
         changekey.setBounds(250, 80, 150, 150);
 
-        bt = new Button(backselect);
         backselect.setBounds(0, 0, 70, 58);
+        setButtonBorder(backselect);
 
         buttonAction();
     }
@@ -71,6 +69,13 @@ public class Setting extends JFrame {
             musicButton.setIcon(new ImageIcon("image\\musicOff.png"));
             home.getMusic().stopMusic();
         }
+    }
+
+    private void setButtonBorder(JButton jb){ // 버튼의 이미지를 나타내기 위해 테두리 등을 제거 (부드럽게 나타내기 .. )
+        jb.setBorderPainted(false);
+        jb.setContentAreaFilled(false);
+        jb.setFocusPainted(false);
+        jb.setOpaque(false);
     }
 
     private void buttonAction() {
