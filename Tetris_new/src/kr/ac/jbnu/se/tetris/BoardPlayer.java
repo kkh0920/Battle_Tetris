@@ -7,6 +7,8 @@ import javax.swing.Timer;
 
 public class BoardPlayer extends Board implements ActionListener {
 
+    public static int PlayerMoveDelay = 500;
+
     // 폭탄
     private final int BombCutlineScore = 10;
     private int cutlineCheck;
@@ -15,7 +17,7 @@ public class BoardPlayer extends Board implements ActionListener {
         super(parent);
         //TODO Auto-generated constructor stub 
         cutlineCheck = BombCutlineScore;
-        timer = new Timer(500, this);        
+        timer = new Timer(PlayerMoveDelay, this);        
         start();
     }
 
