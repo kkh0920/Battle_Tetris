@@ -6,6 +6,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Scanner;
 
@@ -96,6 +97,8 @@ public class LoginPage extends JFrame {
                 } catch (UnsupportedAudioFileException ex) {
                     throw new RuntimeException(ex);
                 } catch (LineUnavailableException ex) {
+                    throw new RuntimeException(ex);
+                } catch (IOException ex) {
                     throw new RuntimeException(ex);
                 }
             }
