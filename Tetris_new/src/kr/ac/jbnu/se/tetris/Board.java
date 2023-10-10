@@ -78,7 +78,7 @@ public class Board extends JPanel {
             int prevMaxScore = maxScorePanel.getMaxScore();
             
             if(player.numLinesRemoved > prevMaxScore)
-                maxScorePanel.FileWriter(numLinesRemoved);
+                maxScorePanel.FileWriter(player.numLinesRemoved);
         }
 
         isStarted = false;
