@@ -1,2 +1,5 @@
 .DS_Store
-ServerInfo.java
+
+server_url
+management_user
+management_password
