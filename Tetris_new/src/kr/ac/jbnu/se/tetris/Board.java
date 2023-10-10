@@ -68,24 +68,23 @@ public class Board extends JPanel {
     }
 
     public void gameOver() {
-        TetrisGameManager manager = parent.gameManager();
+        Board player = this instanceof BoardPlayer ? this : opponent;
 
-        if(manager.opponentIsComputer() && this instanceof BoardPlayer){ // AI 대전이면서, 플레이어의 점수만 갱신
+        TetrisGameManager manager = player.parent.gameManager();
+
+        if(manager.opponentIsComputer()) { // AI 대전이면서, 플레이어의 점수만 갱신
             MaxScorePanel maxScorePanel = manager.getMaxScorePanel();
 
             int prevMaxScore = maxScorePanel.getMaxScore();
             
-            if(numLinesRemoved > prevMaxScore)
+            if(player.numLinesRemoved > prevMaxScore)
                 maxScorePanel.FileWriter(numLinesRemoved);
         }
-
-        opponent.isStarted = false;
-        opponent.timer.stop();
 
         isStarted = false;
         timer.stop();
 
-        parent.gameManager().gameOverDialog().setVisible(true);
+        manager.gameOverDialog().setVisible(true);
     }
 
     private void clearBoard() { // 보드 클리어
@@ -271,7 +270,7 @@ public class Board extends JPanel {
             if(opponent.tryMove(opponentPiece, opponentPiece.curX(), opponentPiece.curY() + 1))
                 opponent.move(opponentPiece, opponentPiece.curX(), opponentPiece.curY() + 1);
         }
-
+    
         for (int i = BoardHeight - 1; i >= 0; i--) {
             for (int j = 0; j < BoardWidth; j++) {
                 if(opponent.board[i][j] == Tetrominoes.NoShape)
@@ -358,7 +357,7 @@ public class Board extends JPanel {
         }
         nY++;
 
-        if(curPiece.getShape() == Tetrominoes.BombBlock) { // 폭탄이 터지는 범위 표시
+        if(curPiece.getShape() == Tetrominoes.BombBlock) { // 1. 폭탄이 터지는 범위 표시
             for(int i = nY - 1; i <= nY + 1; i++){
                 for(int j = nX - 1; j <= nX + 1; j++){
                     if(i < 0 || i >= BoardHeight || j < 0 || j >= BoardWidth)
@@ -366,7 +365,7 @@ public class Board extends JPanel {
                     drawSquare(g, j * squareWidth(), boardTop + (BoardHeight - i - 1) * squareHeight(), Tetrominoes.NoShape);
                 }
             }
-        } else { 
+        } else { // 2. 블록이 떨어질 위치 표시
             for(int i = 0; i < 4; i++){
                 int x = nX + curPiece.x(i);
                 int y = nY - curPiece.y(i);
@@ -380,10 +379,11 @@ public class Board extends JPanel {
 
         int imageSize = squareWidth(); // 이미지 크기를 블록 크기에 맞게 조정합니다.
         
-        if(shape == Tetrominoes.BombBlock)
+        if(shape == Tetrominoes.BombBlock) {
             imageSize = 30;
-
-        if(shape == Tetrominoes.NoShape){
+            g.drawImage(block.getImage(), x - 2, y - 8, imageSize, imageSize, null);
+        }
+        else if(shape == Tetrominoes.NoShape){
             Graphics2D g2d = (Graphics2D) g;
             AlphaComposite alphaComposite = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.3f);
             g2d.setComposite(alphaComposite);

@@ -1,11 +1,16 @@
 package kr.ac.jbnu.se.tetris;
 
 import java.awt.Color;
+import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
@@ -19,7 +24,7 @@ public class TetrisGameManager extends JFrame {
                         p2_up_upper = 'W', p2_down_upper = 'S', p2_left_upper = 'A', p2_right_upper = 'D',
                         p2_dropDown = KeyEvent.VK_SHIFT;
 
-    private final int Frame_X = 750, Frame_Y = 590;
+    private final int Frame_X = 750, Frame_Y = 620;
 
     private boolean isPaused = false;
     private boolean opponentIsComputer;
@@ -230,6 +235,25 @@ public class TetrisGameManager extends JFrame {
         pauseDialog.add(resumeBtn);
         pauseDialog.add(retryBtn);
         pauseDialog.add(homeBtn);
+    }
+
+    // -------------------------------------- 이미지 --------------------------------------
+    
+    @Override
+    public void paint(Graphics g) {
+        super.paint(g);
+        
+        if(!opponentIsComputer)
+            return;
+
+        try {
+            // BufferedImage image = ImageIO.read(new File("TetrisCode/image/control.png"));
+            BufferedImage image = ImageIO.read(new File("image/control.png"));
+            g.drawImage(image, 0, Frame_Y - 30, null);
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
     }
 
     // -------------------------------------- 키 입력 리스너 --------------------------------------
