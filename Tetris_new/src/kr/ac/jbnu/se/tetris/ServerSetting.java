@@ -8,7 +8,7 @@ import java.sql.*;
 // Notice, do not import com.mysql.cj.jdbc.*
 // or you will have problems!
 
-public class ServerSetting implements ServerInfo {
+public class ServerSetting {
 
     Connection connection = null;
     static PreparedStatement preparedStatement = null;
