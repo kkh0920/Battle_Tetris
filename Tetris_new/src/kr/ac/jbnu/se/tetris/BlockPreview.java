@@ -73,9 +73,11 @@ public class BlockPreview extends JPanel {
         
         int imageSize = squareWidth(); // 이미지 크기를 블록 크기에 맞게 조정합니다.
 
-        if(shape == Tetrominoes.BombBlock)
+        if(shape == Tetrominoes.BombBlock) {
             imageSize = 30;
-
-        g.drawImage(block.getImage(), x, y, imageSize, imageSize, null);
+            g.drawImage(block.getImage(), x - 2, y - 6, imageSize, imageSize, null);
+        }
+        else
+            g.drawImage(block.getImage(), x, y, imageSize, imageSize, null);
     }
 }
