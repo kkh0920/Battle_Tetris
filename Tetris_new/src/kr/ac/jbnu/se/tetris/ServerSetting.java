@@ -2,10 +2,8 @@ package kr.ac.jbnu.se.tetris;
 
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
-import java.io.FileReader;
 import java.io.IOException;
 import java.sql.*;
-import java.util.Properties;
 
 // Notice, do not import com.mysql.cj.jdbc.*
 // or you will have problems!
@@ -16,8 +14,6 @@ public class ServerSetting implements ServerInfo {
     static PreparedStatement preparedStatement = null;
     ResultSet resultset = null;
     protected static boolean visible = true;
-    FileReader reader = new FileReader("kr/ac/jbnu/se/tetris/serv.properties");
-    Properties properties = new Properties();
 
     ServerSetting(String id, String pw) throws SQLException, UnsupportedAudioFileException, LineUnavailableException, IOException {
         compareID(id,pw);
@@ -49,11 +45,11 @@ public class ServerSetting implements ServerInfo {
     }
 
     public void connectServer() throws SQLException, IOException {
-        properties.load(reader);
         connection = DriverManager.getConnection(
-                properties.getProperty("url"),
-                properties.getProperty("user"),
-                properties.getProperty("password")); //import됨
+                server_url,
+                management_user,
+                management_password);
     }
+
 
 }
