@@ -81,6 +81,9 @@ public class Board extends JPanel {
                 maxScorePanel.FileWriter(player.numLinesRemoved);
         }
 
+        opponent.isStarted = false;
+        opponent.timer.stop();
+
         isStarted = false;
         timer.stop();
 
