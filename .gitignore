@@ -1,5 +1,2 @@
 .DS_Store
-
-server_url
-management_user
-management_password
+/Tetris_new/src/kr/ac/jbnu/se/tetris/ServerInfo.java

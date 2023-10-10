@@ -46,9 +46,9 @@ public class ServerSetting implements ServerInfo {
 
     public void connectServer() throws SQLException, IOException {
         connection = DriverManager.getConnection(
-                server_url,
-                management_user,
-                management_password);
+                ServerInfo.SERVER_URL,
+                ServerInfo.MANAGEMENT_USER,
+                ServerInfo.MANAGEMENT_PASSWORD);
     }
 
 
