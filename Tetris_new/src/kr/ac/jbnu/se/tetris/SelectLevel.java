@@ -33,7 +33,7 @@ public class SelectLevel extends JFrame {
         backselect = new JButton(new ImageIcon("image\\back.png"));
 
         // backgrounds = new Backgrounds("TetrisCode/image/backg.png", Select.Frame_X, Select.Frame_Y);
-        backgrounds = new Backgrounds("image\\backg.png", Select.Frame_X, Select.Frame_Y);
+        backgrounds = new Backgrounds("image\\Background.jpg", Select.Frame_X, Select.Frame_Y);
 
         setFrame();
     }

@@ -28,7 +28,7 @@ public class Setting extends JFrame {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
 
         // backgrounds = new Backgrounds("TetrisCode/image/backg.png", Select.Frame_X, Select.Frame_Y);
-        backgrounds = new Backgrounds("image\\backg.png", Select.Frame_X, Select.Frame_Y);
+        backgrounds = new Backgrounds("image\\Background.jpg", Select.Frame_X, Select.Frame_Y);
         setButton();
         add(musicButton); add(changekey); add(backselect); add(backgrounds.getPane());
     }
@@ -37,7 +37,7 @@ public class Setting extends JFrame {
         // musicButton = new JButton(new ImageIcon("TetrisCode/image/musicOn.png"));
         musicButton = new JButton(new ImageIcon("image\\musicOn.png"));
 
-        changekey = new JButton("키 변경");
+        changekey = new JButton(new ImageIcon("image\\keychange.png"));
 
         // backselect = new JButton(new ImageIcon("TetrisCode/image/back.png"));
         backselect = new JButton(new ImageIcon("image\\back.png"));
@@ -46,10 +46,11 @@ public class Setting extends JFrame {
     private void setButton() {
         addButton();
         
-        musicButton.setBounds(50, 60, 100, 100);
+        musicButton.setBounds(350, 40, 100, 100);
         setButtonBorder(musicButton);
 
-        changekey.setBounds(250, 80, 150, 150);
+        changekey.setBounds(250, 250, 300, 150);
+        setButtonBorder(changekey);
 
         backselect.setBounds(0, 0, 70, 58);
         setButtonBorder(backselect);

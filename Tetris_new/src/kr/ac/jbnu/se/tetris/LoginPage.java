@@ -11,21 +11,16 @@ import java.sql.SQLException;
 import java.util.Scanner;
 
 public class LoginPage extends JFrame {
-    ServerSetting server;
-
 
     Backgrounds backgrounds;
-    JTextField id = new JTextField(20); // 20글자만 입력 가능
-    JPasswordField password = new JPasswordField(50); // 50글자만 입력 가능;;
+    JTextField id; // 20글자만 입력 가능
+    JPasswordField password; // 50글자만 입력 가능
     JLabel txt_id, txt_pw;
-    JButton login,signup;
+    JButton login,signup,tutorial;
 
-    Scanner scanner = new Scanner(System.in);
-
-    final int x = 800, y = 453;
+    public static final int x = 800, y = 453;
 
     LoginPage() throws SQLException {
-        setTextField();
         setText();
         setTextField();
         setButton();
@@ -46,6 +41,8 @@ public class LoginPage extends JFrame {
     }
 
     public void setTextField() {
+        id = new JTextField(20);
+        password = new JPasswordField(50);
     }
 
     public void setBackgrounds() {
@@ -66,6 +63,7 @@ public class LoginPage extends JFrame {
     public void setButton() {
         login = new JButton("LOGIN");
         signup = new JButton("SIGN UP");
+        tutorial = new JButton("Tutorial");
         buttonAction();
     }
 
@@ -76,10 +74,11 @@ public class LoginPage extends JFrame {
         txt_pw.setBounds(290,350,40,20);
         login.setBounds(530,270,80,80);
         signup.setBounds(630,270,80,80);
+        tutorial.setBounds(350,70,100,50);
     }
 
     public void addComponents() {
-        add(id); add(password); add(txt_id); add(txt_pw); add(login); add(signup);
+        add(id); add(password); add(txt_id); add(txt_pw); add(login); add(signup); add(tutorial);
         add(backgrounds.getPane());
     }
 
@@ -90,8 +89,8 @@ public class LoginPage extends JFrame {
                 String cmp_id = id.getText();
                 String cmp_pw = password.getText();
                 try {
-                    server = new ServerSetting(cmp_id, cmp_pw);
-                    if(!ServerSetting.visible) setVisible(false);
+                    ComPareID comPareID = new ComPareID(cmp_id, cmp_pw);
+                    if(!ComPareID.visible) setVisible(false);
                 } catch (SQLException ex) {
                     throw new RuntimeException(ex);
                 } catch (UnsupportedAudioFileException ex) {
@@ -107,7 +106,23 @@ public class LoginPage extends JFrame {
         signup.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                try {
+                    new SignUp();
+                } catch (SQLException ex) {
+                    throw new RuntimeException(ex);
+                }
+            }
+        });
 
+        tutorial.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    Tutorial tutorial1 = new Tutorial();
+                    tutorial1.setVisible(true);
+                } catch (IOException ex) {
+                    throw new RuntimeException(ex);
+                }
             }
         });
 

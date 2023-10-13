@@ -1,55 +1,49 @@
 package kr.ac.jbnu.se.tetris;
-
-import javax.sound.sampled.LineUnavailableException;
-import javax.sound.sampled.UnsupportedAudioFileException;
-import java.io.IOException;
 import java.sql.*;
-
-// Notice, do not import com.mysql.cj.jdbc.*
-// or you will have problems!
 
 public class ServerSetting {
 
     Connection connection = null;
-    static PreparedStatement preparedStatement = null;
-    ResultSet resultset = null;
-    protected static boolean visible = true;
 
-    ServerSetting(String id, String pw) throws SQLException, UnsupportedAudioFileException, LineUnavailableException, IOException {
-        compareID(id,pw);
-    }
-
-    public void compareID(String id, String pw) throws SQLException, UnsupportedAudioFileException, LineUnavailableException, IOException {
+    private ServerSetting() throws SQLException{
         connectMysql();
         connectServer();
-        String SQL = "SELECT USER_PW FROM USER WHERE USER_ID = ?";
+    }
 
-        preparedStatement = connection.prepareStatement(SQL);
-        preparedStatement.setString(SqlTable.USER_ID.ordinal(), id);
+    private static class ServerSettingHolder {
+        private static final ServerSetting INSTANCE;
 
-        resultset = preparedStatement.executeQuery();
-        while(resultset.next()){
-            if (resultset.getString(SqlTable.USER_ID.ordinal()).contentEquals(pw)) {
-                Select home = new Select();
-                home.setVisible(true);
-                visible = false;
+        static {
+            try {
+                INSTANCE = new ServerSetting();
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
             }
         }
     }
 
+    public static ServerSetting getInstance() {
+        return ServerSettingHolder.INSTANCE;
+    }
+
+
     public void connectMysql() {
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
-        } catch (Exception ex) {
+            Class.forName(ServerInfo.DRIVER).newInstance();
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        } catch (InstantiationException e) {
+            throw new RuntimeException(e);
+        } catch (IllegalAccessException e) {
+            throw new RuntimeException(e);
         }
     }
 
-    public void connectServer() throws SQLException, IOException {
+
+    public void connectServer() throws SQLException {
         connection = DriverManager.getConnection(
                 ServerInfo.SERVER_URL,
                 ServerInfo.MANAGEMENT_USER,
                 ServerInfo.MANAGEMENT_PASSWORD);
     }
-
-
 }

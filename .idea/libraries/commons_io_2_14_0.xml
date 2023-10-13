@@ -1,7 +1,7 @@
 <component name="libraryTable">
-  <library name="snakeyaml-2.2">
+  <library name="commons-io-2.14.0">
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/snakeyaml-2.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/commons-io-2.14.0.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />
