@@ -10,9 +10,8 @@ import java.io.IOException;
 
 public class Select extends JFrame {
 
-    static final int Frame_X = 430, Frame_Y = 336;
-
-    private int Bt_W = 100, Bt_H = 133;
+    public static final int Frame_X = 800, Frame_Y = 453;
+    private final int Bt_W = 200, Bt_H = 267, Bt_Y = 180;
 
     private Backgrounds background;
     private Music music;
@@ -46,33 +45,27 @@ public class Select extends JFrame {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
 
         // background = new Backgrounds("TetrisCode/image/backg.png", Frame_X, Frame_Y);
-        background = new Backgrounds("image\\backg.png", Frame_X, Frame_Y);
+        background = new Backgrounds("image\\Background.jpg", Frame_X, Frame_Y);
         setButton();
-        add(ai); add(versus); add(settingBtn);add(tutorial); add(background.getPane());
+        add(ai); add(versus); add(settingBtn); add(background.getPane());
     }
 
     public void setButton() {
         
         // ai = new JButton(new ImageIcon("TetrisCode/image/AImodes.png"));
         ai = new JButton(new ImageIcon("image\\AImodes.png"));
-        ai.setBounds(250,-20,Bt_W,Bt_H);
+        ai.setBounds(40,Bt_Y,Bt_W,Bt_H);
         setButtonBorder(ai);
 
         // versus = new JButton(new ImageIcon("TetrisCode/image/2P_modes.png"));
         versus = new JButton(new ImageIcon("image\\2P_modes.png"));
-        versus.setBounds(250,80,Bt_W,Bt_H);
+        versus.setBounds(290,Bt_Y,Bt_W,Bt_H);
         setButtonBorder(versus);
 
         // settingBtn = new JButton(new ImageIcon("TetrisCode/image/settings.png"));
         settingBtn = new JButton(new ImageIcon("image\\settings.png"));
-        settingBtn.setBounds(250,180,Bt_W,Bt_H);
+        settingBtn.setBounds(540,Bt_Y,Bt_W,Bt_H);
         setButtonBorder(settingBtn);
-
-        // tutorial = new JButton(new ImageIcon("TetrisCode/image/Tetris.png"));
-        tutorial = new JButton(new ImageIcon("image\\Tetris.png"));
-        tutorial.setBounds(30,100,150,98);
-        setButtonBorder(tutorial);
-
         buttonAction();
     }
 
@@ -113,16 +106,10 @@ public class Select extends JFrame {
                 setting.setVisible(true);
             }
         });
-        tutorial.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                try {
-                    tuto = new Tutorial();
-                } catch (IOException ex) {
-                    throw new RuntimeException(ex);
-                }
-                tuto.setVisible(true);
-            }
-        });
+    }
+
+    public static void main(String[] args) throws UnsupportedAudioFileException, LineUnavailableException {
+        Select se = new Select();
+        se.setVisible(true);
     }
 }
