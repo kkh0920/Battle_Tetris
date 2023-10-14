@@ -8,7 +8,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.Scanner;
 
 public class LoginPage extends JFrame {
 
@@ -117,12 +116,8 @@ public class LoginPage extends JFrame {
         tutorial.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                try {
-                    Tutorial tutorial1 = new Tutorial();
-                    tutorial1.setVisible(true);
-                } catch (IOException ex) {
-                    throw new RuntimeException(ex);
-                }
+                Tutorial tutorial1 = new Tutorial();
+                tutorial1.setVisible(true);
             }
         });
 

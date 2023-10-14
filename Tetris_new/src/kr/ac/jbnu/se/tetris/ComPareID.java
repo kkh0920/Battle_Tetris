@@ -2,7 +2,6 @@ package kr.ac.jbnu.se.tetris;
 
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
-import javax.swing.*;
 import java.io.IOException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -38,31 +37,7 @@ public class ComPareID{
             }
             } catch (SQLException e) {
                 throw new RuntimeException(e);
-            } catch (UnsupportedAudioFileException e) {
-                throw new RuntimeException(e);
-            } catch (LineUnavailableException e) {
-                throw new RuntimeException(e);
-            } /*finally {
-                if(preparedStatement != null) try {
-                    preparedStatement.close();
-                } catch (Exception e) {
-                    throw new RuntimeException(e);
-                }
-                if(resultSet != null) {
-                    try{
-                    resultSet.close();
-                    } catch (SQLException e) {
-                        throw new RuntimeException(e);
-                    }
-                }
-                if(serverSetting.connection != null){
-                    try{
-                    serverSetting.connection.close();
-                    } catch (SQLException e) {
-                        throw new RuntimeException(e);
-                    }
-                }
-            }*/
+            }
         }
         return false;
     }
