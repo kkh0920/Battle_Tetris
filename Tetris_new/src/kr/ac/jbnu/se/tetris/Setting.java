@@ -27,20 +27,15 @@ public class Setting extends JFrame {
         setLocationRelativeTo(null);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
 
-        // backgrounds = new Backgrounds("TetrisCode/image/backg.png", Select.Frame_X, Select.Frame_Y);
-        backgrounds = new Backgrounds("image\\Background.jpg", Select.Frame_X, Select.Frame_Y);
+        backgrounds = new Backgrounds("image/Background.jpg", Select.Frame_X, Select.Frame_Y);
         setButton();
         add(musicButton); add(changekey); add(backselect); add(backgrounds.getPane());
     }
 
     private void addButton() {
-        // musicButton = new JButton(new ImageIcon("TetrisCode/image/musicOn.png"));
-        musicButton = new JButton(new ImageIcon("image\\musicOn.png"));
-
-        changekey = new JButton(new ImageIcon("image\\keychange.png"));
-
-        // backselect = new JButton(new ImageIcon("TetrisCode/image/back.png"));
-        backselect = new JButton(new ImageIcon("image\\back.png"));
+        musicButton = new JButton(new ImageIcon("image/buttons/musicOn.png"));
+        changekey = new JButton(new ImageIcon("image/buttons/keychange.png"));
+        backselect = new JButton(new ImageIcon("image/buttons/back.png"));
     }
 
     private void setButton() {
@@ -52,7 +47,7 @@ public class Setting extends JFrame {
         changekey.setBounds(250, 250, 300, 150);
         setButtonBorder(changekey);
 
-        backselect.setBounds(0, 0, 70, 58);
+        backselect.setBounds(20, 20, 70, 58);
         setButtonBorder(backselect);
 
         buttonAction();
@@ -61,13 +56,11 @@ public class Setting extends JFrame {
     private void pauseMusic(){
         isMusicStarted = !isMusicStarted;
         if(isMusicStarted){
-            // musicButton.setIcon(new ImageIcon("TetrisCode/image/musicOn.png"));
-            musicButton.setIcon(new ImageIcon("image\\musicOn.png"));
+            musicButton.setIcon(new ImageIcon("image/buttons/musicOn.png"));
             home.getMusic().startMusic();
         }
         else{
-            // musicButton.setIcon(new ImageIcon("TetrisCode/image/musicOff.png"));
-            musicButton.setIcon(new ImageIcon("image\\musicOff.png"));
+            musicButton.setIcon(new ImageIcon("image/buttons/musicOff.png"));
             home.getMusic().stopMusic();
         }
     }

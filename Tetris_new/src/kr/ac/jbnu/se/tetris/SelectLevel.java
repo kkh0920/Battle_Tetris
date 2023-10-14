@@ -13,7 +13,7 @@ public class SelectLevel extends JFrame {
 
     private final int LevelNumber = 5;
 
-    private final int Bt_W = 80, Bt_H = 40;
+    private final int Bt_W = 120, Bt_H = 35;
 
     private JButton[] level;
 
@@ -26,14 +26,12 @@ public class SelectLevel extends JFrame {
 
         level = new JButton[LevelNumber];
         for(int i = 1; i <= LevelNumber; i++){
-            level[i - 1] = new JButton("Level " + i); // 레벨 이미지 지정 필요
+            level[i - 1] = new JButton(new ImageIcon("image/buttons/level" + i + ".png")); // 레벨 이미지 지정 필요
         }
-        
-        // backselect = new JButton(new ImageIcon("TetrisCode/image/back.png"));
-        backselect = new JButton(new ImageIcon("image\\back.png"));
 
-        // backgrounds = new Backgrounds("TetrisCode/image/backg.png", Select.Frame_X, Select.Frame_Y);
-        backgrounds = new Backgrounds("image\\Background.jpg", Select.Frame_X, Select.Frame_Y);
+        backselect = new JButton(new ImageIcon("image/buttons/back.png"));
+
+        backgrounds = new Backgrounds("image/Background.jpg", Select.Frame_X, Select.Frame_Y);
 
         setFrame();
     }
@@ -57,10 +55,10 @@ public class SelectLevel extends JFrame {
 
     private void setButton() {
         for(int i = 0; i < LevelNumber; i++){
-            level[i].setBounds(15 + i * Bt_W, Select.Frame_Y / 2, Bt_W, Bt_H);
-            // setButtonBorder(level[i]);
+            level[i].setBounds(10 + (30 * (i + 1)) + i * Bt_W, Select.Frame_Y - 150, Bt_W, Bt_H);
+            setButtonBorder(level[i]);
         }
-        backselect.setBounds(0, 0, 70, 58);
+        backselect.setBounds(20, 20, 70, 58);
         setButtonBorder(backselect);
 
         addButtonAction();
