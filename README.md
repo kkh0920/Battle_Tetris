@@ -2,9 +2,9 @@
 테트리스 코드 개선 프로젝트
 
 ## 추가 및 개선할 기능
-1. 디자인 요소
+1. 디자인 요소 ✔️
    * 배경음악 ✔️
-   * 배경 화면 (진행중)
+   * 배경 화면 ✔️
    * 블록 이미지 변경 ✔️
 
 2. Retry 버튼 추가 ✔️
@@ -35,6 +35,6 @@
 9. 테트리스 AI 개발(BFS 활용) ✔️
 
 ## 개선 전 클래스 다이어그램
-<img width="688" alt="스크린샷 2023-10-02 오후 7 03 35" src="https://github.com/kkh0920/Java_Swing_Tetris/assets/65442366/e7398e49-8500-4942-980b-1223a0ac3074">
+<img width="727" alt="diagram" src="https://github.com/kkh0920/Java_Swing_Tetris/assets/65442366/f569eeea-d9a5-44e4-9089-d0320f5e0fac">
 
 ## 개선 후 클래스 다이어그램
