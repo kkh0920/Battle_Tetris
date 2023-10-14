@@ -247,7 +247,6 @@ public class TetrisGameManager extends JFrame {
             return;
 
         try {
-            // BufferedImage image = ImageIO.read(new File("TetrisCode/image/control.png"));
             BufferedImage image = ImageIO.read(new File("image/control.png"));
             g.drawImage(image, 0, Frame_Y - 30, null);
         } catch (IOException e) {
