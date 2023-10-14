@@ -7,22 +7,21 @@ import javax.sound.sampled.UnsupportedAudioFileException;
 import java.io.File;
 import java.io.IOException;
 
-public class Music{
+public class Music {
 
     private File file;
     private Clip clip;
 
-    Music() throws UnsupportedAudioFileException, LineUnavailableException {
+    Music() {
         setMusic();
     }
 
-    public void setMusic() throws LineUnavailableException, UnsupportedAudioFileException {
-        // file = new File("TetrisCode/bgm/bgm.wav");
-        file = new File("bgm\\bgm.wav");
-        clip = AudioSystem.getClip();
+    public void setMusic() {
+        file = new File("bgm/bgm.wav");
         try {
+            clip = AudioSystem.getClip();
             clip.open(AudioSystem.getAudioInputStream(file));
-        } catch (IOException e) {
+        } catch (IOException | LineUnavailableException | UnsupportedAudioFileException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
