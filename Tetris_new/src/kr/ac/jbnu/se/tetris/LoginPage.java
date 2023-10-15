@@ -11,11 +11,11 @@ import java.sql.SQLException;
 
 public class LoginPage extends JFrame {
 
-    Backgrounds backgrounds;
-    JTextField id; // 20글자만 입력 가능
-    JPasswordField password; // 50글자만 입력 가능
-    JLabel txt_id, txt_pw;
-    JButton login,signup,tutorial;
+    private Backgrounds backgrounds;
+    private JTextField id; // 20글자만 입력 가능
+    private JPasswordField password; // 50글자만 입력 가능
+    private JLabel txt_id, txt_pw;
+    private JButton login,signup;
 
     public static final int x = 800, y = 453;
 
@@ -29,7 +29,7 @@ public class LoginPage extends JFrame {
         addComponents();
     }
 
-    public void setFrame() {
+    private void setFrame() {
 
         setSize(x,y);
         setLayout(null);
@@ -39,16 +39,16 @@ public class LoginPage extends JFrame {
 
     }
 
-    public void setTextField() {
+    private void setTextField() {
         id = new JTextField(20);
         password = new JPasswordField(50);
     }
 
-    public void setBackgrounds() {
+    private void setBackgrounds() {
         backgrounds = new Backgrounds("image\\Background.jpg",x,y);
     }
 
-    public void setText() {
+    private void setText() {
         txt_id = new JLabel("ID : ");
         txt_pw = new JLabel("PW : ");
 
@@ -59,29 +59,27 @@ public class LoginPage extends JFrame {
         txt_pw.setForeground(Color.WHITE);
     }
 
-    public void setButton() {
-        login = new JButton("LOGIN");
-        signup = new JButton("SIGN UP");
-        tutorial = new JButton("Tutorial");
+    private void setButton() {
+        login = new JButton(new ImageIcon("image/Login.png"));
+        signup = new JButton(new ImageIcon("image/SignUp.png"));
         buttonAction();
     }
 
-    public void componentsSize() {
+    private void componentsSize() {
         id.setBounds(330,260,160,50);
         password.setBounds(330,330,160,50);
         txt_id.setBounds(290,280,40,20);
         txt_pw.setBounds(290,350,40,20);
         login.setBounds(530,270,80,80);
         signup.setBounds(630,270,80,80);
-        tutorial.setBounds(350,70,100,50);
     }
 
-    public void addComponents() {
-        add(id); add(password); add(txt_id); add(txt_pw); add(login); add(signup); add(tutorial);
+    private void addComponents() {
+        add(id); add(password); add(txt_id); add(txt_pw); add(login); add(signup);
         add(backgrounds.getPane());
     }
 
-    public void buttonAction() {
+    private void buttonAction() {
         login.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -112,15 +110,6 @@ public class LoginPage extends JFrame {
                 }
             }
         });
-
-        tutorial.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                Tutorial tutorial1 = new Tutorial();
-                tutorial1.setVisible(true);
-            }
-        });
-
 
     }
 

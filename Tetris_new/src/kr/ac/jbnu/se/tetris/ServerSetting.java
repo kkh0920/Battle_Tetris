@@ -3,7 +3,7 @@ import java.sql.*;
 
 public class ServerSetting {
 
-    Connection connection = null;
+    protected Connection connection = null;
 
     private ServerSetting() throws SQLException{
         connectMysql();

@@ -7,30 +7,25 @@ import java.sql.SQLException;
 
 public class SignUpSQL{
 
-    ServerSetting serverSetting;
-    PreparedStatement preparedStatement;
+    private ServerSetting serverSetting;
+    private PreparedStatement readQuery;
 
-    SignUpSQL() throws SQLException, IOException {
-
+    SignUpSQL(String id, String pw) throws SQLException, IOException {
+        signUpUser(id,pw);
     }
 
-    public boolean SignUpUser(String id, String pw) throws SQLException, IOException {
+    public void signUpUser(String id, String pw) throws SQLException, IOException {
         serverSetting = ServerSetting.getInstance();
 
         String SQL = "INSERT INTO USER(USER_ID, USER_PW) values (?, ?)";
 
-        preparedStatement = serverSetting.connection.prepareStatement(SQL);
+        readQuery = serverSetting.connection.prepareStatement(SQL);
 
         try {
-            preparedStatement.setString(SqlTable.USER_ID.ordinal(), id);
-            preparedStatement.setString(SqlTable.USER_PW.ordinal(), pw);
+            readQuery.setString(SqlTable.USER_ID.ordinal(), id);
+            readQuery.setString(SqlTable.USER_PW.ordinal(), pw);
 
-            int updatecount = preparedStatement.executeUpdate();
-
-            if(updatecount >= 1) {
-                JOptionPane.showMessageDialog(null, "회원가입 성공 ! 종료하시려면 아무 키나 눌러주세요.");
-                return true;
-            }
+            int updatecount = readQuery.executeUpdate();
 
         } catch (SQLException e) {
             if(e.getMessage().contains("PRIMARY")){
@@ -40,9 +35,9 @@ public class SignUpSQL{
                 JOptionPane.showMessageDialog(null, "제대로 된 정보를 입력해주세요.");
             }
         }finally {
-            if(preparedStatement != null)
+            if(readQuery != null)
                 try{
-                preparedStatement.close();
+                readQuery.close();
             } catch (SQLException e) {
                 throw new RuntimeException(e);
             }
@@ -53,7 +48,6 @@ public class SignUpSQL{
                 throw new RuntimeException(e);
             }
         }
-        return false;
     }
 
 

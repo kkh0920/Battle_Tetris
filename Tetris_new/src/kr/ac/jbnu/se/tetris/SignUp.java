@@ -10,11 +10,11 @@ import java.sql.SQLException;
 public class SignUp extends JFrame{
 
 
-    JTextField txt_id, txt_pw;
-    JButton accept;
-    JLabel id, pw;
-    String sign_id,sign_pw;
-    Backgrounds backgrounds;
+    private JTextField txt_id, txt_pw;
+    private JButton accept;
+    private JLabel id, pw;
+    private String sign_id,sign_pw;
+    private Backgrounds backgrounds;
 
     SignUp() throws SQLException {
         setText();
@@ -24,7 +24,7 @@ public class SignUp extends JFrame{
         setFrame();
         add(pw); add(id); add(txt_id); add(txt_pw); add(accept); add(backgrounds.getPane());
     }
-    public void setText() {
+    private void setText() {
         id = new JLabel("ID : ");
         pw = new JLabel("PW : ");
 
@@ -35,11 +35,11 @@ public class SignUp extends JFrame{
         pw.setForeground(Color.WHITE);
     }
 
-    public void setBackgrounds() {
+    private void setBackgrounds() {
         backgrounds = new Backgrounds("image\\Background.jpg", LoginPage.x, LoginPage.y);
     }
 
-    public void setFrame() {
+    private void setFrame() {
 
         setSize(LoginPage.x,LoginPage.y);
         setVisible(true);
@@ -49,13 +49,13 @@ public class SignUp extends JFrame{
 
     }
 
-    public void setButton() {
-        accept = new JButton("확인");
+    private void setButton() {
+        accept = new JButton(new ImageIcon("image/SignUp.png"));
         accept.setBounds(530,270,80,80);
         buttonAction();
     }
 
-    public void setTextField() {
+    private void setTextField() {
         txt_id = new JTextField(20);
         txt_pw = new JTextField(50);
 
@@ -67,15 +67,14 @@ public class SignUp extends JFrame{
 
     }
 
-    public void buttonAction() {
+    private void buttonAction() {
         accept.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 sign_id = txt_id.getText();
                 sign_pw = txt_pw.getText();
                 try {
-                    SignUpSQL signUpSQL = new SignUpSQL();
-                    signUpSQL.SignUpUser(sign_id, sign_pw);
+                    SignUpSQL signUpSQL = new SignUpSQL(sign_id, sign_pw);
                 } catch (SQLException ex) {
                     throw new RuntimeException(ex);
                 } catch (IOException ex) {
