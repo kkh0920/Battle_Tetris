@@ -18,7 +18,7 @@ public class ComPareID{
     }
 
     public void Login(String id, String pw) throws SQLException, UnsupportedAudioFileException, LineUnavailableException, IOException {
-        serverSetting = ServerSetting.getInstance();
+        serverSetting = new ServerSetting();
 
         serverSetting.connectMysql();
         serverSetting.connectServer();

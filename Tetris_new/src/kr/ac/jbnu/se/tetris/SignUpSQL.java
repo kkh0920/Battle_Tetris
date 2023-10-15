@@ -15,7 +15,7 @@ public class SignUpSQL{
     }
 
     public void signUpUser(String id, String pw) throws SQLException, IOException {
-        serverSetting = ServerSetting.getInstance();
+        serverSetting = new ServerSetting();
 
         String SQL = "INSERT INTO USER(USER_ID, USER_PW) values (?, ?)";
 
