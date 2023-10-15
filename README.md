@@ -34,6 +34,8 @@
 
 9. 테트리스 AI 개발(BFS 활용) ✔️
 
+- Visual Studio code를 사용하시는 경우 https://allonsyit.tistory.com/86 참고하여 파일 내에 있는 jar 라이브러리 파일을 넣어주시길 바랍니다.
+
 ## 개선 전 클래스 다이어그램
 <img width="727" alt="diagram" src="https://github.com/kkh0920/Java_Swing_Tetris/assets/65442366/f569eeea-d9a5-44e4-9089-d0320f5e0fac">
 

@@ -45,7 +45,7 @@ public class LoginPage extends JFrame {
     }
 
     private void setBackgrounds() {
-        backgrounds = new Backgrounds("image\\Background.jpg",x,y);
+        backgrounds = new Backgrounds("image/Background.jpg",x,y);
     }
 
     private void setText() {

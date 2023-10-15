@@ -22,7 +22,7 @@ public class ComPareID{
 
         serverSetting.connectMysql();
         serverSetting.connectServer();
-        String SQL = "SELECT USER_PW FROM USER WHERE USER_ID = ?";
+        String SQL = "SELECT USER_PW FROM user_info WHERE USER_ID = ?";
 
         readQuery = serverSetting.connection.prepareStatement(SQL);
         readQuery.setString(SqlTable.USER_ID.ordinal(), id);
