@@ -3,29 +3,12 @@ import java.sql.*;
 
 public class ServerSetting {
 
-    Connection connection = null;
+    protected Connection connection = null;
 
-    private ServerSetting() throws SQLException{
+    ServerSetting() throws SQLException{
         connectMysql();
         connectServer();
     }
-
-    private static class ServerSettingHolder {
-        private static final ServerSetting INSTANCE;
-
-        static {
-            try {
-                INSTANCE = new ServerSetting();
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
-            }
-        }
-    }
-
-    public static ServerSetting getInstance() {
-        return ServerSettingHolder.INSTANCE;
-    }
-
 
     public void connectMysql() {
         try {
