@@ -44,7 +44,7 @@ public class LoginPage extends JFrame {
         password = new JPasswordField(50);
     }
 
-    private void setBackgrounds() {
+    public void setBackgrounds() {
         backgrounds = new Backgrounds("image/Background.jpg",x,y);
     }
 

@@ -58,7 +58,7 @@ public class SelectLevel extends JFrame {
             level[i].setBounds(10 + (30 * (i + 1)) + i * Bt_W, Select.Frame_Y - 150, Bt_W, Bt_H);
             setButtonBorder(level[i]);
         }
-        backselect.setBounds(20, 20, 70, 58);
+        
         setButtonBorder(backselect);
 
         addButtonAction();
