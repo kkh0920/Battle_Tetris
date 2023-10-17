@@ -17,7 +17,7 @@ public class SignUpSQL{
     public void signUpUser(String id, String pw) throws SQLException, IOException {
         serverSetting = new ServerSetting();
 
-        String SQL = "INSERT INTO USER_info(USER_ID, USER_PW) values (?, ?)";
+        String SQL = "INSERT INTO user_info(USER_ID, USER_PW) values (?, ?)";
 
         readQuery = serverSetting.connection.prepareStatement(SQL);
 
@@ -26,6 +26,10 @@ public class SignUpSQL{
             readQuery.setString(SqlTable.USER_PW.ordinal(), pw);
 
             int updatecount = readQuery.executeUpdate();
+
+            if(updatecount >= 1) {
+                JOptionPane.showMessageDialog(null, "회원가입 성공");
+            }
 
         } catch (SQLException e) {
             if(e.getMessage().contains("PRIMARY")){
