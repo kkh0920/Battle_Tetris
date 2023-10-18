@@ -39,5 +39,7 @@
 ## 개선 전 클래스 다이어그램
 ![개선 전](https://github.com/kkh0920/Java_Swing_Tetris/assets/65442366/45680258-2bd6-46f0-b955-4e31717e22d4)
 
-## 개선 후 클래스 다이어그램
+## 1차 개선 클래스 다이어그램
 ![개선 후](https://github.com/kkh0920/Java_Swing_Tetris/assets/65442366/149374f3-7288-4aa8-95ff-44187c1a8c1e)
+
+## 2차 개선 클래스 다이어그램
