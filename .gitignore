@@ -4,7 +4,7 @@
 
 *.idea
 
-/Tetris_new/src/kr/ac/jbnu/se/tetris/ServerInfo.java
+/src/kr/ac/jbnu/se/tetris/ServerInfo.java
 
 # Default ignored files
 /shelf/
