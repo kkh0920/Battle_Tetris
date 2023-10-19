@@ -4,6 +4,8 @@
 
 *.idea
 
+*.iml
+
 /src/kr/ac/jbnu/se/tetris/ServerInfo.java
 
 # Default ignored files
