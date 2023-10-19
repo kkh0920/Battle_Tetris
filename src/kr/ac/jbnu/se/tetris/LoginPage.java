@@ -61,8 +61,19 @@ public class LoginPage extends JFrame {
 
     private void setButton() {
         login = new JButton(new ImageIcon("image/Login.png"));
+        setButtonBorder(login);
+
         signup = new JButton(new ImageIcon("image/SignUp.png"));
+        setButtonBorder(signup);
+
         buttonAction();
+    }
+
+    private void setButtonBorder(JButton jb){ // 버튼의 이미지를 나타내기 위해 테두리 등을 제거 (부드럽게 나타내기 .. )
+        jb.setBorderPainted(false);
+        jb.setContentAreaFilled(false);
+        jb.setFocusPainted(false);
+        jb.setOpaque(false);
     }
 
     private void componentsSize() {
