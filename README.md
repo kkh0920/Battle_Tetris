@@ -39,9 +39,9 @@
 
 
 ## 개선 전 클래스 다이어그램
-![개선 전](https://github.com/kkh0920/Java_Swing_Tetris/assets/65442366/45680258-2bd6-46f0-b955-4e31717e22d4)
+<img width="695" alt="개선 전" src="https://github.com/kkh0920/Java_Swing_Tetris/assets/65442366/115cef1d-4b99-49a9-afc2-6ae94544565a">
 
 ## 1차 개선 클래스 다이어그램
-![개선 후](https://github.com/kkh0920/Java_Swing_Tetris/assets/65442366/149374f3-7288-4aa8-95ff-44187c1a8c1e)
+<img width="750" alt="1차 개선" src="https://github.com/kkh0920/Java_Swing_Tetris/assets/65442366/8409a8f5-2d67-46fa-8886-752fa724d22b">
 
 ## 2차 개선 클래스 다이어그램
