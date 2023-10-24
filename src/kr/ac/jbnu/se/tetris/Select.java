@@ -54,7 +54,7 @@ public class Select extends JFrame {
         ai = new JButton(new ImageIcon("image/buttons/AImodes.png"));
         ai.setBounds(71, Bt_Y, Bt_W, Bt_H);
         setButtonBorder(ai);
-
+        
         versus = new JButton(new ImageIcon("image/buttons/2P_modes.png"));
         versus.setBounds(142 + Bt_W, Bt_Y, Bt_W, Bt_H);
         setButtonBorder(versus);
