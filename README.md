@@ -11,7 +11,7 @@
 # About Project
 자세한 코드는 [이곳](https://github.com/kkh0920/Java_Swing_Tetris/tree/master/src/kr/ac/jbnu/se/tetris)에서 확인하세요.
 
-## 추가 및 개선할 기능
+### 추가 및 개선할 기능
 
 1. 디자인 요소 ✔️
    * 배경음악 ✔️
@@ -43,12 +43,17 @@
    * 플레어어 vs 플레이어 (단일 컴퓨터 2p) ✔️
    * 플레이어 vs AI ✔️
 
-9. 테트리스 AI 개발(BFS 활용) ✔️
+9. 테트리스 AI 개발(BFS 활용) ✔
 
-## 개선 전 클래스 다이어그램
+
+### 개선 전 클래스 다이어그램
+
 <img width="695" alt="개선 전" src="https://github.com/kkh0920/Java_Swing_Tetris/assets/65442366/115cef1d-4b99-49a9-afc2-6ae94544565a">
 
-## 1차 개선 클래스 다이어그램
+
+### 1차 개선 클래스 다이어그램
+
 <img width="750" alt="1차 개선" src="https://github.com/kkh0920/Java_Swing_Tetris/assets/65442366/8409a8f5-2d67-46fa-8886-752fa724d22b">
 
-## 2차 개선 클래스 다이어그램
+
+### 2차 개선 클래스 다이어그램
