@@ -1,4 +1,4 @@
-<h1 align="center"><b>Battle Tetris</b></h1>
+<h1 align="center"><b>Battle Tetris</b></h1>
 <img width="797" alt="메인 화면" src="https://github.com/kkh0920/Java_Swing_Tetris/assets/65442366/a1524238-8527-4748-9910-c13252951fb8">
 
 ## 게임 설명
