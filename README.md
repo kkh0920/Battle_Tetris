@@ -2,7 +2,7 @@
 테트리스 코드 개선 프로젝트
 
 ## 게임 플레이 화면
-![게임](https://github.com/kkh0920/Java_Swing_Tetris/assets/65442366/70704975-02a0-4cf8-bab0-f4ed66236a6e)
+![게임](https://github.com/kkh0920/Java_Swing_Tetris/assets/65442366/066941e7-f4fd-4cd2-bfdd-3d09e71b2806)
 
 ## 추가 및 개선할 기능
 
