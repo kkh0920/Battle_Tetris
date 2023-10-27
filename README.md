@@ -1,4 +1,4 @@
-# Battle Tetris
+<h1 align="center"><b>Battle Tetris</b></h1>
 <img width="797" alt="메인 화면" src="https://github.com/kkh0920/Java_Swing_Tetris/assets/65442366/a1524238-8527-4748-9910-c13252951fb8">
 
 ## Description
@@ -9,7 +9,7 @@
 
 
 # About Project
-자세한 [코드 확인](https://github.com/kkh0920/Java_Swing_Tetris/tree/master/src/kr/ac/jbnu/se/tetris)
+자세한 코드는 [이곳](https://github.com/kkh0920/Java_Swing_Tetris/tree/master/src/kr/ac/jbnu/se/tetris)에서 확인하세요.
 
 ## 추가 및 개선할 기능
 
