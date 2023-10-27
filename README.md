@@ -4,7 +4,7 @@
 ## Description
 ![게임 설명](https://github.com/kkh0920/Java_Swing_Tetris/assets/65442366/2d7a9899-8215-4106-973e-2b3d72e9d008)
 
-## Game Play
+## Preview
 ![게임](https://github.com/kkh0920/Java_Swing_Tetris/assets/65442366/86bfe276-587f-466e-ab65-a6456555f64e)
 
 
