@@ -14,7 +14,6 @@ public class BoardPlayer extends Board implements ActionListener {
 
     public BoardPlayer(Tetris parent) {
         super(parent);
-        //TODO Auto-generated constructor stub 
         cutlineCheck = BombCutlineScore;
         timer = new Timer(moveDelay, this);        
         start();
@@ -26,7 +25,7 @@ public class BoardPlayer extends Board implements ActionListener {
             isFallingFinished = false;
             
             if(numLinesRemoved >= cutlineCheck) { // 점수 기준 넘어가면 폭탄 획득
-                parent.acquireBomb();
+                parentTetris.acquireBomb();
                 cutlineCheck += BombCutlineScore;
             }
 
