@@ -19,26 +19,30 @@ public class TetrisAI {
 
     private int maxWeight;
     
-    private int[] dx, dy;
+    private int[] dx = { -1, 1, 0, 0 };
+    private int[] dy = { 0, 0, -1, 1 };
     
     public TetrisAI(BoardAI board) {
         this.board = board;
-        dx = new int[] { -1, 1, 0, 0 };
-        dy = new int[] { 0, 0, -1, 1 };
     }
 
-    public String findBestRoute() {
+    public String getBestRoute() {
         initFindRoute();
 
         while(!shapeQueue.isEmpty()) {
-            Shape piece = (Shape) shapeQueue.poll().clone();
-            String curRoute = routeQueue.poll();
+            try {
+                Shape piece = (Shape) shapeQueue.poll().clone();
 
-            int curX = piece.curX();
-            int curY = piece.curY();
+                int curX = piece.curX();
+                int curY = piece.curY();
 
-            findRoute_move(piece, curRoute, curX, curY);
-            fineRoute_rotate(piece, curRoute, curX, curY);
+                String curRoute = routeQueue.poll();
+
+                findRouteMove(piece, curRoute, curX, curY);
+                fineRouteRotate(piece, curRoute, curX, curY);
+            } catch (CloneNotSupportedException e) {
+                e.printStackTrace();
+            } 
         }
         
         return bestRoute;
@@ -51,7 +55,12 @@ public class TetrisAI {
         maxWeight = -10;
         bestRoute = "";
         visited = new boolean[board.height()][board.width()][4];
-        curPiece = (Shape) board.curPiece.clone();
+
+        try {
+            curPiece = (Shape) board.curPiece.clone();
+        } catch (CloneNotSupportedException e) {
+            e.printStackTrace();
+        }
 
         for(int i = 0; i < 4; i++){
             visited[curPiece.curY()][curPiece.curX()][curPiece.getRotateIndex()] = true;
@@ -64,34 +73,38 @@ public class TetrisAI {
         }
     }
 
-    private void findRoute_move(Shape piece, String curRoute, int curX, int curY) {
+    private void findRouteMove(Shape piece, String curRoute, int curX, int curY) {
         for(int i = 0; i < 3; i++) {
-            Shape nPiece = (Shape) piece.clone();
-            int nX = curX + dx[i];
-            int nY = curY + dy[i];
-            
-            if(nX < 0 || nX >= board.width() || nY < 0 || nY >= board.height())
-                continue;
-            if(visited[nY][nX][nPiece.getRotateIndex()])
-                continue;
-            if(!board.tryMove(nPiece, nX, nY)){
-                int weight = getWeight(nPiece);
-                if(maxWeight <= weight){
-                    bestRoute = curRoute;
-                    maxWeight = weight;
+            try {
+                Shape nPiece = (Shape) piece.clone();
+                int nX = curX + dx[i];
+                int nY = curY + dy[i];
+                
+                if(nX < 0 || nX >= board.width() || nY < 0 || nY >= board.height())
+                    continue;
+                if(visited[nY][nX][nPiece.getRotateIndex()])
+                    continue;
+                if(!board.tryMove(nPiece, nX, nY)){
+                    int weight = getWeight(nPiece);
+                    if(maxWeight <= weight){
+                        bestRoute = curRoute;
+                        maxWeight = weight;
+                    }
+                    continue;
                 }
-                continue;
+
+                nPiece.moveTo(nX, nY);
+                visited[nY][nX][nPiece.getRotateIndex()] = true;
+
+                routeQueue.add(curRoute + Integer.toString(i));
+                shapeQueue.add(nPiece);
+            } catch (CloneNotSupportedException e) {
+                e.printStackTrace();
             }
-
-            nPiece.moveTo(nX, nY);
-            visited[nY][nX][nPiece.getRotateIndex()] = true;
-
-            routeQueue.add(curRoute + Integer.toString(i));
-            shapeQueue.add(nPiece);
         }
     }
 
-    private void fineRoute_rotate(Shape piece, String curRoute, int curX, int curY) {
+    private void fineRouteRotate(Shape piece, String curRoute, int curX, int curY) {
         Shape rPiece = piece;
         for(int i = 0; i < 3; i++) {
             rPiece = rPiece.rotateRight();
@@ -139,10 +152,10 @@ public class TetrisAI {
                     continue;
                 }
 
-                if(board.board[y][x] == Tetrominoes.NoShape) {
+                if(board.gridBoard[y][x] == Tetrominoes.NoShape) {
                     weight--;
                 }
-                else if(!isCurPiece[y][x] && board.board[y][x] != Tetrominoes.NoShape) {
+                else if(!isCurPiece[y][x] && board.gridBoard[y][x] != Tetrominoes.NoShape) {
                     weight++;
                 }
             }
