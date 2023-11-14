@@ -9,39 +9,37 @@ import java.io.IOException;
 
 public class Backgrounds extends JFrame {
 
-    private BufferedImage img = null;
-    
-    private BackG background;
+    private transient BufferedImage image = null;
     
     private JLayeredPane layeredPane = new JLayeredPane();
     
     Backgrounds(String image, int x, int y) {
-        DrawBackGround(image, x, y);
+        drawBackGround(image, x, y);
     }
 
     public JLayeredPane getPane(){
         return layeredPane;
     }
 
-    private void DrawBackGround(String image, int x, int y) { // LayerdPane에 이미지를 덮어씌우는 메소드
+    private void drawBackGround(String imagePath, int x, int y) { // LayerdPane에 이미지를 덮어씌우는 메소드
         layeredPane.setSize(x, y);
         layeredPane.setLayout(null);
 
         try {
-            img = ImageIO.read(new File(image));
+            image = ImageIO.read(new File(imagePath));
         } catch (IOException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
-
-        background = new BackG();
+        
+        BackG background = new BackG();
         background.setSize(x, y);
         layeredPane.add(background);
     }
 
     class BackG extends JPanel { // Panel에 이미지를 나타내기 위해서
+        @Override
         public void paint(Graphics g){
-            g.drawImage(img, 0, 0, null);
+            g.drawImage(image, 0, 0, null);
         }
     }
 }
