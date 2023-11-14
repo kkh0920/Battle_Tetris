@@ -17,10 +17,8 @@ public class BoardAI extends Board implements ActionListener {
 
     public BoardAI(Tetris parent) {
         super(parent);
+
         computer = new TetrisAI(this);
-
-        bestRoute = computer.findBestRoute();
-
         timer = new Timer(moveDelay, this);
         
         start();
@@ -34,7 +32,7 @@ public class BoardAI extends Board implements ActionListener {
             if (!newPiece())
                 gameOver();
             else 
-                bestRoute = computer.findBestRoute();
+                bestRoute = computer.getBestRoute();
         } 
         else
             moveToBestRoute(index++);
@@ -46,13 +44,21 @@ public class BoardAI extends Board implements ActionListener {
             return;
         }
 
-        if(bestRoute.charAt(i) == '0' && tryMove(curPiece, curPiece.curX() - 1, curPiece.curY()))
-            move(curPiece, curPiece.curX() - 1, curPiece.curY());
-        else if(bestRoute.charAt(i) == '1' && tryMove(curPiece, curPiece.curX() + 1, curPiece.curY()))
-            move(curPiece, curPiece.curX() + 1, curPiece.curY());
-        else if(bestRoute.charAt(i) == '2' && tryMove(curPiece, curPiece.curX(), curPiece.curY() - 1))
-            move(curPiece, curPiece.curX(), curPiece.curY() - 1);
-        else if(bestRoute.charAt(i) == '3' && tryMove(curPiece.rotateRight(), curPiece.curX(), curPiece.curY()))
-            move(curPiece.rotateRight(), curPiece.curX(), curPiece.curY());    
+        switch (bestRoute.charAt(i)) {
+            case '0':
+                move(curPiece, curPiece.curX() - 1, curPiece.curY());
+                break;
+            case '1':
+                move(curPiece, curPiece.curX() + 1, curPiece.curY());
+                break;
+            case '2':
+                move(curPiece, curPiece.curX(), curPiece.curY() - 1);
+                break;
+            case '3':
+                move(curPiece.rotateRight(), curPiece.curX(), curPiece.curY());
+                break;
+            default:
+                throw new IllegalArgumentException("route number is 0 ~ 3");
+        }            
     }
 }
