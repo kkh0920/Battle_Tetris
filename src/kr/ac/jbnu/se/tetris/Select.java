@@ -103,8 +103,8 @@ public class Select extends JFrame {
             setting.setVisible(true);
         });
 
-        tutorialBtn.addActionListener(e->{
-            tutorial.setVisible(true);
-        });
+        tutorialBtn.addActionListener(e->
+            tutorial.setVisible(true)
+        );
     }
 }
