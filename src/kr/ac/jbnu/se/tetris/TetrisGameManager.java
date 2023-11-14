@@ -15,6 +15,7 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.WindowConstants;
 
 public class TetrisGameManager extends JFrame {
     
@@ -40,7 +41,8 @@ public class TetrisGameManager extends JFrame {
     private Tetris player2Panel;
 
     // 일시 정지, 게임 종료 UI
-    private JDialog pauseDialog, gameOverDialog;
+    private JDialog pauseDialog;
+    private JDialog gameOverDialog;
 
     public TetrisGameManager(Select select) {
         setFrame();
@@ -113,7 +115,7 @@ public class TetrisGameManager extends JFrame {
         setSize(Frame_X, Frame_Y);
         setLayout(null);
         setResizable(false);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         setFocusable(true);
         getContentPane().setBackground(new Color(220, 220, 220));
@@ -143,28 +145,22 @@ public class TetrisGameManager extends JFrame {
         JButton retryBtn = new JButton("재시작");
         JButton homeBtn = new JButton("메인화면");
 
-        retryBtn.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                g.dispose();
 
-                gameOverDialog.setVisible(false);
+        retryBtn.addActionListener(e->{
+            g.dispose();
 
-                TetrisGameManager game = new TetrisGameManager(select);
-                game.start(opponentIsComputer);
-                game.setVisible(true);
-            }
+            gameOverDialog.setVisible(false);
 
+            TetrisGameManager game = new TetrisGameManager(select);
+            game.start(opponentIsComputer);
+            game.setVisible(true);
         });
-        homeBtn.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                g.dispose();
 
-                gameOverDialog.setVisible(false);
+        homeBtn.addActionListener(e->{
+            g.dispose();
 
-                select.setVisible(true);
-            }
+            gameOverDialog.setVisible(false);
+            select.setVisible(true);
         });
 
         gameOverDialog = new JDialog(this, "게임 오버", true);
@@ -191,33 +187,25 @@ public class TetrisGameManager extends JFrame {
         JButton retryBtn = new JButton("재시작");
         JButton homeBtn = new JButton("메인화면");
 
-        resumeBtn.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                pause();
-            }
-
+        resumeBtn.addActionListener(e->{
+            pause();
         });
-        retryBtn.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                g.dispose();
 
-                pauseDialog.setVisible(false);
+        retryBtn.addActionListener(e->{
+            g.dispose();
 
-                TetrisGameManager game = new TetrisGameManager(select);
-                game.start(opponentIsComputer);
-                game.setVisible(true);
-            }
+            pauseDialog.setVisible(false);
+
+            TetrisGameManager game = new TetrisGameManager(select);
+            game.start(opponentIsComputer);
+            game.setVisible(true);
         });
-        homeBtn.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                g.dispose();
 
-                select.setVisible(true);
-                pauseDialog.setVisible(false);
-            }
+        homeBtn.addActionListener(e->{
+            g.dispose();
+
+            select.setVisible(true);
+            pauseDialog.setVisible(false);
         });
 
         pauseDialog = new JDialog(this, "일시정지", true);
@@ -250,7 +238,6 @@ public class TetrisGameManager extends JFrame {
             BufferedImage image = ImageIO.read(new File("image/control.png"));
             g.drawImage(image, 0, Frame_Y - 30, null);
         } catch (IOException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
     }
@@ -258,14 +245,13 @@ public class TetrisGameManager extends JFrame {
     // -------------------------------------- 키 입력 리스너 --------------------------------------
     
     public class PlayerKeyListener extends KeyAdapter {
+        @Override
         public void keyPressed(KeyEvent e) {
 
             Board p1Board = player1Panel.getBoard();
             Board p2Board = player2Panel.getBoard();
             
-            if (!p1Board.isStarted() || !p2Board.isStarted() || 
-                    p1Board.getCurPiece().getShape() == Tetrominoes.NoShape ||
-                                p2Board.getCurPiece().getShape() == Tetrominoes.NoShape) {
+            if (!p1Board.isStarted() || !p2Board.isStarted()) {
                 return;
             }
 
@@ -278,64 +264,62 @@ public class TetrisGameManager extends JFrame {
             if (isPaused)
                 return;
 
-            // player1 키 입력
+            p1KeyInput(keycode, p1Board);
+            p2KeyInput(keycode, p2Board);
+        }
 
+        private void p1KeyInput(int keycode, Board p1Board){
             Shape p1CurPiece = p1Board.getCurPiece();
 
-            if (keycode == KeyEvent.VK_LEFT) {
-                if (p1Board.tryMove(p1CurPiece, p1CurPiece.curX() - 1, p1CurPiece.curY()))
+            switch (keycode) {
+                case KeyEvent.VK_LEFT:
                     p1Board.move(p1CurPiece, p1CurPiece.curX() - 1, p1CurPiece.curY());
-
-            }
-            if (keycode == KeyEvent.VK_RIGHT) {
-                if (p1Board.tryMove(p1CurPiece, p1CurPiece.curX() + 1, p1CurPiece.curY()))
+                    break;
+                case KeyEvent.VK_RIGHT:
                     p1Board.move(p1CurPiece, p1CurPiece.curX() + 1, p1CurPiece.curY());
-            }
-            if (keycode == KeyEvent.VK_UP) {
-                Shape leftRotated = p1CurPiece.rotateLeft();
-                if (p1Board.tryMove(leftRotated, p1CurPiece.curX(), p1CurPiece.curY()))
+                    break;
+                case KeyEvent.VK_UP:
+                    Shape leftRotated = p1CurPiece.rotateLeft();
                     p1Board.move(leftRotated, p1CurPiece.curX(), p1CurPiece.curY());
-            }
-            if (keycode == KeyEvent.VK_DOWN) {
-                Shape rightRotated = p1CurPiece.rotateRight();
-                if (p1Board.tryMove(rightRotated, p1CurPiece.curX(), p1CurPiece.curY()))
+                    break;
+                case KeyEvent.VK_DOWN:
+                    Shape rightRotated = p1CurPiece.rotateRight();
                     p1Board.move(rightRotated, p1CurPiece.curX(), p1CurPiece.curY());
+                    break;
+                case KeyEvent.VK_SPACE:
+                    p1Board.dropDown();
+                    break;
+                case 'm':
+                case 'M':
+                    p1Board.oneLineDown();
+                    break;
+                case '/':
+                    player1Panel.useBomb();
+                    break;
+                default:
+                    break;
             }
-            if (keycode == KeyEvent.VK_SPACE) {
-                p1Board.dropDown();
-            }
-            if (keycode == 'm' || keycode == 'M') {
-                p1Board.oneLineDown();
-            }
+        }
 
-            if(keycode == '/'){
-                player1Panel.useBomb();
-            }
-
-            // player2 키 입력
-            
+        private void p2KeyInput(int keycode, Board p2Board){
             if(opponentIsComputer)
                 return;
 
             Shape p2CurPiece = p2Board.getCurPiece();
 
             if (keycode == p2_left || keycode == p2_left_upper) {
-                if (p2Board.tryMove(p2CurPiece, p2CurPiece.curX() - 1, p2CurPiece.curY()))
-                    p2Board.move(p2CurPiece, p2CurPiece.curX() - 1, p2CurPiece.curY());
+                p2Board.move(p2CurPiece, p2CurPiece.curX() - 1, p2CurPiece.curY());
             }
             if (keycode == p2_right || keycode == p2_right_upper) {
-                if (p2Board.tryMove(p2CurPiece, p2CurPiece.curX() + 1, p2CurPiece.curY()))
-                    p2Board.move(p2CurPiece, p2CurPiece.curX() + 1, p2CurPiece.curY());
+                p2Board.move(p2CurPiece, p2CurPiece.curX() + 1, p2CurPiece.curY());
             }     
             if (keycode == p2_up || keycode == p2_up_upper) {
                 Shape leftRotated = p2CurPiece.rotateLeft();
-                if (p2Board.tryMove(leftRotated, p2CurPiece.curX(), p2CurPiece.curY()))
-                    p2Board.move(leftRotated, p2CurPiece.curX(), p2CurPiece.curY());
+                p2Board.move(leftRotated, p2CurPiece.curX(), p2CurPiece.curY());
             }
             if (keycode == p2_down || keycode == p2_down_upper) {
                 Shape rightRotated = p2CurPiece.rotateRight();
-                if (p2Board.tryMove(rightRotated, p2CurPiece.curX(), p2CurPiece.curY()))
-                    p2Board.move(rightRotated, p2CurPiece.curX(), p2CurPiece.curY());
+                p2Board.move(rightRotated, p2CurPiece.curX(), p2CurPiece.curY());
             }
             if (keycode == p2_dropDown) {
                 p2Board.dropDown();
@@ -343,10 +327,12 @@ public class TetrisGameManager extends JFrame {
             if (keycode == KeyEvent.VK_CONTROL) {
                 p2Board.oneLineDown();
             }
-
             if(keycode == 'q' || keycode == 'Q'){
                 player2Panel.useBomb();
             }
         }
     }
+
+    
+
 }
