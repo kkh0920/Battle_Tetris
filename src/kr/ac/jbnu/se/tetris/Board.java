@@ -70,7 +70,7 @@ public class Board extends JPanel {
         timer.start();
     }
 
-    public void gameOver() {
+    public void gameOver() { // 게임 종료 (게임 패배)
         Board player = this instanceof BoardPlayer ? this : opponent;
 
         TetrisGameManager manager = player.parentTetris.gameManager();
@@ -90,7 +90,21 @@ public class Board extends JPanel {
         isStarted = false;
         timer.stop();
 
+        curPiece.setShape(Tetrominoes.NoShape);
+
+        gameOverBoardPaint();
+
         manager.gameOverDialog().setVisible(true);
+    }
+
+    private void gameOverBoardPaint() { // 게임에서 패배한 보드의 모든 블록을 LockBlock으로 변경
+        for(int i = 0; i < BoardHeight; i++){
+            for(int j = 0; j < BoardWidth; j++){
+                if(gridBoard[i][j] != Tetrominoes.NoShape)
+                    gridBoard[i][j] = Tetrominoes.LockBlock;
+            }
+        }
+        repaint();
     }
 
     private void clearBoard() { // 보드 클리어
@@ -223,6 +237,8 @@ public class Board extends JPanel {
         removeFullLines();
     }
     private void removeFullLines() { // 한 줄 제거 가능 여부 탐색(점수 획득)
+        curPiece.setShape(Tetrominoes.NoShape);
+
         int numFullLines = 0;
 
         for (int i = BoardHeight - 1; i >= 0; --i) {
@@ -260,7 +276,7 @@ public class Board extends JPanel {
         repaint();
 
         if(isBlockOvered)
-            gameOver();
+            opponent.gameOver();  
     }
 
     private void stackLinesToOpponent(int attackCount) { // 상대 보드에 장애물 블록 생성
@@ -348,7 +364,7 @@ public class Board extends JPanel {
         }
     }
     private void paintDroppingPiece(Graphics g, int boardTop) {
-        if (curPiece.getShape() == Tetrominoes.NoShape || isFallingFinished) 
+        if (curPiece.getShape() == Tetrominoes.NoShape) 
             return;
 
         for (int i = 0; i < 4; ++i) {
@@ -358,7 +374,7 @@ public class Board extends JPanel {
         }
     }
     private void paintShadow(Graphics g, int boardTop) {
-        if(curPiece.getShape() == Tetrominoes.NoShape || isFallingFinished)
+        if(curPiece.getShape() == Tetrominoes.NoShape)
             return;
 
         int nX = curPiece.curX();
