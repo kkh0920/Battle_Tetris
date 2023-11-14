@@ -13,7 +13,7 @@ public class BlockPreview extends JPanel {
 
     private Shape piece;
 
-    BlockPreview(Board board) {
+    BlockPreview() {
         setPreferredSize(new Dimension(PanelWidth, PanelHeight));
         nextPiece = new Tetrominoes[height][width];
         initNextPiece();
@@ -27,10 +27,10 @@ public class BlockPreview extends JPanel {
     }
 
     private int squareWidth(){
-        return (int) PanelWidth / width;
+        return PanelWidth / width;
     }
     private int squareHeight(){
-        return (int) PanelHeight / height;
+        return PanelHeight / height;
     }
 
     private void initNextPiece(){
@@ -54,7 +54,6 @@ public class BlockPreview extends JPanel {
 
     @Override
     public void paint(Graphics g) {
-        // TODO Auto-generated method stub
         super.paint(g);
 
         int boardTop = PanelHeight - height * squareHeight();
