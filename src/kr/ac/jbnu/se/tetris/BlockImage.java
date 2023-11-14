@@ -8,14 +8,14 @@ import javax.imageio.ImageIO;
 
 public class BlockImage {
 
-    private BufferedImage blockImage;
+    private BufferedImage image;
 
     public BlockImage(Tetrominoes shape) {
-        blockImage = getImage(getImageFile(shape));
+        image = getImage(getImageFile(shape));
     }
 
     public BufferedImage getImage() {
-        return blockImage;
+        return image;
     }
 
     public BufferedImage getImage(String filePath) {
