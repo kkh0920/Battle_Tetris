@@ -271,6 +271,9 @@ public class TetrisGameManager extends JFrame {
         private void p1KeyInput(int keycode, Board p1Board){
             Shape p1CurPiece = p1Board.getCurPiece();
 
+            if(p1CurPiece.getShape() == Tetrominoes.NoShape)
+                return;
+
             switch (keycode) {
                 case KeyEvent.VK_LEFT:
                     p1Board.move(p1CurPiece, p1CurPiece.curX() - 1, p1CurPiece.curY());
@@ -306,6 +309,9 @@ public class TetrisGameManager extends JFrame {
                 return;
 
             Shape p2CurPiece = p2Board.getCurPiece();
+
+            if(p2CurPiece.getShape() == Tetrominoes.NoShape)
+                return;
 
             if (keycode == p2_left || keycode == p2_left_upper) {
                 p2Board.move(p2CurPiece, p2CurPiece.curX() - 1, p2CurPiece.curY());
