@@ -6,7 +6,7 @@ import javax.swing.plaf.basic.BasicProgressBarUI;
 
 public class Tetris extends JPanel {
 
-    private TetrisGameManager parent;
+    private TetrisGameManager parentManager;
 
     final int Frame_X = 335, Frame_Y = 500, Status_X = 60, Status_Y = 30;
 
@@ -30,7 +30,7 @@ public class Tetris extends JPanel {
     private int bombCount;
 
     public Tetris(TetrisGameManager parent, boolean isComputer) {
-        this.parent = parent;    
+        this.parentManager = parent;    
         this.isComputer = isComputer; 
         setTetrisLayout(isComputer);
     }
@@ -53,7 +53,7 @@ public class Tetris extends JPanel {
     // -------------------------------------- get 메소드 --------------------------------------
 
     public TetrisGameManager gameManager() {
-        return parent;
+        return parentManager;
     }
     public JLabel getStatusBar() {
         return statusbar;
@@ -82,7 +82,7 @@ public class Tetris extends JPanel {
         setLayout(null);
 
         board = isComputer ? new BoardAI(this) : new BoardPlayer(this); // 1. 보드판
-        blockPreview =  new BlockPreview(board); // 2. Next 블록 프리뷰
+        blockPreview =  new BlockPreview(); // 2. Next 블록 프리뷰
         setHealthBar(); // 3. 체력바
         setScorePanel(); // 4. 스코어 패널
         setBombLabel(); // 5. 폭탄 개수
@@ -98,6 +98,7 @@ public class Tetris extends JPanel {
         healthBar.setStringPainted(true); // 백분율 표시 활성화
         healthBar.setForeground(new Color(220, 120, 120)); // 체력 바의 색상 변경
         healthBar.setUI(new BasicProgressBarUI() {
+            @Override
             protected Color getSelectionForeground() {
                 return Color.WHITE; // 글자 색 변경
             }
@@ -135,7 +136,6 @@ public class Tetris extends JPanel {
     
     @Override
     public void paint(Graphics g) {
-        // TODO Auto-generated method stub
         super.paint(g);
         if(!isComputer) { // 플레이어 패널만 폭탄 아이콘 생성
             BlockImage image = new BlockImage(Tetrominoes.BombBlock);
