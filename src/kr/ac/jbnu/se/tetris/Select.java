@@ -19,7 +19,10 @@ public class Select extends JFrame {
 
     private Tutorial tutorial;
 
-    private JButton ai, versus, settingBtn, tutorialBtn;
+    private JButton ai;
+    private JButton versus;
+    private JButton settingBtn;
+    private JButton tutorialBtn;
 
     Select() {
         setFrame();
@@ -79,41 +82,29 @@ public class Select extends JFrame {
 
     public void buttonAction() {
         Select select = this;
-        ai.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                setVisible(false);
-                selectLevel.setVisible(true);
-            }
+
+        ai.addActionListener(e->{
+            setVisible(false);
+            selectLevel.setVisible(true);
         });
 
-        versus.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                setVisible(false);
+        versus.addActionListener(e->{
+            setVisible(false);
 
-                TetrisGameManager.level = 0; // 플레이어 대전인 경우 0 레벨 설정
-                
-                TetrisGameManager game = new TetrisGameManager(select);
-                game.start(false);
-                game.setVisible(true);
-            }
-        });
-
-        settingBtn.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                setVisible(false);
-                setting.setVisible(true);
-            }
-        });
-
-        tutorialBtn.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                tutorial.setVisible(true);
-            }
+            TetrisGameManager.level = 0; // 플레이어 대전인 경우 0 레벨 설정
             
+            TetrisGameManager game = new TetrisGameManager(select);
+            game.start(false);
+            game.setVisible(true);
+        });
+
+        settingBtn.addActionListener(e->{
+            setVisible(false);
+            setting.setVisible(true);
+        });
+
+        tutorialBtn.addActionListener(e->{
+            tutorial.setVisible(true);
         });
     }
 }
