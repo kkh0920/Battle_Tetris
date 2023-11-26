@@ -2,8 +2,6 @@ package kr.ac.jbnu.se.tetris;
 
 import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
@@ -11,11 +9,12 @@ import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
-import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.WindowConstants;
+
+import kr.ac.jbnu.se.tetris.dialogs.GameOverDialog;
+import kr.ac.jbnu.se.tetris.dialogs.PauseDialog;
 
 public class TetrisGameManager extends JFrame {
     
@@ -25,10 +24,8 @@ public class TetrisGameManager extends JFrame {
                         p2_up_upper = 'W', p2_down_upper = 'S', p2_left_upper = 'A', p2_right_upper = 'D',
                         p2_dropDown = KeyEvent.VK_SHIFT;
 
-    private final int Frame_X = 750, Frame_Y = 620;
-
     private boolean isPaused = false;
-    private boolean opponentIsComputer;
+    private boolean isComputer;
 
     // 최대 점수 표기 (AI 대전)
     private MaxScorePanel maxScorePanel;
@@ -41,22 +38,20 @@ public class TetrisGameManager extends JFrame {
     private Tetris player2Panel;
 
     // 일시 정지, 게임 종료 UI
-    private JDialog pauseDialog;
-    private JDialog gameOverDialog;
+    private PauseDialog pauseDialog;
+    private GameOverDialog gameOverDialog;
 
-    public TetrisGameManager(Select select) {
+    public TetrisGameManager() {
         setFrame();
 
-        setPauseDialog(select); // 일시정지 화면 설정
-        setGameOverDialog(select); // 게임종료 화면 설정
+        pauseDialog = new PauseDialog(this); // 일시정지 화면 설정
+        gameOverDialog = new GameOverDialog(this); // 게임종료 화면 설정
 
         addKeyListener(new PlayerKeyListener());
     }
 
-    // -------------------------------------- get 메소드 --------------------------------------
-
-    public boolean opponentIsComputer(){
-        return opponentIsComputer;
+    public boolean isComputer(){
+        return isComputer;
     }
     public MaxScorePanel getMaxScorePanel(){
         return maxScorePanel;
@@ -65,10 +60,14 @@ public class TetrisGameManager extends JFrame {
         return gameOverDialog;
     }
 
-    // -------------------------------------- 시작 및 종료 관리 --------------------------------------
-
+    /**
+     * 해당 메소드에서 게임 시작을 담당한다.
+     *
+     * @param isComputer true 값이면 AI 모드
+     *                   false 값이면 2P 모드
+     */
     public void start(boolean isComputer) {
-        opponentIsComputer = isComputer;
+        this.isComputer = isComputer;
         
         maxScorePanel = new MaxScorePanel(); // 1. 최대 점수 패널     
         timer = new TimerPanel(); // 2. 타이머
@@ -86,8 +85,13 @@ public class TetrisGameManager extends JFrame {
         addComponent(isComputer); // 각 컴포넌트 배치
 
         timer.startTimer(); // 타이머 가동
+
+        setVisible(true);
     }
 
+    /**
+     * 게임을 일시정지 하는 메소드
+     */
     public void pause() {
         Board p1Board = player1Panel.getBoard();
         Board p2Board = player2Panel.getBoard();
@@ -108,11 +112,9 @@ public class TetrisGameManager extends JFrame {
         pauseDialog.setVisible(isPaused);
     }
 
-    // -------------------------------------- 컴포넌트 레이아웃 설정 --------------------------------------
-
     private void setFrame() {
         setTitle("Tetris");
-        setSize(Frame_X, Frame_Y);
+        setSize(750, 620);
         setLayout(null);
         setResizable(false);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -120,130 +122,35 @@ public class TetrisGameManager extends JFrame {
         setFocusable(true);
         getContentPane().setBackground(new Color(220, 220, 220));
     }
-
     private void setLayoutLocation() {
         timer.setBounds(325, 10, 100, 25);
         maxScorePanel.setBounds(30, 10, 90, 25);
         player1Panel.setBounds(20, 45, player1Panel.frameX(), player1Panel.frameY());
         player2Panel.setBounds(player2Panel.frameX() + 60, 45, player2Panel.frameX(), player2Panel.frameY());
     }
-
     private void addComponent(boolean isComputer) {
-        if(isComputer) add(maxScorePanel);
+        if(isComputer) add(maxScorePanel); // AI 모드인 경우에만 최대 점수 패널을 추가
         add(timer);
         add(player1Panel);
         add(player2Panel);
     }
-
-    // -------------------------------------- 게임 종료 및 일시 정지 UI 설정 --------------------------------------
-
-    private void setGameOverDialog(Select select) {
-        TetrisGameManager g = this;
-
-        JLabel gameOverText = new JLabel("게임 종료!");
-
-        JButton retryBtn = new JButton("재시작");
-        JButton homeBtn = new JButton("메인화면");
-
-
-        retryBtn.addActionListener(e->{
-            g.dispose();
-
-            gameOverDialog.setVisible(false);
-
-            TetrisGameManager game = new TetrisGameManager(select);
-            game.start(opponentIsComputer);
-            game.setVisible(true);
-        });
-
-        homeBtn.addActionListener(e->{
-            g.dispose();
-
-            gameOverDialog.setVisible(false);
-            select.setVisible(true);
-        });
-
-        gameOverDialog = new JDialog(this, "게임 오버", true);
-        gameOverDialog.setUndecorated(true);
-        gameOverDialog.setSize(170, 135);
-        gameOverDialog.setLocationRelativeTo(null);
-        gameOverDialog.setLayout(null);
-
-        gameOverText.setBounds(60, 10, 150, 30);
-        retryBtn.setBounds(10, 45, 150, 35);
-        homeBtn.setBounds(10, 90, 150, 35);
-
-        gameOverDialog.add(gameOverText);
-        gameOverDialog.add(retryBtn);
-        gameOverDialog.add(homeBtn);
-    }
-
-    private void setPauseDialog(Select select) {
-        TetrisGameManager g = this;
-
-        JLabel pauseText = new JLabel("일시 정지");
-
-        JButton resumeBtn = new JButton("계속하기");
-        JButton retryBtn = new JButton("재시작");
-        JButton homeBtn = new JButton("메인화면");
-
-        resumeBtn.addActionListener(e->{
-            pause();
-        });
-
-        retryBtn.addActionListener(e->{
-            g.dispose();
-
-            pauseDialog.setVisible(false);
-
-            TetrisGameManager game = new TetrisGameManager(select);
-            game.start(opponentIsComputer);
-            game.setVisible(true);
-        });
-
-        homeBtn.addActionListener(e->{
-            g.dispose();
-
-            select.setVisible(true);
-            pauseDialog.setVisible(false);
-        });
-
-        pauseDialog = new JDialog(this, "일시정지", true);
-        pauseDialog.setUndecorated(true);
-        pauseDialog.setSize(170, 175);
-        pauseDialog.setLocationRelativeTo(null); 
-        pauseDialog.setLayout(null);
-
-        pauseText.setBounds(60, 5, 150, 30);
-        resumeBtn.setBounds(10, 40, 150, 35);
-        retryBtn.setBounds(10, 85, 150, 35);
-        homeBtn.setBounds(10, 130, 150, 35);
-
-        pauseDialog.add(pauseText);
-        pauseDialog.add(resumeBtn);
-        pauseDialog.add(retryBtn);
-        pauseDialog.add(homeBtn);
-    }
-
-    // -------------------------------------- 이미지 --------------------------------------
     
     @Override
-    public void paint(Graphics g) {
+    public void paint(Graphics g) { // 이미지 페인트
         super.paint(g);
         
-        if(!opponentIsComputer)
+        if(!isComputer)
             return;
 
-        try {
+        try {  
             BufferedImage image = ImageIO.read(new File("image/control.png"));
-            g.drawImage(image, 0, Frame_Y - 30, null);
+            g.drawImage(image, 0, getHeight() - 30, null);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
-
-    // -------------------------------------- 키 입력 리스너 --------------------------------------
     
+    // 키 입력 관리
     public class PlayerKeyListener extends KeyAdapter {
         @Override
         public void keyPressed(KeyEvent e) {
@@ -268,6 +175,7 @@ public class TetrisGameManager extends JFrame {
             p2KeyInput(keycode, p2Board);
         }
 
+        // 플레이어 1 키입력
         private void p1KeyInput(int keycode, Board p1Board){
             Shape p1CurPiece = p1Board.getCurPiece();
 
@@ -304,8 +212,9 @@ public class TetrisGameManager extends JFrame {
             }
         }
 
+        // 플레이어 2 키입력
         private void p2KeyInput(int keycode, Board p2Board){
-            if(opponentIsComputer)
+            if(isComputer)
                 return;
 
             Shape p2CurPiece = p2Board.getCurPiece();
@@ -338,7 +247,4 @@ public class TetrisGameManager extends JFrame {
             }
         }
     }
-
-    
-
 }

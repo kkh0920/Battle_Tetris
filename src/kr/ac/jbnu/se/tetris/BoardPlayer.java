@@ -22,16 +22,11 @@ public class BoardPlayer extends Board implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (isFallingFinished) {
-            isFallingFinished = false;
-            
             if(numLinesRemoved >= cutlineCheck) { // 점수 기준 넘어가면 폭탄 획득
                 parentTetris.acquireBomb();
                 cutlineCheck += BombCutlineScore;
             }
-
-            if (!newPiece())
-                gameOver();
-
+            newPiece();
         } else {
             oneLineDown();
         }

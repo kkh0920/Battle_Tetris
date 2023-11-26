@@ -1,12 +1,9 @@
 package kr.ac.jbnu.se.tetris;
 
-import javax.sound.sampled.LineUnavailableException;
-import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
 import java.sql.SQLException;
 
 public class LoginPage extends JFrame {
@@ -100,12 +97,6 @@ public class LoginPage extends JFrame {
                     ComPareID comPareID = new ComPareID(cmp_id, cmp_pw);
                     if(!ComPareID.visible) setVisible(false);
                 } catch (SQLException ex) {
-                    throw new RuntimeException(ex);
-                } catch (UnsupportedAudioFileException ex) {
-                    throw new RuntimeException(ex);
-                } catch (LineUnavailableException ex) {
-                    throw new RuntimeException(ex);
-                } catch (IOException ex) {
                     throw new RuntimeException(ex);
                 }
             }

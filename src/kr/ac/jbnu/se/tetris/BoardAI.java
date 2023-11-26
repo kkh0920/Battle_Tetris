@@ -27,12 +27,9 @@ public class BoardAI extends Board implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (isFallingFinished) {
-            isFallingFinished = false;
             index = 0;
-            if (!newPiece())
-                gameOver();
-            else 
-                bestRoute = computer.getBestRoute();
+            newPiece();
+            bestRoute = computer.getBestRoute();    
         } 
         else
             moveToBestRoute(index++);
