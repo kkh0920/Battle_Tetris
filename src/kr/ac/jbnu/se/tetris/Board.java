@@ -51,7 +51,7 @@ public class Board extends JPanel {
 
         gridBoard = new Tetrominoes[BoardHeight][BoardWidth];
 
-        curPiece = new Shape(); // 생성자에서 객체 생성 (합성 관계)
+        curPiece = new Shape();
         nextPiece = new Shape();
 
         isFallingFinished = true;
@@ -61,21 +61,34 @@ public class Board extends JPanel {
         nextPiece.setRandomShape();
     }
 
+    /**
+     * TetrisGameManager의 start 메소드에서 사용됨
+     * 
+     * @param opponent 대결할 상대편 보드; 해당 객체를 참조하여 
+     *                  decreaseOtherHp, stackLinesToOpponent 메소드를 통해 상대방 공격
+     */
     public void setOpponent(Board opponent) {
         this.opponent = opponent;
     }
 
-    public void start(){
+    /**
+     * 타이머를 가동
+     */
+    public void start() {
         isStarted = true;
         timer.start();
     }
 
-    public void gameOver() { // 게임 종료 (게임 패배)
+    /**
+     * 게임 종료 -> 게임에 패배한 보드에서 실행되는 메소드
+     * AI 대전인 경우, numLinesRemoved를 최대 점수로 갱신
+     */
+    public void gameOver() {
         Board player = this instanceof BoardPlayer ? this : opponent;
 
         TetrisGameManager manager = player.parentTetris.gameManager();
 
-        if(manager.isComputer()) { // AI 대전이면서, 플레이어의 점수만 갱신
+        if(manager.isComputer()) {
             MaxScorePanel maxScorePanel = manager.getMaxScorePanel();
 
             int prevMaxScore = maxScorePanel.getMaxScore();
@@ -97,7 +110,10 @@ public class Board extends JPanel {
         manager.gameOverDialog().setVisible(true);
     }
 
-    private void gameOverBoardPaint() { // 게임에서 패배한 보드의 모든 블록을 LockBlock으로 변경
+    /**
+     * 게임에서 패배한 보드의 모든 블록을 LockBlock으로 변경
+     */
+    private void gameOverBoardPaint() {
         for(int i = 0; i < BoardHeight; i++){
             for(int j = 0; j < BoardWidth; j++){
                 if(gridBoard[i][j] != Tetrominoes.NoShape)
@@ -107,7 +123,10 @@ public class Board extends JPanel {
         repaint();
     }
 
-    private void clearBoard() { // 보드 클리어
+    /**
+     * 보드의 모든 블록을 지운다.
+     */
+    public void clearBoard() {
         for (int i = 0; i < BoardHeight; ++i) {
             for(int j = 0; j < BoardWidth; ++j) {
                 gridBoard[i][j] = Tetrominoes.NoShape;
@@ -115,24 +134,39 @@ public class Board extends JPanel {
         }
     }
 
-    public boolean newPiece() { // 새로운 떨어지는 블록 생성
+    /**
+     * 보드의 가장 위에 새로운 블록을 생성한다.
+     * 
+     * @return 더이상 블록을 생성할 수 없다면,
+     *         (블록이 생성되는 위치에 다른 블록이 존재한다면) false를 반환한다.
+     *         그 외에는 true를 반환한다.
+     */
+    public boolean newPiece() {
         curPiece = nextPiece.copy();
 
         int initPosX = BoardWidth / 2;
         int initPosY = BoardHeight - 2 + curPiece.minY();
 
-        if (!tryMove(curPiece, initPosX, initPosY))
+        if (!tryMove(curPiece, initPosX, initPosY)) {
+            gameOver();
             return false;
+        }
 
         move(curPiece, initPosX, initPosY);
 
         nextPiece.setRandomShape();
         parentTetris.getBlockPreview().setNextPiece(nextPiece);
 
+        isFallingFinished = false;
+
         return true;
     }
 
-    public void bombBlock() { // 폭탄 범위 내 블록 제거
+    /**
+     * 폭탄이 터질 때 수행.
+     * 범위 내의 블록을 제거한다.
+     */
+    public void bombBlock() {
         int x = curPiece.curX();
         int y = curPiece.curY();
 
@@ -145,8 +179,6 @@ public class Board extends JPanel {
             }
         }
     }
-
-    // -------------------------------- get 메소드 --------------------------------
 
     public int panelWidth(){
         return PanelWidth;
@@ -188,16 +220,31 @@ public class Board extends JPanel {
         return gridBoard[y][x];
     }
 
-    // -------------------------------- 블록 이동, 점수 획득, 상대방 공격 --------------------------------
-
-    public void move(Shape piece, int newX, int newY) { // 실제로 이동
+    /**
+     * 떨어지고 있는 블록을 직접적으로 이동시키는 메소드
+     * 
+     * @param piece 변화된 블록의 모양 (Up, Down 키를 통한 블록의 회전을 고려)
+     * @param newX 이동할 X 좌표
+     * @param newY 이동할 Y 좌표
+     */
+    public void move(Shape piece, int newX, int newY) {
         if(!tryMove(piece, newX, newY))
             return;
         curPiece = piece;
         curPiece.moveTo(newX, newY);
         repaint();
     }
-    public boolean tryMove(Shape piece, int newX, int newY) { // 이동 가능 여부 체크
+
+    /**
+     * 블록이 다음 위치로 이동 가능한지의 여부를 체크하는 메소드
+     * 
+     * @param piece 변화된 블록의 모양 (Up, Down 키를 통한 블록의 회전을 고려)
+     * @param newX 이동할 X 좌표
+     * @param newY 이동할 Y 좌표
+     * @return 이동 가능하면 true
+     *         이동 불가능하면 false를 반환
+     */
+    public boolean tryMove(Shape piece, int newX, int newY) {
         for (int i = 0; i < 4; ++i) {
             int x = newX + piece.x(i);
             int y = newY - piece.y(i);
@@ -208,13 +255,24 @@ public class Board extends JPanel {
         }
         return true;
     }
-    public void oneLineDown() { // curPiece 한줄 드롭
+
+    /**
+     * curPiece를 한줄 아래로 이동시킨다.
+     */
+    public void oneLineDown() {
         if (!tryMove(curPiece, curPiece.curX(), curPiece.curY() - 1))
             pieceDropped();
         else
             move(curPiece, curPiece.curX(), curPiece.curY() - 1);
     }
-    public void dropDown() { // curPiece 한번에 드롭
+    
+    /**
+     * curPiece의 위치를 확정시킨다.(맨 아래로 이동시킨다)
+     * 
+     * 이후 pieceDropped, removeFullLines, afterRemoveLines, stackLinesToOpponent, 
+     *     removeOneBlock, recoverHp, decreaseOtherHp 메소드가 연쇄적으로 수행된다.
+     */
+    public void dropDown() {
         int newY = curPiece.curY();
         while (newY > 0) {
             if (!tryMove(curPiece, curPiece.curX(), --newY))
@@ -223,7 +281,6 @@ public class Board extends JPanel {
         }
         pieceDropped();
     }
-
     private void pieceDropped() { // 블록이 완전히 떨어지면, 해당 블록을 board에 그리는 식
         for (int i = 0; i < 4; ++i) {
             int x = curPiece.curX() + curPiece.x(i);
@@ -236,11 +293,10 @@ public class Board extends JPanel {
         } 
         removeFullLines();
     }
+
     private void removeFullLines() { // 한 줄 제거 가능 여부 탐색(점수 획득)
         curPiece.setShape(Tetrominoes.NoShape);
-
         int numFullLines = 0;
-
         for (int i = BoardHeight - 1; i >= 0; --i) {
             boolean lineIsFull = true;
             for (int j = 0; j < BoardWidth; ++j) {
@@ -260,23 +316,22 @@ public class Board extends JPanel {
                 }
             }
         }
-
         isFallingFinished = true;
-        
+        afterRemoveLines(numFullLines);
+    }
+
+    private void afterRemoveLines(int numFullLines) { 
         if (numFullLines > 0) {
             numLinesRemoved += numFullLines;
-            
             parentTetris.getStatusBar().setText(String.valueOf(numLinesRemoved)); // 0. 점수 갱신
-            
             recoverHp(numFullLines); // 1. 내 hp 회복
             int remainCount = decreaseOtherHp(numFullLines); // 2. 상대 hp 감소
             stackLinesToOpponent(remainCount); // 3. 상대 보드에 장애물 생성
         }
-
         repaint();
 
         if(isBlockOvered)
-            opponent.gameOver();  
+            opponent.gameOver();
     }
 
     private void stackLinesToOpponent(int attackCount) { // 상대 보드에 장애물 블록 생성
@@ -304,7 +359,8 @@ public class Board extends JPanel {
 
         removeOneBlock(attackCount);
     }
-    private void removeOneBlock(int linesHeight) {
+
+    private void removeOneBlock(int linesHeight) { // 상대 보드에 생성된 장애물 라인에서 각각 한칸씩만 지운다. 
         ThreadLocalRandom r = ThreadLocalRandom.current();
         int x = r.nextInt(BoardWidth);
 
@@ -316,14 +372,15 @@ public class Board extends JPanel {
         }
     }
 
-    private void recoverHp(int count){
+    private void recoverHp(int count){ // 내 hp 회복 
         JProgressBar curHp = parentTetris.getHealthBar();
         int increasedHp = curHp.getValue() + count * HealthRecover;
         if(increasedHp > 100)
             increasedHp = 100;
         curHp.setValue(increasedHp);
     }
-    private int decreaseOtherHp(int count) {
+
+    private int decreaseOtherHp(int count) { // 상대 hp 감소
         int attackCount = 0;
 
         JProgressBar otherHp = opponent.parentTetris.getHealthBar();
@@ -337,8 +394,10 @@ public class Board extends JPanel {
         return attackCount;
     }
 
-    // -------------------------------- 블록 페인트 --------------------------------
-    
+    /**
+     * gridBoard(보드에 위치한 블록), curPiece(떨어지는 블록), 
+     * 블록 고스트를 페인트 하는 메소드
+     */
     @Override
     public void paint(Graphics g) {
         super.paint(g);
@@ -346,12 +405,9 @@ public class Board extends JPanel {
         Dimension size = getSize();
         int boardTop = (int) size.getHeight() - BoardHeight * squareHeight();
 
-        paintBoardPiece(g, boardTop); // 보드에 위치한 블록
-
-        paintDroppingPiece(g, boardTop); // 현재 떨어지고 있는 블록
-
-        paintShadow(g, boardTop); // 블록이 놓여질 위치
-        
+        paintBoardPiece(g, boardTop);
+        paintDroppingPiece(g, boardTop);
+        paintGhost(g, boardTop);
     }
 
     private void paintBoardPiece(Graphics g, int boardTop) {
@@ -374,7 +430,7 @@ public class Board extends JPanel {
         }
     }
 
-    private void paintShadow(Graphics g, int boardTop) {
+    private void paintGhost(Graphics g, int boardTop) {
         if(curPiece.getShape() == Tetrominoes.NoShape)
             return;
 
@@ -388,12 +444,13 @@ public class Board extends JPanel {
         nY++;
 
         if(curPiece.getShape() == Tetrominoes.BombBlock) {
-            paintBombShadow(g, boardTop, nX, nY);
+            paintBombGhost(g, boardTop, nX, nY);
         } else {
-            paintPieceShadow(g, boardTop, nX, nY);
+            paintPieceGhost(g, boardTop, nX, nY);
         }
     }
-    private void paintBombShadow(Graphics g, int boardTop, int nX, int nY){
+
+    private void paintBombGhost(Graphics g, int boardTop, int nX, int nY){
         for(int i = nY - 1; i <= nY + 1; i++){
             for(int j = nX - 1; j <= nX + 1; j++){
                 if(i < 0 || i >= BoardHeight || j < 0 || j >= BoardWidth)
@@ -402,7 +459,8 @@ public class Board extends JPanel {
             }
         }
     }
-    private void paintPieceShadow(Graphics g, int boardTop, int nX, int nY){
+
+    private void paintPieceGhost(Graphics g, int boardTop, int nX, int nY){
         for(int i = 0; i < 4; i++){
             int x = nX + curPiece.x(i);
             int y = nY - curPiece.y(i);

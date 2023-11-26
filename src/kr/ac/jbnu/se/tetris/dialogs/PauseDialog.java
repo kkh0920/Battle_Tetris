@@ -44,9 +44,13 @@ public class PauseDialog extends JDialog {
         resumeBtn.addActionListener( e-> manager.pause() );
 
         retryBtn.addActionListener(e->{
+            boolean isComputer = manager.isComputer();
+            
             setVisible(false);
             manager.dispose();
-            manager.start(manager.isComputer());
+
+            TetrisGameManager game = new TetrisGameManager();
+            game.start(isComputer);
         });
 
         homeBtn.addActionListener(e->{
@@ -59,6 +63,7 @@ public class PauseDialog extends JDialog {
 
     private void addComponent() {
         add(pauseText);
+        add(resumeBtn);
         add(retryBtn);
         add(homeBtn);
     }

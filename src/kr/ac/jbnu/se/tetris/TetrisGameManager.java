@@ -50,8 +50,6 @@ public class TetrisGameManager extends JFrame {
         addKeyListener(new PlayerKeyListener());
     }
 
-    // -------------------------------------- get 메소드 --------------------------------------
-
     public boolean isComputer(){
         return isComputer;
     }
@@ -62,8 +60,12 @@ public class TetrisGameManager extends JFrame {
         return gameOverDialog;
     }
 
-    // -------------------------------------- 시작 및 종료 관리 --------------------------------------
-
+    /**
+     * 해당 메소드에서 게임 시작을 담당한다.
+     *
+     * @param isComputer true 값이면 AI 모드
+     *                   false 값이면 2P 모드
+     */
     public void start(boolean isComputer) {
         this.isComputer = isComputer;
         
@@ -83,8 +85,13 @@ public class TetrisGameManager extends JFrame {
         addComponent(isComputer); // 각 컴포넌트 배치
 
         timer.startTimer(); // 타이머 가동
+
+        setVisible(true);
     }
 
+    /**
+     * 게임을 일시정지 하는 메소드
+     */
     public void pause() {
         Board p1Board = player1Panel.getBoard();
         Board p2Board = player2Panel.getBoard();
@@ -105,8 +112,6 @@ public class TetrisGameManager extends JFrame {
         pauseDialog.setVisible(isPaused);
     }
 
-    // -------------------------------------- 컴포넌트 레이아웃 설정 --------------------------------------
-
     private void setFrame() {
         setTitle("Tetris");
         setSize(750, 620);
@@ -116,43 +121,36 @@ public class TetrisGameManager extends JFrame {
         setLocationRelativeTo(null);
         setFocusable(true);
         getContentPane().setBackground(new Color(220, 220, 220));
-        setVisible(true);
     }
-
     private void setLayoutLocation() {
         timer.setBounds(325, 10, 100, 25);
         maxScorePanel.setBounds(30, 10, 90, 25);
         player1Panel.setBounds(20, 45, player1Panel.frameX(), player1Panel.frameY());
         player2Panel.setBounds(player2Panel.frameX() + 60, 45, player2Panel.frameX(), player2Panel.frameY());
     }
-
     private void addComponent(boolean isComputer) {
-        if(isComputer) add(maxScorePanel);
+        if(isComputer) add(maxScorePanel); // AI 모드인 경우에만 최대 점수 패널을 추가
         add(timer);
         add(player1Panel);
         add(player2Panel);
     }
-
-    // -------------------------------------- 이미지 --------------------------------------
     
     @Override
-    public void paint(Graphics g) {
+    public void paint(Graphics g) { // 이미지 페인트
         super.paint(g);
         
         if(!isComputer)
             return;
 
         try {  
-            int frameHeight = getPreferredSize().height;
             BufferedImage image = ImageIO.read(new File("image/control.png"));
-            g.drawImage(image, 0, frameHeight - 30, null);
+            g.drawImage(image, 0, getHeight() - 30, null);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
-
-    // -------------------------------------- 키 입력 리스너 --------------------------------------
     
+    // 키 입력 관리
     public class PlayerKeyListener extends KeyAdapter {
         @Override
         public void keyPressed(KeyEvent e) {
@@ -177,6 +175,7 @@ public class TetrisGameManager extends JFrame {
             p2KeyInput(keycode, p2Board);
         }
 
+        // 플레이어 1 키입력
         private void p1KeyInput(int keycode, Board p1Board){
             Shape p1CurPiece = p1Board.getCurPiece();
 
@@ -213,6 +212,7 @@ public class TetrisGameManager extends JFrame {
             }
         }
 
+        // 플레이어 2 키입력
         private void p2KeyInput(int keycode, Board p2Board){
             if(isComputer)
                 return;

@@ -38,13 +38,18 @@ public class GameOverDialog extends JDialog {
 
     private void addListener() {
         retryBtn.addActionListener(e->{
+            boolean isComputer = manager.isComputer();
+            
             setVisible(false);
             manager.dispose();
-            manager.start(manager.isComputer());
+
+            TetrisGameManager game = new TetrisGameManager();
+            game.start(isComputer);
         });
         homeBtn.addActionListener(e->{
             setVisible(false);
             manager.dispose();
+
             Select mainPage = new Select();
             mainPage.setVisible(true);
         });
