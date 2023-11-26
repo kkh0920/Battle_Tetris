@@ -21,7 +21,7 @@ public class KeyChange extends JFrame implements ActionListener {
 
     private JButton bt1, bt2, bt3, bt4, bt5, exit;
 
-    KeyChange() {
+    public KeyChange() {
         setFrame();
     }
 

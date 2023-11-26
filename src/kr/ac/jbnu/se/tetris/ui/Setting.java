@@ -1,5 +1,7 @@
 package kr.ac.jbnu.se.tetris.ui;
 
+import kr.ac.jbnu.se.tetris.KeyChange;
+
 import javax.swing.*;
 
 public class Setting extends JFrame {

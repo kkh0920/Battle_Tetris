@@ -7,30 +7,30 @@ import javax.swing.JPanel;
 
 public class BlockPreview extends JPanel {
 
-    protected final int PanelWidth = 60, PanelHeight = 80, width = 3, height = 4;
+    protected final int panelWidth = 60, panelHeight = 80, width = 3, height = 4;
 
     private Tetrominoes[][] nextPiece;
 
     private Shape piece;
 
     public BlockPreview() {
-        setPreferredSize(new Dimension(PanelWidth, PanelHeight));
+        setPreferredSize(new Dimension(panelWidth, panelHeight));
         nextPiece = new Tetrominoes[height][width];
         initNextPiece();
     }
     
     public int panelWidth(){
-        return PanelWidth;
+        return panelWidth;
     }
     public int panelHeight(){
-        return PanelHeight;
+        return panelHeight;
     }
 
     private int squareWidth(){
-        return PanelWidth / width;
+        return panelWidth / width;
     }
     private int squareHeight(){
-        return PanelHeight / height;
+        return panelHeight / height;
     }
 
     private void initNextPiece(){
@@ -56,7 +56,7 @@ public class BlockPreview extends JPanel {
     public void paint(Graphics g) {
         super.paint(g);
 
-        int boardTop = PanelHeight - height * squareHeight();
+        int boardTop = panelHeight - height * squareHeight();
 
         for(int i = 0; i < height; i++){
             for(int j = 0; j < width; j++){
