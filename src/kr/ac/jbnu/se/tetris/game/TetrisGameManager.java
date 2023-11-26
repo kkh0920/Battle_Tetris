@@ -107,8 +107,8 @@ public class TetrisGameManager extends JFrame {
         isPaused = !isPaused;
 
         if (isPaused) {
-            p1Board.getTimer().stop();
-            p2Board.getTimer().stop();
+            p1Board.pause();
+            p2Board.pause();
         } else {
             p1Board.start();
             p2Board.start();
@@ -184,7 +184,7 @@ public class TetrisGameManager extends JFrame {
         private void p1KeyInput(int keycode, Board p1Board){
             Shape p1CurPiece = p1Board.getCurPiece();
 
-            if(p1CurPiece.getShape() == Tetrominoes.NoShape)
+            if(p1CurPiece.getShape() == Tetrominoes.NO_SHAPE)
                 return;
 
             switch (keycode) {
@@ -224,7 +224,7 @@ public class TetrisGameManager extends JFrame {
 
             Shape p2CurPiece = p2Board.getCurPiece();
 
-            if(p2CurPiece.getShape() == Tetrominoes.NoShape)
+            if(p2CurPiece.getShape() == Tetrominoes.NO_SHAPE)
                 return;
 
             if (keycode == p2_Left || keycode == p2_Left_Upper) {

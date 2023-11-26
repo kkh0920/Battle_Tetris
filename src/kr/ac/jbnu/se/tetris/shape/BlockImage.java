@@ -30,34 +30,34 @@ public class BlockImage {
     public String getImageFile(Tetrominoes shape) {
         String imgPath = "";
         switch (shape) {
-            case NoShape:
+            case NO_SHAPE:
                 imgPath = "image/blocks/Block0.png";
                 break;
-            case ZShape:
+            case Z_SHAPE:
                 imgPath = "image/blocks/Block1.png";
                 break;
-            case SShape:
+            case S_SHAPE:
                 imgPath = "image/blocks/Block2.png";
                 break;
-            case LineShape:
+            case LINE_SHAPE:
                 imgPath = "image/blocks/Block3.png";
                 break;
-            case TShape:
+            case T_SHAPE:
                 imgPath = "image/blocks/Block4.png";
                 break;
-            case SquareShape:
+            case SQUARE_SHAPE:
                 imgPath = "image/blocks/Block5.png";
                 break;
-            case LShape:
+            case L_SHAPE:
                 imgPath = "image/blocks/Block6.png";
                 break;
-            case MirroredLShape:
+            case MIRRORED_L_SHAPE:
                 imgPath = "image/blocks/Block7.png";
                 break;
-            case BombBlock:
+            case BOMB_BLOCK:
                 imgPath = "image/blocks/BombIcon.png";
                 break;
-            case LockBlock:
+            case LOCK_BLOCK:
                 imgPath = "image/blocks/lockBlock.png";
                 break;
         }

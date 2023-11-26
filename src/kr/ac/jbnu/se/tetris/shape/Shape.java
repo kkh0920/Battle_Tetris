@@ -16,7 +16,7 @@ public class Shape implements Cloneable {
 
     public Shape() {
         coords = new int[4][2];
-        setShape(Tetrominoes.NoShape);
+        setShape(Tetrominoes.NO_SHAPE);
     }
 
     public void setShape(Tetrominoes shape) {
@@ -113,7 +113,7 @@ public class Shape implements Cloneable {
     }
 
     public Shape rotateLeft() {
-        if (pieceShape == Tetrominoes.SquareShape)
+        if (pieceShape == Tetrominoes.SQUARE_SHAPE)
             return this;
 
         Shape result = new Shape();
@@ -133,7 +133,7 @@ public class Shape implements Cloneable {
         return result;
     }
     public Shape rotateRight() {
-        if (pieceShape == Tetrominoes.SquareShape)
+        if (pieceShape == Tetrominoes.SQUARE_SHAPE)
             return this;
 
         Shape result = new Shape();

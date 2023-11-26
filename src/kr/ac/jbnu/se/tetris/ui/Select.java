@@ -7,7 +7,7 @@ import kr.ac.jbnu.se.tetris.game.TetrisGameManager;
 
 public class Select extends JFrame {
     
-    private Wallpapers background;
+    private Wallpapers wallpaper;
     
     private Music music;
 
@@ -47,11 +47,11 @@ public class Select extends JFrame {
         setLocationRelativeTo(null);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
 
-        background = new Wallpapers("image/Background.jpg", frameWidth, frameHeight);
+        wallpaper = new Wallpapers("image/Background.jpg", frameWidth, frameHeight);
         setButton();
 
         add(ai); add(versus); add(settingBtn); add(tutorialBtn);
-        add(background.getPane());
+        add(wallpaper.getPane());
     }
 
     public void setButton() {

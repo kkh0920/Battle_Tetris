@@ -86,6 +86,9 @@ public class Board extends JPanel {
         isStarted = true;
         timer.start();
     }
+    public void pause() {
+        timer.stop();
+    }
 
     /**
      * 게임 종료 -> 게임에 패배한 보드에서 실행되는 메소드
@@ -111,7 +114,7 @@ public class Board extends JPanel {
         isStarted = false;
         timer.stop();
 
-        curPiece.setShape(Tetrominoes.NoShape);
+        curPiece.setShape(Tetrominoes.NO_SHAPE);
 
         gameOverBoardPaint();
 
@@ -124,8 +127,8 @@ public class Board extends JPanel {
     private void gameOverBoardPaint() {
         for(int i = 0; i < boardHeight; i++){
             for(int j = 0; j < boardWidth; j++){
-                if(gridBoard[i][j] != Tetrominoes.NoShape)
-                    gridBoard[i][j] = Tetrominoes.LockBlock;
+                if(gridBoard[i][j] != Tetrominoes.NO_SHAPE)
+                    gridBoard[i][j] = Tetrominoes.LOCK_BLOCK;
             }
         }
         repaint();
@@ -137,7 +140,7 @@ public class Board extends JPanel {
     public void clearBoard() {
         for (int i = 0; i < boardHeight; ++i) {
             for(int j = 0; j < boardWidth; ++j) {
-                gridBoard[i][j] = Tetrominoes.NoShape;
+                gridBoard[i][j] = Tetrominoes.NO_SHAPE;
             }
         }
     }
@@ -182,8 +185,8 @@ public class Board extends JPanel {
             for(int j = x - 1; j <= x + 1; j++){
                 if(i < 0 || i >= boardHeight || j < 0 || j >= boardWidth)
                     continue;
-                if(gridBoard[i][j] != Tetrominoes.NoShape)
-                    gridBoard[i][j] = Tetrominoes.NoShape;
+                if(gridBoard[i][j] != Tetrominoes.NO_SHAPE)
+                    gridBoard[i][j] = Tetrominoes.NO_SHAPE;
             }
         }
     }
@@ -258,7 +261,7 @@ public class Board extends JPanel {
             int y = newY - piece.y(i);
             if (x < 0 || x >= boardWidth || y < 0 || y >= boardHeight)
                 return false;
-            if (shapeAt(x, y) != Tetrominoes.NoShape)
+            if (shapeAt(x, y) != Tetrominoes.NO_SHAPE)
                 return false;
         }
         return true;
@@ -289,6 +292,7 @@ public class Board extends JPanel {
         }
         pieceDropped();
     }
+
     private void pieceDropped() { // 블록이 완전히 떨어지면, 해당 블록을 board에 그리는 식
         for (int i = 0; i < 4; ++i) {
             int x = curPiece.curX() + curPiece.x(i);
@@ -296,45 +300,57 @@ public class Board extends JPanel {
             gridBoard[y][x] = curPiece.getShape();
         }
 
-        if(curPiece.getShape() == Tetrominoes.BombBlock) {
+        if(curPiece.getShape() == Tetrominoes.BOMB_BLOCK) {
             bombBlock();
-        } 
+        }
+
+        curPiece.setShape(Tetrominoes.NO_SHAPE);
+
         removeFullLines();
     }
 
     private void removeFullLines() { // 한 줄 제거 가능 여부 탐색(점수 획득)
-        curPiece.setShape(Tetrominoes.NoShape);
         int numFullLines = 0;
         for (int i = boardHeight - 1; i >= 0; --i) {
             boolean lineIsFull = true;
             for (int j = 0; j < boardWidth; ++j) {
-                if (shapeAt(j, i) == Tetrominoes.NoShape) {
+                if (shapeAt(j, i) == Tetrominoes.NO_SHAPE) {
                     lineIsFull = false;
                     break;
                 }
             }
-            if (lineIsFull) {
-                ++numFullLines;
-                for (int k = i; k < boardHeight - 1; ++k) {
-                    for (int j = 0; j < boardWidth; ++j){
-                        gridBoard[k][j] = shapeAt(j, k + 1);
-                        if(k == boardHeight - 2 && shapeAt(j, k + 1) != Tetrominoes.NoShape)
-                            gridBoard[k + 1][j] = Tetrominoes.NoShape;
-                    }
+            
+            if (!lineIsFull)
+                continue;
+
+            ++numFullLines;
+            for (int k = i; k < boardHeight - 1; ++k) {
+                for (int j = 0; j < boardWidth; ++j){
+                    gridBoard[k][j] = shapeAt(j, k + 1);
+                    gridBoard[k + 1][j] = Tetrominoes.NO_SHAPE;
                 }
-            }
+            }   
         }
         isFallingFinished = true;
         afterRemoveLines(numFullLines);
     }
-
+    
+    /**
+     * 블록을 드랍하고 라인을 제거한 후에 수행되는 메소드이다.
+     * 
+     * 1. 점수를 갱신
+     * 2. 나의 HP를 회복
+     * 3. 상대방을 공격
+     *  3.1 상대방 보드에 장애물을 생성했을 시, 보드가 넘쳐버리면 게임 종료
+     * 
+     * @param numFullLines 제거한 줄 수를 의미한다.
+     */
     private void afterRemoveLines(int numFullLines) { 
         if (numFullLines > 0) {
             numLinesRemoved += numFullLines;
-            parentTetris.getStatusBar().setText(String.valueOf(numLinesRemoved)); // 0. 점수 갱신
-            recoverHp(numFullLines); // 1. 내 hp 회복
-            int remainCount = decreaseOtherHp(numFullLines); // 2. 상대 hp 감소
-            stackLinesToOpponent(remainCount); // 3. 상대 보드에 장애물 생성
+            parentTetris.getStatusBar().setText(String.valueOf(numLinesRemoved));
+            recoverHp(numFullLines);
+            attackOpponent(numFullLines);
         }
         repaint();
 
@@ -342,6 +358,45 @@ public class Board extends JPanel {
             opponent.gameOver();
     }
 
+    /**
+     * 자신의 HP를 회복하는 메소드이다.
+     * 
+     * @param count 제거한 줄 수를 의미한다.
+     */
+    private void recoverHp(int count) {
+        JProgressBar curHp = parentTetris.getHealthBar();
+        int increasedHp = curHp.getValue() + count * healthRecover;
+        if(increasedHp > 100)
+            increasedHp = 100;
+        curHp.setValue(increasedHp);
+    }
+
+    /**
+     * 상대편을 공격하는 메소드이다.
+     * 제거한 줄 수 만큼 상대방의 HP를 감소시키고,
+     * 남아있는 카운드 만큼 상대방 보드에 장애물을 생성하는 메소드를 수행한다.
+     * 
+     * @param count 제거한 줄 수를 의미한다.
+     */
+    private void attackOpponent(int count) {
+        int attackCount = 0;
+
+        JProgressBar otherHp = opponent.parentTetris.getHealthBar();
+        int decreasedHp = otherHp.getValue() - count * attackDamage;
+        if(decreasedHp < 0){
+            attackCount += (-1 * decreasedHp) / attackDamage;
+            decreasedHp = 0;
+        }
+        otherHp.setValue(decreasedHp);
+
+        stackLinesToOpponent(attackCount);
+    }
+
+    /**
+     * 싱대방 보드에 장애물을 생성하는 메소드이다.
+     * 
+     * @param attackCount 상대편 체력을 감소시키고 남은 제거 줄 수 카운트가 매개변수로 들어간다.
+     */
     private void stackLinesToOpponent(int attackCount) { // 상대 보드에 장애물 블록 생성
         if(attackCount == 0)
             return;
@@ -353,7 +408,7 @@ public class Board extends JPanel {
     
         for (int i = boardHeight - 1; i >= 0; i--) {
             for (int j = 0; j < boardWidth; j++) {
-                if(opponent.gridBoard[i][j] == Tetrominoes.NoShape)
+                if(opponent.gridBoard[i][j] == Tetrominoes.NO_SHAPE)
                     continue;
 
                 if (i + attackCount >= boardHeight) {
@@ -361,45 +416,28 @@ public class Board extends JPanel {
                 } else {
                     opponent.gridBoard[i + attackCount][j] = opponent.gridBoard[i][j];
                 }
-                opponent.gridBoard[i][j] = Tetrominoes.NoShape;
+                opponent.gridBoard[i][j] = Tetrominoes.NO_SHAPE;
             }
         }
 
         removeOneBlock(attackCount);
     }
 
-    private void removeOneBlock(int linesHeight) { // 상대 보드에 생성된 장애물 라인에서 각각 한칸씩만 지운다. 
+    /**
+     * 생성된 장애물의 각 라인에서 한 칸 씩만 지운다.
+     * 
+     * @param linesHeight 생성된 장애물의 높이이다.
+     */
+    private void removeOneBlock(int linesHeight) {
         ThreadLocalRandom r = ThreadLocalRandom.current();
         int x = r.nextInt(boardWidth);
 
         for (int i = 0; i < linesHeight; i++) {
             for (int j = 0; j < boardWidth; j++) {
-                opponent.gridBoard[i][j] = Tetrominoes.LockBlock;
+                opponent.gridBoard[i][j] = Tetrominoes.LOCK_BLOCK;
             }
-            opponent.gridBoard[i][x] = Tetrominoes.NoShape;
+            opponent.gridBoard[i][x] = Tetrominoes.NO_SHAPE;
         }
-    }
-
-    private void recoverHp(int count){ // 내 hp 회복 
-        JProgressBar curHp = parentTetris.getHealthBar();
-        int increasedHp = curHp.getValue() + count * healthRecover;
-        if(increasedHp > 100)
-            increasedHp = 100;
-        curHp.setValue(increasedHp);
-    }
-
-    private int decreaseOtherHp(int count) { // 상대 hp 감소
-        int attackCount = 0;
-
-        JProgressBar otherHp = opponent.parentTetris.getHealthBar();
-        int decreasedHp = otherHp.getValue() - count * attackDamage;
-        if(decreasedHp < 0){
-            attackCount += (-1 * decreasedHp) / attackDamage;
-            decreasedHp = 0;
-        }
-        otherHp.setValue(decreasedHp);
-
-        return attackCount;
     }
 
     /**
@@ -422,13 +460,13 @@ public class Board extends JPanel {
         for (int i = 0; i < boardHeight; ++i) {
             for (int j = 0; j < boardWidth; ++j) {
                 Tetrominoes shape = shapeAt(j, boardHeight - i - 1);
-                if(shape != Tetrominoes.NoShape)
+                if(shape != Tetrominoes.NO_SHAPE)
                     drawSquare(g, j * squareWidth(), boardTop + i * squareHeight(), shape);
             }
         }
     }
     private void paintDroppingPiece(Graphics g, int boardTop) {
-        if (curPiece.getShape() == Tetrominoes.NoShape) 
+        if (curPiece.getShape() == Tetrominoes.NO_SHAPE)
             return;
 
         for (int i = 0; i < 4; ++i) {
@@ -439,7 +477,7 @@ public class Board extends JPanel {
     }
 
     private void paintGhost(Graphics g, int boardTop) {
-        if(curPiece.getShape() == Tetrominoes.NoShape)
+        if(curPiece.getShape() == Tetrominoes.NO_SHAPE)
             return;
 
         int nX = curPiece.curX();
@@ -451,7 +489,7 @@ public class Board extends JPanel {
         }
         nY++;
 
-        if(curPiece.getShape() == Tetrominoes.BombBlock) {
+        if(curPiece.getShape() == Tetrominoes.BOMB_BLOCK) {
             paintBombGhost(g, boardTop, nX, nY);
         } else {
             paintPieceGhost(g, boardTop, nX, nY);
@@ -463,7 +501,7 @@ public class Board extends JPanel {
             for(int j = nX - 1; j <= nX + 1; j++){
                 if(i < 0 || i >= boardHeight || j < 0 || j >= boardWidth)
                     continue;
-                drawSquare(g, j * squareWidth(), boardTop + (boardHeight - i - 1) * squareHeight(), Tetrominoes.NoShape);
+                drawSquare(g, j * squareWidth(), boardTop + (boardHeight - i - 1) * squareHeight(), Tetrominoes.NO_SHAPE);
             }
         }
     }
@@ -472,7 +510,7 @@ public class Board extends JPanel {
         for(int i = 0; i < 4; i++){
             int x = nX + curPiece.x(i);
             int y = nY - curPiece.y(i);
-            drawSquare(g, x * squareWidth(), boardTop + (boardHeight - y - 1) * squareHeight(), Tetrominoes.NoShape);
+            drawSquare(g, x * squareWidth(), boardTop + (boardHeight - y - 1) * squareHeight(), Tetrominoes.NO_SHAPE);
         }
     }
 
@@ -481,11 +519,11 @@ public class Board extends JPanel {
 
         int imageSize = squareWidth(); // 이미지 크기를 블록 크기에 맞게 조정합니다.
         
-        if(shape == Tetrominoes.BombBlock) {
+        if(shape == Tetrominoes.BOMB_BLOCK) {
             imageSize = 30;
             g.drawImage(block.getImage(), x - 2, y - 8, imageSize, imageSize, null);
         }
-        else if(shape == Tetrominoes.NoShape){
+        else if(shape == Tetrominoes.NO_SHAPE){
             Graphics2D g2d = (Graphics2D) g;
             AlphaComposite alphaComposite = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.3f);
             g2d.setComposite(alphaComposite);

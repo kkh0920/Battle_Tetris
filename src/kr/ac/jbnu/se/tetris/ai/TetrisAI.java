@@ -156,10 +156,10 @@ public class TetrisAI {
                     continue;
                 }
 
-                if(board.shapeAt(x, y) == Tetrominoes.NoShape) {
+                if(board.shapeAt(x, y) == Tetrominoes.NO_SHAPE) {
                     weight--;
                 }
-                else if(!isCurPiece[y][x] && board.shapeAt(x, y) != Tetrominoes.NoShape) {
+                else if(!isCurPiece[y][x] && board.shapeAt(x, y) != Tetrominoes.NO_SHAPE) {
                     weight++;
                 }
             }

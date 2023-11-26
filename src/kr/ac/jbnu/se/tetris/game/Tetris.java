@@ -52,7 +52,7 @@ public class Tetris extends JPanel {
         if(bombCount > 0) {
             String bomb = Integer.toString(--bombCount);
             bombLabel.setText("X " + bomb);
-            board.getNextPiece().setShape(Tetrominoes.BombBlock);
+            board.getNextPiece().setShape(Tetrominoes.BOMB_BLOCK);
             blockPreview.setNextPiece(board.getNextPiece());
         }
     }
@@ -145,7 +145,7 @@ public class Tetris extends JPanel {
     public void paint(Graphics g) {
         super.paint(g);
         if(!isComputer) { // 플레이어 패널만 폭탄 아이콘 생성
-            BlockImage image = new BlockImage(Tetrominoes.BombBlock);
+            BlockImage image = new BlockImage(Tetrominoes.BOMB_BLOCK);
             g.drawImage(image.getImage(), 32 + board.panelWidth(), 40 + board.panelHeight() - status_Y - 52,
                         30, 30, null);
         }

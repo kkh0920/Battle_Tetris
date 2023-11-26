@@ -10,7 +10,7 @@ import javax.swing.JPanel;
 
 public class TimerPanel extends JPanel {
     
-    private ScheduledExecutorService scheduler = Executors.newSingleThreadScheduledExecutor();
+    private transient ScheduledExecutorService scheduler = Executors.newSingleThreadScheduledExecutor();
     
     private int second = 0;
     private int minute = 0;

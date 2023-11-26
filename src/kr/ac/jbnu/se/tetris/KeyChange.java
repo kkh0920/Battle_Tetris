@@ -8,7 +8,7 @@ import java.awt.event.ActionListener;
 
 public class KeyChange extends JFrame implements ActionListener {
 
-    private static final int
+    private final int
             bt_Size = 30, txf_Width = 100, txf_Height = 30, frame_Size = 450,
             txf_X = 140, bt_X = 260;
     private String up, down, left, right, dropdown;

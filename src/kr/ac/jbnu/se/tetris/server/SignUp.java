@@ -37,12 +37,12 @@ public class SignUp extends JFrame{
     }
 
     private void setBackgrounds() {
-        backgrounds = new Wallpapers("image/Background.jpg", LoginPage.x, LoginPage.y);
+        backgrounds = new Wallpapers("image/Background.jpg", LoginPage.FRAME_WIDTH, LoginPage.FRAME_HEIGHT);
     }
 
     private void setFrame() {
 
-        setSize(LoginPage.x,LoginPage.y);
+        setSize(LoginPage.FRAME_WIDTH,LoginPage.FRAME_HEIGHT);
         setVisible(true);
         setLayout(null);
         setResizable(false);

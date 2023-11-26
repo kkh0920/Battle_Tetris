@@ -16,9 +16,9 @@ public class LoginPage extends JFrame {
     private JLabel txt_Id, txt_Pw;
     private CustomButton login, signup;
 
-    public static final int x = 800, y = 453;
+    public static final int FRAME_WIDTH = 800, FRAME_HEIGHT = 453;
 
-    LoginPage() throws SQLException {
+    LoginPage() {
         setText();
         setTextField();
         setButton();
@@ -29,7 +29,7 @@ public class LoginPage extends JFrame {
     }
 
     private void setFrame() {
-        setSize(x,y);
+        setSize(FRAME_WIDTH, FRAME_HEIGHT);
         setLayout(null);
         setResizable(false);
         setLocationRelativeTo(null);
@@ -42,7 +42,7 @@ public class LoginPage extends JFrame {
     }
 
     public void setBackgrounds() {
-        backgrounds = new Wallpapers("image/Background.jpg",x,y);
+        backgrounds = new Wallpapers("image/Background.jpg", FRAME_WIDTH, FRAME_HEIGHT);
     }
 
     private void setText() {

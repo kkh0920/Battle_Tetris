@@ -11,6 +11,20 @@
   <component name="ChangeListManager">
     <list default="true" id="df31b2e9-4dad-4417-a805-ed9e6604b83a" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/kr/ac/jbnu/se/tetris/KeyChange.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/kr/ac/jbnu/se/tetris/KeyChange.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/kr/ac/jbnu/se/tetris/ai/TetrisAI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/kr/ac/jbnu/se/tetris/ai/TetrisAI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/kr/ac/jbnu/se/tetris/board/Board.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/kr/ac/jbnu/se/tetris/board/Board.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/kr/ac/jbnu/se/tetris/game/Tetris.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/kr/ac/jbnu/se/tetris/game/Tetris.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/kr/ac/jbnu/se/tetris/game/TetrisGameManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/kr/ac/jbnu/se/tetris/game/TetrisGameManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/kr/ac/jbnu/se/tetris/score/MaxScorePanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/kr/ac/jbnu/se/tetris/score/MaxScorePanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/kr/ac/jbnu/se/tetris/server/LoginPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/kr/ac/jbnu/se/tetris/server/LoginPage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/kr/ac/jbnu/se/tetris/server/SignUp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/kr/ac/jbnu/se/tetris/server/SignUp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/kr/ac/jbnu/se/tetris/shape/BlockImage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/kr/ac/jbnu/se/tetris/shape/BlockImage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/kr/ac/jbnu/se/tetris/shape/BlockPreview.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/kr/ac/jbnu/se/tetris/shape/BlockPreview.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/kr/ac/jbnu/se/tetris/shape/Shape.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/kr/ac/jbnu/se/tetris/shape/Shape.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/kr/ac/jbnu/se/tetris/shape/Tetrominoes.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/kr/ac/jbnu/se/tetris/shape/Tetrominoes.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/kr/ac/jbnu/se/tetris/timer/TimerPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/kr/ac/jbnu/se/tetris/timer/TimerPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/kr/ac/jbnu/se/tetris/ui/Select.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/kr/ac/jbnu/se/tetris/ui/Select.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -40,7 +54,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "master",
+    "git-widget-placeholder": "Rebasing master",
     "jdk.selected.JAVA_MODULE": "11",
     "last_opened_file_path": "/Users/jeonjeonghyeon/Java_Swing_Tetris",
     "node.js.detected.package.eslint": "true",
@@ -53,7 +67,7 @@
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.2",
     "run.code.analysis.last.selected.profile": "pProject Default",
-    "settings.editor.selected.configurable": "reference.projectsettings.compiler.javacompiler",
+    "settings.editor.selected.configurable": "preferences.lookFeel",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -93,9 +107,8 @@
       <workItem from="1700113915206" duration="604000" />
       <workItem from="1700115556610" duration="142000" />
       <workItem from="1700526117264" duration="4304000" />
-      <workItem from="1700997689243" duration="10000" />
-      <workItem from="1700997706383" duration="484000" />
-      <workItem from="1700998199616" duration="1106000" />
+      <workItem from="1701060790802" duration="100000" />
+      <workItem from="1701061055647" duration="4629000" />
     </task>
     <servers />
   </component>

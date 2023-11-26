@@ -14,9 +14,8 @@ import kr.ac.jbnu.se.tetris.game.TetrisGameManager;
 public class MaxScorePanel extends JPanel {
 
     private JLabel maxScoreLabel;
-    private FileWriter scoreWriter;
-
-    private BufferedReader scoreReading;
+    private transient FileWriter scoreWriter;
+    private transient BufferedReader scoreReading;
     private String maxScore;
 
     public MaxScorePanel(){
