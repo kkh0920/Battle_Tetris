@@ -10,28 +10,28 @@ public class SelectLevel extends JFrame {
 
     private Select home;
 
-    private final int LevelNumber = 5;
+    private final int levelNumber = 5;
 
     private int btnWidth = 120;
     private int btnHeight = 35;
 
     private CustomButton[] level;
 
-    private CustomButton backselect;
+    private CustomButton backSelect;
 
-    private Backgrounds backgrounds;
+    private Wallpapers backgrounds;
 
     public SelectLevel(Select home){
         this.home = home;
 
-        level = new CustomButton[LevelNumber];
-        for(int i = 1; i <= LevelNumber; i++){
+        level = new CustomButton[levelNumber];
+        for(int i = 1; i <= levelNumber; i++){
             level[i - 1] = new CustomButton(new ImageIcon("image/buttons/level" + i + ".png")); // 레벨 이미지 지정 필요
         }
 
-        backselect = new CustomButton(new ImageIcon("image/buttons/back.png"));
+        backSelect = new CustomButton(new ImageIcon("image/buttons/back.png"));
 
-        backgrounds = new Backgrounds("image/Background.jpg", home.getWidth(), home.getHeight());
+        backgrounds = new Wallpapers("image/Background.jpg", home.getWidth(), home.getHeight());
 
         setFrame();
     }
@@ -45,24 +45,24 @@ public class SelectLevel extends JFrame {
 
         setButton();
 
-        for(int i = 0; i < LevelNumber; i++){
+        for(int i = 0; i < levelNumber; i++){
             add(level[i]);
         }
 
-        add(backselect);
+        add(backSelect);
         add(backgrounds.getPane());
     }
 
     private void setButton() {
-        for(int i = 0; i < LevelNumber; i++){
+        for(int i = 0; i < levelNumber; i++){
             level[i].setBounds(10 + (30 * (i + 1)) + i * btnWidth, home.getHeight() - 150, btnWidth, btnHeight);
         }
-        backselect.setBounds(20, 20, 70, 58);
+        backSelect.setBounds(20, 20, 70, 58);
         addButtonAction();
     }
 
     private void addButtonAction() {
-        for(int i = 0; i < LevelNumber; i++) {
+        for(int i = 0; i < levelNumber; i++) {
             int index = i;
             level[index].addActionListener(e->{
                 dispose();
@@ -74,7 +74,7 @@ public class SelectLevel extends JFrame {
                 game.start(true);
             });
         }
-        backselect.addActionListener(e->{
+        backSelect.addActionListener(e->{
             dispose();
             home.setVisible(true);
         });

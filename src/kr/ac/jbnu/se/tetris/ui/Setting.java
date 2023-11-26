@@ -1,15 +1,14 @@
 package kr.ac.jbnu.se.tetris.ui;
 
-import javax.swing.*;
+import kr.ac.jbnu.se.tetris.KeyChange;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import javax.swing.*;
 
 public class Setting extends JFrame {
 
     private Select home;
 
-    private Backgrounds backgrounds;
+    private Wallpapers backgrounds;
     private CustomButton musicButton, changekey, backselect;
     private boolean isMusicStarted = true;
 
@@ -28,7 +27,7 @@ public class Setting extends JFrame {
         setLocationRelativeTo(null);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
 
-        backgrounds = new Backgrounds("image/Background.jpg", home.getWidth(), home.getHeight());
+        backgrounds = new Wallpapers("image/Background.jpg", home.getWidth(), home.getHeight());
         setButton();
         add(musicButton); add(changekey); add(backselect); add(backgrounds.getPane());
     }

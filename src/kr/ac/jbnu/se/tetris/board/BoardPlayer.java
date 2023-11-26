@@ -11,12 +11,12 @@ public class BoardPlayer extends Board implements ActionListener {
 
     public static int moveDelay = 500;
 
-    private final int BombCutlineScore = 10;
+    private final int bombCutlineScore = 10;
     private int cutlineCheck;
 
     public BoardPlayer(Tetris parent) {
         super(parent);
-        cutlineCheck = BombCutlineScore;
+        cutlineCheck = bombCutlineScore;
         timer = new Timer(moveDelay, this);        
         start();
     }
@@ -26,7 +26,7 @@ public class BoardPlayer extends Board implements ActionListener {
         if (isFallingFinished) {
             if(numLinesRemoved >= cutlineCheck) { // 점수 기준 넘어가면 폭탄 획득
                 parentTetris.acquireBomb();
-                cutlineCheck += BombCutlineScore;
+                cutlineCheck += bombCutlineScore;
             }
             newPiece();
         } else {

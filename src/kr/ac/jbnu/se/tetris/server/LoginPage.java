@@ -2,7 +2,7 @@ package kr.ac.jbnu.se.tetris.server;
 
 import javax.swing.*;
 
-import kr.ac.jbnu.se.tetris.ui.Backgrounds;
+import kr.ac.jbnu.se.tetris.ui.Wallpapers;
 import kr.ac.jbnu.se.tetris.ui.CustomButton;
 
 import java.awt.*;
@@ -10,10 +10,10 @@ import java.sql.SQLException;
 
 public class LoginPage extends JFrame {
 
-    private Backgrounds backgrounds;
+    private Wallpapers backgrounds;
     private JTextField id; // 20글자만 입력 가능
     private JPasswordField password; // 50글자만 입력 가능
-    private JLabel txt_id, txt_pw;
+    private JLabel txt_Id, txt_Pw;
     private CustomButton login, signup;
 
     public static final int x = 800, y = 453;
@@ -42,18 +42,18 @@ public class LoginPage extends JFrame {
     }
 
     public void setBackgrounds() {
-        backgrounds = new Backgrounds("image/Background.jpg",x,y);
+        backgrounds = new Wallpapers("image/Background.jpg",x,y);
     }
 
     private void setText() {
-        txt_id = new JLabel("ID : ");
-        txt_pw = new JLabel("PW : ");
+        txt_Id = new JLabel("ID : ");
+        txt_Pw = new JLabel("PW : ");
 
-        txt_id.setFont(txt_id.getFont().deriveFont(15.0f));
-        txt_pw.setFont(txt_pw.getFont().deriveFont(15.0f));
+        txt_Id.setFont(txt_Id.getFont().deriveFont(15.0f));
+        txt_Pw.setFont(txt_Pw.getFont().deriveFont(15.0f));
 
-        txt_id.setForeground(Color.WHITE);
-        txt_pw.setForeground(Color.WHITE);
+        txt_Id.setForeground(Color.WHITE);
+        txt_Pw.setForeground(Color.WHITE);
     }
 
     private void setButton() {
@@ -65,14 +65,14 @@ public class LoginPage extends JFrame {
     private void componentsSize() {
         id.setBounds(330,260,160,50);
         password.setBounds(330,330,160,50);
-        txt_id.setBounds(290,280,40,20);
-        txt_pw.setBounds(290,350,40,20);
+        txt_Id.setBounds(290,280,40,20);
+        txt_Pw.setBounds(290,350,40,20);
         login.setBounds(530,270,80,80);
         signup.setBounds(630,270,80,80);
     }
 
     private void addComponents() {
-        add(id); add(password); add(txt_id); add(txt_pw); add(login); add(signup);
+        add(id); add(password); add(txt_Id); add(txt_Pw); add(login); add(signup);
         add(backgrounds.getPane());
     }
 

@@ -3,15 +3,15 @@ import javax.swing.JFrame;
 
 public class Tutorial extends JFrame {
     
-    private String tutorialpng = "image/tutorials.png";
+    private String tutorialPng = "image/tutorials.png";
     
     public Tutorial() {
         setFrame();
     }
 
     private void setFrame() {
-        Backgrounds background = new Backgrounds(tutorialpng, 299, 537);
-        add(background.getPane());
+        Wallpapers backGround = new Wallpapers(tutorialPng, 299, 537);
+        add(backGround.getPane());
         setSize(299, 537);
         setLayout(null);
         setResizable(false);

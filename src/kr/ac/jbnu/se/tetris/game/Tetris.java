@@ -15,7 +15,7 @@ public class Tetris extends JPanel {
 
     private TetrisGameManager parentManager;
 
-    final int Frame_X = 335, Frame_Y = 500, Status_X = 60, Status_Y = 30;
+    final int frame_X = 335, frame_Y = 500, status_X = 60, status_Y = 30;
 
     private boolean isComputer;
     
@@ -75,16 +75,16 @@ public class Tetris extends JPanel {
         return blockPreview;
     }
     public int frameX(){
-        return Frame_X;
+        return frame_X;
     }
     public int frameY(){
-        return Frame_Y;
+        return frame_Y;
     }
 
     // -------------------------------------- 컴포넌트 레이아웃 설정 --------------------------------------
 
     private void setTetrisLayout(boolean isComputer) {
-        setPreferredSize(new Dimension(Frame_X, Frame_Y));
+        setPreferredSize(new Dimension(frame_X, frame_Y));
         setBackground(new Color(210, 210, 210));
         setLayout(null);
 
@@ -129,8 +129,8 @@ public class Tetris extends JPanel {
         healthBar.setBounds(20, 15, board.panelWidth(), 15);
         board.setBounds(20, 40, board.panelWidth(), board.panelHeight());
         blockPreview.setBounds(35 + board.panelWidth(), 40, blockPreview.panelWidth(), blockPreview.panelHeight());
-        statusPanel.setBounds(35 + board.panelWidth(), 40 + board.panelHeight() - Status_Y, Status_X, Status_Y);
-        bombLabel.setBounds(64 + board.panelWidth(), 40 + board.panelHeight() - Status_Y - 49, 30, 30);
+        statusPanel.setBounds(35 + board.panelWidth(), 40 + board.panelHeight() - status_Y, status_X, status_Y);
+        bombLabel.setBounds(64 + board.panelWidth(), 40 + board.panelHeight() - status_Y - 49, 30, 30);
     }
 
     private void addComponent(boolean isComputer){
@@ -146,7 +146,7 @@ public class Tetris extends JPanel {
         super.paint(g);
         if(!isComputer) { // 플레이어 패널만 폭탄 아이콘 생성
             BlockImage image = new BlockImage(Tetrominoes.BombBlock);
-            g.drawImage(image.getImage(), 32 + board.panelWidth(), 40 + board.panelHeight() - Status_Y - 52, 
+            g.drawImage(image.getImage(), 32 + board.panelWidth(), 40 + board.panelHeight() - status_Y - 52,
                         30, 30, null);
         }
     }

@@ -10,45 +10,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="df31b2e9-4dad-4417-a805-ed9e6604b83a" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Tetris/kr/ac/jbnu/se/tetris/Backgrounds$BackG.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Tetris/kr/ac/jbnu/se/tetris/Backgrounds$BackG.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Tetris/kr/ac/jbnu/se/tetris/Backgrounds.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Tetris/kr/ac/jbnu/se/tetris/Backgrounds.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Tetris/kr/ac/jbnu/se/tetris/BlockImage.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Tetris/kr/ac/jbnu/se/tetris/BlockImage.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Tetris/kr/ac/jbnu/se/tetris/BlockPreview.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Tetris/kr/ac/jbnu/se/tetris/BlockPreview.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Tetris/kr/ac/jbnu/se/tetris/Board.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Tetris/kr/ac/jbnu/se/tetris/Board.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Tetris/kr/ac/jbnu/se/tetris/BoardAI.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Tetris/kr/ac/jbnu/se/tetris/BoardAI.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Tetris/kr/ac/jbnu/se/tetris/BoardPlayer.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Tetris/kr/ac/jbnu/se/tetris/BoardPlayer.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Tetris/kr/ac/jbnu/se/tetris/MaxScorePanel.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Tetris/kr/ac/jbnu/se/tetris/MaxScorePanel.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Tetris/kr/ac/jbnu/se/tetris/Music.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Tetris/kr/ac/jbnu/se/tetris/Music.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Tetris/kr/ac/jbnu/se/tetris/Select$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Tetris/kr/ac/jbnu/se/tetris/Select$2.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Tetris/kr/ac/jbnu/se/tetris/Select$3.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Tetris/kr/ac/jbnu/se/tetris/Select$4.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Tetris/kr/ac/jbnu/se/tetris/Select.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Tetris/kr/ac/jbnu/se/tetris/Select.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Tetris/kr/ac/jbnu/se/tetris/SelectLevel$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Tetris/kr/ac/jbnu/se/tetris/SelectLevel$2.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Tetris/kr/ac/jbnu/se/tetris/SelectLevel.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Tetris/kr/ac/jbnu/se/tetris/SelectLevel.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Tetris/kr/ac/jbnu/se/tetris/Shape.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Tetris/kr/ac/jbnu/se/tetris/Shape.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Tetris/kr/ac/jbnu/se/tetris/Tetris$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Tetris/kr/ac/jbnu/se/tetris/Tetris$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Tetris/kr/ac/jbnu/se/tetris/Tetris.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Tetris/kr/ac/jbnu/se/tetris/Tetris.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Tetris/kr/ac/jbnu/se/tetris/TetrisAI.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Tetris/kr/ac/jbnu/se/tetris/TetrisAI.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Tetris/kr/ac/jbnu/se/tetris/TetrisGameManager$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Tetris/kr/ac/jbnu/se/tetris/TetrisGameManager$2.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Tetris/kr/ac/jbnu/se/tetris/TetrisGameManager$3.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Tetris/kr/ac/jbnu/se/tetris/TetrisGameManager$4.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Tetris/kr/ac/jbnu/se/tetris/TetrisGameManager$5.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Tetris/kr/ac/jbnu/se/tetris/TetrisGameManager$PlayerKeyListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Tetris/kr/ac/jbnu/se/tetris/TetrisGameManager$PlayerKeyListener.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Tetris/kr/ac/jbnu/se/tetris/TetrisGameManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Tetris/kr/ac/jbnu/se/tetris/TetrisGameManager.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Tetris/kr/ac/jbnu/se/tetris/TimerPanel$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Tetris/kr/ac/jbnu/se/tetris/TimerPanel$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Tetris/kr/ac/jbnu/se/tetris/TimerPanel.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Tetris/kr/ac/jbnu/se/tetris/TimerPanel.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/kr/ac/jbnu/se/tetris/Board.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/kr/ac/jbnu/se/tetris/Board.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/kr/ac/jbnu/se/tetris/ComPareID.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/kr/ac/jbnu/se/tetris/ComPareID.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/kr/ac/jbnu/se/tetris/LoginPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/kr/ac/jbnu/se/tetris/LoginPage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/kr/ac/jbnu/se/tetris/SelectLevel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/kr/ac/jbnu/se/tetris/SelectLevel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/kr/ac/jbnu/se/tetris/TetrisGameManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/kr/ac/jbnu/se/tetris/TetrisGameManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/kr/ac/jbnu/se/tetris/TimerPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/kr/ac/jbnu/se/tetris/TimerPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/kr/ac/jbnu/se/tetris/Tutorial.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/kr/ac/jbnu/se/tetris/Tutorial.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -62,7 +24,7 @@
     <option name="stateVersion" value="1" />
   </component>
   <component name="ProblemsViewState">
-    <option name="selectedTabId" value="DEPENDENCY_CHECKER_PROBLEMS_TAB" />
+    <option name="selectedTabId" value="CurrentFile" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 2
@@ -72,30 +34,34 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/kkh1535/myCode/code/Tetris&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Artifacts&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "master",
+    "jdk.selected.JAVA_MODULE": "11",
+    "last_opened_file_path": "/Users/jeonjeonghyeon/Java_Swing_Tetris",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "onboarding.tips.debug.path": "/Users/jeonjeonghyeon/Java_Swing_Tetris/src/Main.java",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "run.code.analysis.last.selected.profile": "pProject Default",
+    "settings.editor.selected.configurable": "reference.projectsettings.compiler.javacompiler",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RunManager">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="ALTERNATIVE_JRE_PATH" value="1.8" />
       <option name="MAIN_CLASS_NAME" value="kr.ac.jbnu.se.tetris.Main" />
-      <module name="Tetris" />
+      <module name="Java_Swing_Tetris" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="kr.ac.jbnu.se.tetris.*" />
@@ -127,10 +93,17 @@
       <workItem from="1700113915206" duration="604000" />
       <workItem from="1700115556610" duration="142000" />
       <workItem from="1700526117264" duration="4304000" />
+      <workItem from="1700997689243" duration="10000" />
+      <workItem from="1700997706383" duration="484000" />
+      <workItem from="1700998199616" duration="1106000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
 </project>

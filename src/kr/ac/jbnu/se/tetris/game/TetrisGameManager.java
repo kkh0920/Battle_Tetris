@@ -25,9 +25,9 @@ public class TetrisGameManager extends JFrame {
     
     public static int level = 0;
 
-    public static int p2_up = 'w', p2_down = 's', p2_left = 'a', p2_right = 'd',
-                        p2_up_upper = 'W', p2_down_upper = 'S', p2_left_upper = 'A', p2_right_upper = 'D',
-                        p2_dropDown = KeyEvent.VK_SHIFT;
+    public static int p2_Up = 'w', p2_Down = 's', p2_Left = 'a', p2_Right = 'd',
+                        p2_Up_Upper = 'W', p2_Down_Upper = 'S', p2_Left_Upper = 'A', p2_Right_Upper = 'D',
+                        p2_Dropdown = KeyEvent.VK_SHIFT;
 
     private boolean isPaused = false;
     private boolean isComputer;
@@ -227,21 +227,21 @@ public class TetrisGameManager extends JFrame {
             if(p2CurPiece.getShape() == Tetrominoes.NoShape)
                 return;
 
-            if (keycode == p2_left || keycode == p2_left_upper) {
+            if (keycode == p2_Left || keycode == p2_Left_Upper) {
                 p2Board.move(p2CurPiece, p2CurPiece.curX() - 1, p2CurPiece.curY());
             }
-            if (keycode == p2_right || keycode == p2_right_upper) {
+            if (keycode == p2_Right || keycode == p2_Right_Upper) {
                 p2Board.move(p2CurPiece, p2CurPiece.curX() + 1, p2CurPiece.curY());
             }     
-            if (keycode == p2_up || keycode == p2_up_upper) {
+            if (keycode == p2_Up || keycode == p2_Up_Upper) {
                 Shape leftRotated = p2CurPiece.rotateLeft();
                 p2Board.move(leftRotated, p2CurPiece.curX(), p2CurPiece.curY());
             }
-            if (keycode == p2_down || keycode == p2_down_upper) {
+            if (keycode == p2_Down || keycode == p2_Down_Upper) {
                 Shape rightRotated = p2CurPiece.rotateRight();
                 p2Board.move(rightRotated, p2CurPiece.curX(), p2CurPiece.curY());
             }
-            if (keycode == p2_dropDown) {
+            if (keycode == p2_Dropdown) {
                 p2Board.dropDown();
             }
             if (keycode == KeyEvent.VK_CONTROL) {
