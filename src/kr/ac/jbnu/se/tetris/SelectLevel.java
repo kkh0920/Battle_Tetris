@@ -1,8 +1,5 @@
 package kr.ac.jbnu.se.tetris;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -13,7 +10,8 @@ public class SelectLevel extends JFrame {
 
     private final int LevelNumber = 5;
 
-    private final int Bt_W = 120, Bt_H = 35;
+    private int btnWidth = 120;
+    private int btnHeight = 35;
 
     private JButton[] level;
 
@@ -55,7 +53,7 @@ public class SelectLevel extends JFrame {
 
     private void setButton() {
         for(int i = 0; i < LevelNumber; i++){
-            level[i].setBounds(10 + (30 * (i + 1)) + i * Bt_W, Select.Frame_Y - 150, Bt_W, Bt_H);
+            level[i].setBounds(10 + (30 * (i + 1)) + i * btnWidth, Select.Frame_Y - 150, btnWidth, btnHeight);
             setButtonBorder(level[i]);
         }
         backselect.setBounds(20, 20, 70, 58);
@@ -74,27 +72,19 @@ public class SelectLevel extends JFrame {
     private void addButtonAction() {
         for(int i = 0; i < LevelNumber; i++) {
             int index = i;
-            level[index].addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    setVisible(false);
+            level[index].addActionListener(e->{
+                dispose();
                     
-                    TetrisGameManager.level = index + 1; // level 설정
-
-                    BoardAI.moveDelay = 160 - TetrisGameManager.level * 20;  // level에 따른 ai 속도 조정
-                    
-                    TetrisGameManager game = new TetrisGameManager(home);
-                    game.setVisible(true);
-                    game.start(true); 
-                }
+                TetrisGameManager.level = index + 1; // level 설정
+                BoardAI.moveDelay = 160 - TetrisGameManager.level * 20;  // level에 따른 ai 속도 조정
+                
+                TetrisGameManager game = new TetrisGameManager();
+                game.start(true);
             });
         }
-        backselect.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                setVisible(false);
-                home.setVisible(true);
-            }
+        backselect.addActionListener(e->{
+            dispose();
+            home.setVisible(true);
         });
     }   
 }

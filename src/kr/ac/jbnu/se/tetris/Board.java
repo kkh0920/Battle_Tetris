@@ -75,7 +75,7 @@ public class Board extends JPanel {
 
         TetrisGameManager manager = player.parentTetris.gameManager();
 
-        if(manager.opponentIsComputer()) { // AI 대전이면서, 플레이어의 점수만 갱신
+        if(manager.isComputer()) { // AI 대전이면서, 플레이어의 점수만 갱신
             MaxScorePanel maxScorePanel = manager.getMaxScorePanel();
 
             int prevMaxScore = maxScorePanel.getMaxScore();
@@ -373,6 +373,7 @@ public class Board extends JPanel {
             drawSquare(g, x * squareWidth(), boardTop + (BoardHeight - y - 1) * squareHeight(), curPiece.getShape());
         }
     }
+
     private void paintShadow(Graphics g, int boardTop) {
         if(curPiece.getShape() == Tetrominoes.NoShape)
             return;

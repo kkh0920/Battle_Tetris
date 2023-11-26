@@ -1,23 +1,25 @@
 package kr.ac.jbnu.se.tetris;
 
-import javax.sound.sampled.LineUnavailableException;
-import javax.sound.sampled.UnsupportedAudioFileException;
-import java.io.IOException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class ComPareID{
+    
     private ServerSetting serverSetting;
+    
     private PreparedStatement readQuery;
+    
     private ResultSet matchQuery;
+    
     public static boolean visible = true;
-    ComPareID(String id, String pw) throws SQLException, UnsupportedAudioFileException, LineUnavailableException, IOException {
+
+    ComPareID(String id, String pw) throws SQLException {
         super();
-        Login(id,pw);
+        login(id,pw);
     }
 
-    public void Login(String id, String pw) throws SQLException, UnsupportedAudioFileException, LineUnavailableException, IOException {
+    public void login(String id, String pw) throws SQLException {
         serverSetting = new ServerSetting();
 
         serverSetting.connectMysql();

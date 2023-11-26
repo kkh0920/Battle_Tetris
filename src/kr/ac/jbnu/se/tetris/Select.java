@@ -24,7 +24,7 @@ public class Select extends JFrame {
     private JButton settingBtn;
     private JButton tutorialBtn;
 
-    Select() {
+    public Select() {
         setFrame();
 
         selectLevel = new SelectLevel(this);
@@ -84,18 +84,16 @@ public class Select extends JFrame {
         Select select = this;
 
         ai.addActionListener(e->{
-            setVisible(false);
+            dispose();
             selectLevel.setVisible(true);
         });
 
         versus.addActionListener(e->{
-            setVisible(false);
+            dispose();
 
             TetrisGameManager.level = 0; // 플레이어 대전인 경우 0 레벨 설정
-            
-            TetrisGameManager game = new TetrisGameManager(select);
+            TetrisGameManager game = new TetrisGameManager();
             game.start(false);
-            game.setVisible(true);
         });
 
         settingBtn.addActionListener(e->{

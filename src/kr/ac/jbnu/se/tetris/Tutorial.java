@@ -3,10 +3,6 @@ import javax.swing.JFrame;
 
 public class Tutorial extends JFrame {
     
-    private final int tutorial_Frame_X = 299, tutorial_Frame_Y = 537;
-
-    private Backgrounds background;
-    
     private String tutorialpng = "image/tutorials.png";
     
     Tutorial() {
@@ -14,9 +10,9 @@ public class Tutorial extends JFrame {
     }
 
     private void setFrame() {
-        background = new Backgrounds(tutorialpng, tutorial_Frame_X, tutorial_Frame_Y);
+        Backgrounds background = new Backgrounds(tutorialpng, 299, 537);
         add(background.getPane());
-        setSize(tutorial_Frame_X, tutorial_Frame_Y);
+        setSize(299, 537);
         setLayout(null);
         setResizable(false);
         setLocationRelativeTo(null);
