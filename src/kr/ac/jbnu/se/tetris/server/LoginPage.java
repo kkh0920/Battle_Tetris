@@ -2,7 +2,7 @@ package kr.ac.jbnu.se.tetris.server;
 
 import javax.swing.*;
 
-import kr.ac.jbnu.se.tetris.ui.Backgrounds;
+import kr.ac.jbnu.se.tetris.ui.Wallpapers;
 import kr.ac.jbnu.se.tetris.ui.CustomButton;
 
 import java.awt.*;
@@ -10,7 +10,7 @@ import java.sql.SQLException;
 
 public class LoginPage extends JFrame {
 
-    private Backgrounds backgrounds;
+    private Wallpapers backgrounds;
     private JTextField id; // 20글자만 입력 가능
     private JPasswordField password; // 50글자만 입력 가능
     private JLabel txt_id, txt_pw;
@@ -42,7 +42,7 @@ public class LoginPage extends JFrame {
     }
 
     public void setBackgrounds() {
-        backgrounds = new Backgrounds("image/Background.jpg",x,y);
+        backgrounds = new Wallpapers("image/Background.jpg",x,y);
     }
 
     private void setText() {

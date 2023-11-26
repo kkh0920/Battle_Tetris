@@ -7,13 +7,13 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
-public class Backgrounds extends JFrame {
+public class Wallpapers extends JFrame {
 
     private transient BufferedImage image = null;
     
     private JLayeredPane layeredPane = new JLayeredPane();
     
-    public Backgrounds(String image, int x, int y) {
+    public Wallpapers(String image, int x, int y) {
         drawBackGround(image, x, y);
     }
 

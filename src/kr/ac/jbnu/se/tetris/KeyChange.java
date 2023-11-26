@@ -1,24 +1,25 @@
-package kr.ac.jbnu.se.tetris.ui;
-
-import javax.swing.*;
-
+package kr.ac.jbnu.se.tetris;
 import kr.ac.jbnu.se.tetris.game.TetrisGameManager;
 
+import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class KeyChange extends JFrame implements ActionListener { 
+public class KeyChange extends JFrame implements ActionListener {
 
+    private static final int
+            bt_Size = 30, txf_Width = 100, txf_Height = 30, frame_Size = 450,
+            txf_X = 140, bt_X = 260;
     private String up, down, left, right, dropdown;
-    
+
     private char invert1, invert2, invert3, invert4, invert5;
-    
+
     private JTextField up_in, down_in, left_in, right_in, dropdown_in;
-    
+
     private TextArea explain;
-    
-    private CustomButton bt1, bt2, bt3, bt4, bt5, exit;
+
+    private JButton bt1, bt2, bt3, bt4, bt5, exit;
 
     KeyChange() {
         setFrame();
@@ -28,7 +29,7 @@ public class KeyChange extends JFrame implements ActionListener {
         setTextfield();
         setButton();
         addComponent();
-        setSize(450,450);
+        setSize(frame_Size,frame_Size);
         setLocationRelativeTo(null);
         setLayout(null);
     }
@@ -51,11 +52,11 @@ public class KeyChange extends JFrame implements ActionListener {
 
     public void setTextfield() {
         addTextField();
-        up_in.setBounds(140,80,100,30);
-        down_in.setBounds(140,130,100,30);
-        left_in.setBounds(140,180,100,30);
-        right_in.setBounds(140,230,100,30);
-        dropdown_in.setBounds(140,280,100,30);
+        up_in.setBounds(txf_X,80,txf_Width,txf_Height);
+        down_in.setBounds(txf_X,130,txf_Width,txf_Height);
+        left_in.setBounds(txf_X,180,txf_Width,txf_Height);
+        right_in.setBounds(txf_X,230,txf_Width,txf_Height);
+        dropdown_in.setBounds(txf_X,280,txf_Width,txf_Height);
         explain.setBounds(0,320,450,450);
         textFieldAction();
     }
@@ -69,22 +70,22 @@ public class KeyChange extends JFrame implements ActionListener {
     }
 
     public void addButton() {
-        bt1 = new CustomButton();
-        bt2 = new CustomButton();
-        bt3 = new CustomButton();
-        bt4 = new CustomButton();
-        bt5 = new CustomButton();
-        exit = new CustomButton("종료");
+        bt1 = new JButton();
+        bt2 = new JButton();
+        bt3 = new JButton();
+        bt4 = new JButton();
+        bt5 = new JButton();
+        exit = new JButton("종료");
     }
 
     public void setButton() {
         addButton();
-        bt1.setBounds(260,80,30,30);
-        bt2.setBounds(260,130,30,30);
-        bt3.setBounds(260,180,30,30);
-        bt4.setBounds(260,230,30,30);
-        bt5.setBounds(260,280,30,30);
-        exit.setBounds(0,0,60,30);
+        bt1.setBounds(bt_X,80,bt_Size,bt_Size);
+        bt2.setBounds(bt_X,130,bt_Size,bt_Size);
+        bt3.setBounds(bt_X,180,bt_Size,bt_Size);
+        bt4.setBounds(bt_X,230,bt_Size,bt_Size);
+        bt5.setBounds(bt_X,280,bt_Size,bt_Size);
+        exit.setBounds(0,0,bt_Size+30,bt_Size);
         addAction();
     }
 
@@ -104,46 +105,46 @@ public class KeyChange extends JFrame implements ActionListener {
         if(e.getSource() == bt1) {
             invert1 = up.charAt(0);
             TetrisGameManager.p2_up = invert1;
-            
+
             invert1 = Character.toUpperCase(invert1);
             TetrisGameManager.p2_up_upper = invert1;
-            
+
             JOptionPane.showMessageDialog(null, "UP, 변경된 키 : " + invert1);
         }
         else if(e.getSource() == bt2) {
             invert2 = down.charAt(0);
             TetrisGameManager.p2_down = invert2;
-            
+
             invert2 = Character.toUpperCase(invert2);
             TetrisGameManager.p2_down_upper = invert2;
-            
+
             JOptionPane.showMessageDialog(null, "DOWN, 현재 변경된 키 : " + invert2);
         }
         else if(e.getSource() == bt3) {
             invert3 = left.charAt(0);
             TetrisGameManager.p2_left = invert3;
-            
+
             invert3 = Character.toUpperCase(invert3);
             TetrisGameManager.p2_left_upper = invert3;
-            
+
             JOptionPane.showMessageDialog(null, "LEFT, 현재 변경된 키 : " + invert3);
         }
         else if(e.getSource() == bt4) {
             invert4 = right.charAt(0);
             TetrisGameManager.p2_right = invert4;
-            
+
             invert4 = Character.toUpperCase(invert4);
             TetrisGameManager.p2_right_upper = invert4;
-            
+
             JOptionPane.showMessageDialog(null, "RIGHT, 현재 변경된 키 : " + invert4);
         }
         else if(e.getSource() == bt5) {
             invert5 = dropdown.charAt(0);
             TetrisGameManager.p2_dropDown = invert5;
-            
+
             invert5 = Character.toUpperCase(invert5);
             TetrisGameManager.p2_dropDown = invert5;
-            
+
             JOptionPane.showMessageDialog(null, "DROPDOWN, 현재 변경된 키 : " + invert5);
         }
         else if(e.getSource() == exit){

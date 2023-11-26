@@ -10,7 +10,7 @@ public class Tutorial extends JFrame {
     }
 
     private void setFrame() {
-        Backgrounds background = new Backgrounds(tutorialpng, 299, 537);
+        Wallpapers background = new Wallpapers(tutorialpng, 299, 537);
         add(background.getPane());
         setSize(299, 537);
         setLayout(null);
