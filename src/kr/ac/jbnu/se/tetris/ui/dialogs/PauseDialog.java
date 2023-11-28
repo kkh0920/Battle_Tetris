@@ -9,15 +9,15 @@ import kr.ac.jbnu.se.tetris.ui.Select;
 
 public class PauseDialog extends JDialog {
 
-    TetrisGameManager manager;
+    private TetrisGameManager manager;
 
-    JLabel pauseText = new JLabel("일시 정지");
+    private JLabel pauseText = new JLabel("일시 정지");
 
-    CustomButton resumeBtn = new CustomButton("계속하기");
+    private CustomButton resumeBtn = new CustomButton("계속하기");
     
-    CustomButton retryBtn = new CustomButton("재시작");
+    private CustomButton retryBtn = new CustomButton("재시작");
     
-    CustomButton homeBtn = new CustomButton("메인화면");
+    private CustomButton homeBtn = new CustomButton("메인화면");
 
     public PauseDialog(TetrisGameManager ownerFrame){
         super(ownerFrame, true);

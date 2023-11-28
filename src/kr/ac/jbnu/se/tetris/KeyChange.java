@@ -1,5 +1,6 @@
 package kr.ac.jbnu.se.tetris;
 import kr.ac.jbnu.se.tetris.game.TetrisGameManager;
+import kr.ac.jbnu.se.tetris.ui.CustomButton;
 
 import javax.swing.*;
 import java.awt.*;
@@ -19,13 +20,13 @@ public class KeyChange extends JFrame implements ActionListener {
 
     private TextArea explain;
 
-    private JButton bt1, bt2, bt3, bt4, bt5, exit;
+    private CustomButton bt1, bt2, bt3, bt4, bt5, exit;
 
     public KeyChange() {
         setFrame();
     }
 
-    public void setFrame() {
+    private void setFrame() {
         setTextfield();
         setButton();
         addComponent();
@@ -34,13 +35,13 @@ public class KeyChange extends JFrame implements ActionListener {
         setLayout(null);
     }
 
-    public void addComponent() {
+    private void addComponent() {
         add(up_in); add(down_in); add(left_in); add(right_in); add(dropdown_in);
         add(bt1); add(bt2); add(bt3); add(bt4); add(bt5); add(exit);
         add(explain);
     }
 
-    public void addTextField() {
+    private void addTextField() {
         up_in = new JTextField();
         down_in = new JTextField();
         left_in = new JTextField();
@@ -50,7 +51,7 @@ public class KeyChange extends JFrame implements ActionListener {
                 "\nESC,SHIFT등 Function Key는 입력이 불가능합니다.\n 그리고 소문자만 입력 가능합니다.");
     }
 
-    public void setTextfield() {
+    private void setTextfield() {
         addTextField();
         up_in.setBounds(txf_X,80,txf_Width,txf_Height);
         down_in.setBounds(txf_X,130,txf_Width,txf_Height);
@@ -61,7 +62,7 @@ public class KeyChange extends JFrame implements ActionListener {
         textFieldAction();
     }
 
-    public void textFieldAction() {
+    private void textFieldAction() {
         up = up_in.getText();
         down = down_in.getText();
         left = left_in.getText();
@@ -69,16 +70,16 @@ public class KeyChange extends JFrame implements ActionListener {
         dropdown = dropdown_in.getText();
     }
 
-    public void addButton() {
-        bt1 = new JButton();
-        bt2 = new JButton();
-        bt3 = new JButton();
-        bt4 = new JButton();
-        bt5 = new JButton();
-        exit = new JButton("종료");
+    private void addButton() {
+        bt1 = new CustomButton();
+        bt2 = new CustomButton();
+        bt3 = new CustomButton();
+        bt4 = new CustomButton();
+        bt5 = new CustomButton();
+        exit = new CustomButton("종료");
     }
 
-    public void setButton() {
+    private void setButton() {
         addButton();
         bt1.setBounds(bt_X,80,bt_Size,bt_Size);
         bt2.setBounds(bt_X,130,bt_Size,bt_Size);
@@ -89,7 +90,7 @@ public class KeyChange extends JFrame implements ActionListener {
         addAction();
     }
 
-    public void addAction() {
+    private void addAction() {
         bt1.addActionListener(this);
         bt2.addActionListener(this);
         bt3.addActionListener(this);

@@ -1,6 +1,5 @@
 package kr.ac.jbnu.se.tetris.ui.dialogs;
 
-import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 
@@ -10,13 +9,13 @@ import kr.ac.jbnu.se.tetris.ui.Select;
 
 public class GameOverDialog extends JDialog {
 
-    TetrisGameManager manager;
+    private TetrisGameManager manager;
     
-    JLabel gameOverText = new JLabel("게임 종료!");
+    private JLabel gameOverText = new JLabel("게임 종료!");
 
-    CustomButton retryBtn = new CustomButton("재시작");
+    private CustomButton retryBtn = new CustomButton("재시작");
     
-    CustomButton homeBtn = new CustomButton("메인화면");
+    private CustomButton homeBtn = new CustomButton("메인화면");
 
     public GameOverDialog(TetrisGameManager ownerFrame) {
         super(ownerFrame, true);

@@ -42,13 +42,21 @@ public class Tetris extends JPanel {
         setTetrisLayout(isComputer);
     }
 
-    // -------------------------------------- 아이템 --------------------------------------
-
-    public void acquireBomb() { // 폭탄 획득
+    
+    /**
+     * 폭탄 개수를 1 카운트하는 메소드
+     */
+    public void acquireBomb() {
         String bomb = Integer.toString(++bombCount);
         bombLabel.setText("X " + bomb);
     }
-    public void useBomb() { // 폭탄 사용
+
+    /**
+     * 폭탄을 사용하는 메소드
+     * 
+     * 폭탄 개수를 1 줄이고, 다음에 올 블록을 폭탄 아이템으로 변경한다.
+     */
+    public void useBomb() {
         if(bombCount > 0) {
             String bomb = Integer.toString(--bombCount);
             bombLabel.setText("X " + bomb);

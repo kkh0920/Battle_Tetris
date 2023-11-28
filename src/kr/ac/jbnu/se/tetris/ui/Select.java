@@ -38,7 +38,7 @@ public class Select extends JFrame {
         return music;
     }
 
-    public void setFrame() {
+    private void setFrame() {
         int frameWidth = 800;
         int frameHeight = 453;
 
@@ -55,7 +55,7 @@ public class Select extends JFrame {
         add(wallpaper.getPane());
     }
 
-    public void setButton() {
+    private void setButton() {
         int btnWidth = 172;
         int btnHeight = 50;
 
@@ -76,7 +76,7 @@ public class Select extends JFrame {
         buttonAction();
     }
 
-    public void buttonAction() {
+    private void buttonAction() {
         ai.addActionListener(e->{
             dispose();
             selectLevel.setVisible(true);

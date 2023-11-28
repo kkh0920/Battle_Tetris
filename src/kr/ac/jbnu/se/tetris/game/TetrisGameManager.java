@@ -118,6 +118,9 @@ public class TetrisGameManager extends JFrame {
         pauseDialog.setVisible(isPaused);
     }
 
+    /**
+     * 기본 프레임 세팅
+     */
     private void setFrame() {
         setTitle("Tetris");
         setSize(750, 620);
@@ -141,8 +144,11 @@ public class TetrisGameManager extends JFrame {
         add(player2Panel);
     }
     
+    /**
+     * 이미지 페인트
+     */
     @Override
-    public void paint(Graphics g) { // 이미지 페인트
+    public void paint(Graphics g) {
         super.paint(g);
         
         if(!isComputer)
@@ -180,8 +186,13 @@ public class TetrisGameManager extends JFrame {
             p1KeyInput(keycode, p1Board);
             p2KeyInput(keycode, p2Board);
         }
-
-        // 플레이어 1 키입력
+        
+        /**
+         * Player 1 (GUI 화면 상 왼쪽) 의 키 입력을 처리하는 메소드
+         * 
+         * @param keycode 입력된 키
+         * @param p1Board Player 1 의 보드
+         */
         private void p1KeyInput(int keycode, Board p1Board){
             Shape p1CurPiece = p1Board.getCurPiece();
 
@@ -218,7 +229,12 @@ public class TetrisGameManager extends JFrame {
             }
         }
 
-        // 플레이어 2 키입력
+        /**
+         * Player 2 (GUI 화면 상 오른쪽) 의 키 입력을 처리하는 메소드
+         * 
+         * @param keycode 입력된 키
+         * @param p1Board Player 2 의 보드
+         */
         private void p2KeyInput(int keycode, Board p2Board){
             if(isComputer)
                 return;

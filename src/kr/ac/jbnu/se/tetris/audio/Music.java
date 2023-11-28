@@ -24,7 +24,7 @@ public class Music {
             e.printStackTrace();
         }
     }
-
+    
     public void setVolume(float volume){
         if(clip != null){
             if (volume < 0f) volume = 0f;

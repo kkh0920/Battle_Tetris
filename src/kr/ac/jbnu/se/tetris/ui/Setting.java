@@ -15,7 +15,7 @@ public class Setting extends JFrame {
 
     private KeyChange keyChange;
 
-    Setting(Select home) {
+    public Setting(Select home) {
         this.home = home;
         keyChange = new KeyChange();
         setFrame();
