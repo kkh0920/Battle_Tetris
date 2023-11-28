@@ -1,6 +1,5 @@
 package kr.ac.jbnu.se.tetris.ui;
 
-import kr.ac.jbnu.se.tetris.KeyChange;
 import kr.ac.jbnu.se.tetris.ResourcePath;
 
 import javax.swing.*;

@@ -1,6 +1,5 @@
-package kr.ac.jbnu.se.tetris;
+package kr.ac.jbnu.se.tetris.ui;
 import kr.ac.jbnu.se.tetris.game.TetrisGameManager;
-import kr.ac.jbnu.se.tetris.ui.CustomButton;
 
 import javax.swing.*;
 import java.awt.*;

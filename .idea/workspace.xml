@@ -9,11 +9,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="df31b2e9-4dad-4417-a805-ed9e6604b83a" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/kr/ac/jbnu/se/tetris/ai/TetrisAI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/kr/ac/jbnu/se/tetris/ai/TetrisAI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/kr/ac/jbnu/se/tetris/game/TetrisGameManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/kr/ac/jbnu/se/tetris/game/TetrisGameManager.java" afterDir="false" />
-    </list>
+    <list default="true" id="df31b2e9-4dad-4417-a805-ed9e6604b83a" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -98,7 +94,7 @@
       <workItem from="1701060790802" duration="100000" />
       <workItem from="1701061055647" duration="5477000" />
       <workItem from="1701136844891" duration="517000" />
-      <workItem from="1701144696100" duration="2877000" />
+      <workItem from="1701144696100" duration="3087000" />
     </task>
     <servers />
   </component>
