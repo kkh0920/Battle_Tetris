@@ -9,9 +9,10 @@ import kr.ac.jbnu.se.tetris.game.Tetris;
 
 public class BoardPlayer extends Board implements ActionListener {
 
-    public static int moveDelay = 500;
+    private int moveDelay = 500;
 
-    private final int bombCutlineScore = 10;
+    private int bombCutlineScore = 10;
+    
     private int cutlineCheck;
 
     public BoardPlayer(Tetris parent) {
