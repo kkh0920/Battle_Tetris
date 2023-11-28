@@ -233,7 +233,7 @@ public class TetrisGameManager extends JFrame {
          * Player 2 (GUI 화면 상 오른쪽) 의 키 입력을 처리하는 메소드
          * 
          * @param keycode 입력된 키
-         * @param p1Board Player 2 의 보드
+         * @param p2Board Player 2 의 보드
          */
         private void p2KeyInput(int keycode, Board p2Board){
             if(isComputer)
