@@ -82,7 +82,6 @@ public class LoginPage extends JFrame {
             String cmp_pw = password.getText();
             try {
                 ComPareID comPareID = new ComPareID(cmp_id, cmp_pw);
-                if(!ComPareID.visible) setVisible(false);
             } catch (SQLException ex) {
                 throw new RuntimeException(ex);
             }

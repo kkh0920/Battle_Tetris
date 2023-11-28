@@ -13,8 +13,6 @@ public class ComPareID{
     private PreparedStatement readQuery;
     
     private ResultSet matchQuery;
-    
-    public static boolean visible = true;
 
     ComPareID(String id, String pw) throws SQLException {
         super();
@@ -37,7 +35,6 @@ public class ComPareID{
             if (matchQuery.getString(SqlTable.USER_ID.ordinal()).contentEquals(pw)) {
                 Select home = new Select();
                 home.setVisible(true);
-                visible = false;
             }
             } catch (SQLException e) {
                 throw new RuntimeException(e);
