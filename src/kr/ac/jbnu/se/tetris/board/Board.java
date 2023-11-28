@@ -293,7 +293,11 @@ public class Board extends JPanel {
         pieceDropped();
     }
 
-    private void pieceDropped() { // 블록이 완전히 떨어지면, 해당 블록을 board에 그리는 식
+    /**
+     * 블록이 완전히 떨어지면, 해당 블록을 board에 배치하고
+     * 떨어진 블록이 폭탄인 경우 bombBlock 메소드 수행
+     */
+    private void pieceDropped() {
         for (int i = 0; i < 4; ++i) {
             int x = curPiece.curX() + curPiece.x(i);
             int y = curPiece.curY() - curPiece.y(i);
@@ -309,7 +313,10 @@ public class Board extends JPanel {
         removeFullLines();
     }
 
-    private void removeFullLines() { // 한 줄 제거 가능 여부 탐색(점수 획득)
+    /**
+     * pieceDropped 이후 제거할 라인이 있는지 탐색한다.
+     */
+    private void removeFullLines() { 
         int numFullLines = 0;
         for (int i = boardHeight - 1; i >= 0; --i) {
             boolean lineIsFull = true;
