@@ -34,6 +34,9 @@ public class BlockPreview extends JPanel {
         return panelHeight / previewBoardHeight;
     }
 
+    /**
+     * Next 블록 배열을 초기화 한다.
+     */
     private void initNextPiece(){
         for(int i = 0; i < previewBoardHeight; i++){
             for(int j = 0; j < previewBoardWidth; j++){
@@ -42,6 +45,10 @@ public class BlockPreview extends JPanel {
         }
     }
 
+    /**
+     * Next 블록 배열을 설정한다.
+     * @param piece 패널에 보여줄 블록 모양
+     */
     public void setNextPiece(Shape piece){
         initNextPiece();
         this.piece = piece;
@@ -56,13 +63,10 @@ public class BlockPreview extends JPanel {
     @Override
     public void paint(Graphics g) {
         super.paint(g);
-
-        int boardTop = panelHeight - previewBoardHeight * squareHeight();
-
         for(int i = 0; i < previewBoardHeight; i++){
             for(int j = 0; j < previewBoardWidth; j++){
                 if(nextPiece[i][j] != Tetrominoes.NO_SHAPE){
-                    drawSquare(g, 0 + j * squareWidth(), boardTop + i * squareHeight(), piece.getShape());
+                    drawSquare(g, 0 + j * squareWidth(), i * squareHeight(), piece.getShape());
                 }
             }
         }
