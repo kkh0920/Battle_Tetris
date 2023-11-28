@@ -2,6 +2,7 @@ package kr.ac.jbnu.se.tetris.ui;
 
 import javax.swing.*;
 
+import kr.ac.jbnu.se.tetris.ResourcePath;
 import kr.ac.jbnu.se.tetris.audio.Music;
 import kr.ac.jbnu.se.tetris.game.TetrisGameManager;
 
@@ -47,7 +48,7 @@ public class Select extends JFrame {
         setLocationRelativeTo(null);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
 
-        wallpaper = new Wallpapers("image/Background.jpg", frameWidth, frameHeight);
+        wallpaper = new Wallpapers(ResourcePath.WALL_PAPER, frameWidth, frameHeight);
         setButton();
 
         add(ai); add(versus); add(settingBtn); add(tutorialBtn);
@@ -60,16 +61,16 @@ public class Select extends JFrame {
 
         int btnY = getHeight() - 150;
 
-        ai = new CustomButton(new ImageIcon("image/buttons/AImodes.png"));
+        ai = new CustomButton(new ImageIcon(ResourcePath.BUTTON_AI_MODE));
         ai.setBounds(71, btnY, btnWidth, btnHeight);
         
-        versus = new CustomButton(new ImageIcon("image/buttons/2P_modes.png"));
+        versus = new CustomButton(new ImageIcon(ResourcePath.BUTTON_2P_MODE));
         versus.setBounds(142 + btnWidth, btnY, btnWidth, btnHeight);
 
-        settingBtn = new CustomButton(new ImageIcon("image/buttons/settings.png"));
+        settingBtn = new CustomButton(new ImageIcon(ResourcePath.BUTTON_SETTING));
         settingBtn.setBounds(213 + btnWidth * 2, btnY, btnWidth, btnHeight);
         
-        tutorialBtn = new CustomButton(new ImageIcon("image/buttons/tutorial.png"));
+        tutorialBtn = new CustomButton(new ImageIcon(ResourcePath.BUTTON_TUTORIAL));
         tutorialBtn.setBounds(getWidth() - 150, 30, 120, 35);
 
         buttonAction();

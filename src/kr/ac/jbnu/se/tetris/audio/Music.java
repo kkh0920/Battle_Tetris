@@ -1,6 +1,9 @@
 package kr.ac.jbnu.se.tetris.audio;
 
 import javax.sound.sampled.*;
+
+import kr.ac.jbnu.se.tetris.ResourcePath;
+
 import java.io.File;
 import java.io.IOException;
 
@@ -13,7 +16,7 @@ public class Music {
     }
 
     public void setMusic() {
-        File file = new File("bgm/bgm.wav");
+        File file = new File(ResourcePath.BGM);
         try {
             clip = AudioSystem.getClip();
             clip.open(AudioSystem.getAudioInputStream(file));

@@ -13,6 +13,7 @@ import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.WindowConstants;
 
+import kr.ac.jbnu.se.tetris.ResourcePath;
 import kr.ac.jbnu.se.tetris.board.Board;
 import kr.ac.jbnu.se.tetris.score.MaxScorePanel;
 import kr.ac.jbnu.se.tetris.shape.Shape;
@@ -148,7 +149,7 @@ public class TetrisGameManager extends JFrame {
             return;
 
         try {  
-            BufferedImage image = ImageIO.read(new File("image/control.png"));
+            BufferedImage image = ImageIO.read(new File(ResourcePath.KEY_INPUT_MANUAL));
             g.drawImage(image, 0, getHeight() - 30, null);
         } catch (IOException e) {
             e.printStackTrace();

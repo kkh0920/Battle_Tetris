@@ -3,6 +3,7 @@ package kr.ac.jbnu.se.tetris.ui;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 
+import kr.ac.jbnu.se.tetris.ResourcePath;
 import kr.ac.jbnu.se.tetris.board.BoardAI;
 import kr.ac.jbnu.se.tetris.game.TetrisGameManager;
 
@@ -26,12 +27,12 @@ public class SelectLevel extends JFrame {
 
         level = new CustomButton[levelNumber];
         for(int i = 1; i <= levelNumber; i++){
-            level[i - 1] = new CustomButton(new ImageIcon("image/buttons/level" + i + ".png")); // 레벨 이미지 지정 필요
+            level[i - 1] = new CustomButton(new ImageIcon(ResourcePath.BUTTON_LEVEL[i - 1]));
         }
 
-        backSelect = new CustomButton(new ImageIcon("image/buttons/back.png"));
+        backSelect = new CustomButton(new ImageIcon(ResourcePath.BUTTON_BACK));
 
-        backgrounds = new Wallpapers("image/Background.jpg", home.getWidth(), home.getHeight());
+        backgrounds = new Wallpapers(ResourcePath.WALL_PAPER, home.getWidth(), home.getHeight());
 
         setFrame();
     }

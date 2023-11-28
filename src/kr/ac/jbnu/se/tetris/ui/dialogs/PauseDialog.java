@@ -1,6 +1,5 @@
 package kr.ac.jbnu.se.tetris.ui.dialogs;
 
-import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 

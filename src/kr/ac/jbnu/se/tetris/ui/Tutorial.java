@@ -1,16 +1,16 @@
 package kr.ac.jbnu.se.tetris.ui;
 import javax.swing.JFrame;
 
+import kr.ac.jbnu.se.tetris.ResourcePath;
+
 public class Tutorial extends JFrame {
-    
-    private String tutorialPng = "image/tutorials.png";
     
     public Tutorial() {
         setFrame();
     }
 
     private void setFrame() {
-        Wallpapers backGround = new Wallpapers(tutorialPng, 299, 537);
+        Wallpapers backGround = new Wallpapers(ResourcePath.TUTORIAL, 299, 537);
         add(backGround.getPane());
         setSize(299, 537);
         setLayout(null);

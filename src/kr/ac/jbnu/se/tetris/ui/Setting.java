@@ -1,6 +1,7 @@
 package kr.ac.jbnu.se.tetris.ui;
 
 import kr.ac.jbnu.se.tetris.KeyChange;
+import kr.ac.jbnu.se.tetris.ResourcePath;
 
 import javax.swing.*;
 
@@ -27,15 +28,15 @@ public class Setting extends JFrame {
         setLocationRelativeTo(null);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
 
-        backgrounds = new Wallpapers("image/Background.jpg", home.getWidth(), home.getHeight());
+        backgrounds = new Wallpapers(ResourcePath.WALL_PAPER, home.getWidth(), home.getHeight());
         setButton();
         add(musicButton); add(changekey); add(backselect); add(backgrounds.getPane());
     }
 
     private void addButton() {
-        musicButton = new CustomButton(new ImageIcon("image/buttons/musicOn.png"));
-        changekey = new CustomButton(new ImageIcon("image/buttons/keychange.png"));
-        backselect = new CustomButton(new ImageIcon("image/buttons/back.png"));
+        musicButton = new CustomButton(new ImageIcon(ResourcePath.BUTTON_MUSIC_ON));
+        changekey = new CustomButton(new ImageIcon(ResourcePath.BUTTON_KEY_CHANGE));
+        backselect = new CustomButton(new ImageIcon(ResourcePath.BUTTON_BACK));
     }
 
     private void setButton() {
@@ -51,11 +52,11 @@ public class Setting extends JFrame {
     private void pauseMusic(){
         isMusicStarted = !isMusicStarted;
         if(isMusicStarted){
-            musicButton.setIcon(new ImageIcon("image/buttons/musicOn.png"));
+            musicButton.setIcon(new ImageIcon(ResourcePath.BUTTON_MUSIC_ON));
             home.getMusic().startMusic();
         }
         else{
-            musicButton.setIcon(new ImageIcon("image/buttons/musicOff.png"));
+            musicButton.setIcon(new ImageIcon(ResourcePath.BUTTON_MUSIC_OFF));
             home.getMusic().stopMusic();
         }
     }

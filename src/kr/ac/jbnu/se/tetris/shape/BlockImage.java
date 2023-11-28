@@ -3,8 +3,11 @@ package kr.ac.jbnu.se.tetris.shape;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.ResourceBundle;
 
 import javax.imageio.ImageIO;
+
+import kr.ac.jbnu.se.tetris.ResourcePath;
 
 public class BlockImage {
 
@@ -31,34 +34,34 @@ public class BlockImage {
         String imgPath = "";
         switch (shape) {
             case NO_SHAPE:
-                imgPath = "image/blocks/Block0.png";
+                imgPath = ResourcePath.NO_SHAPE;
                 break;
             case Z_SHAPE:
-                imgPath = "image/blocks/Block1.png";
+                imgPath = ResourcePath.Z_SHAPE;
                 break;
             case S_SHAPE:
-                imgPath = "image/blocks/Block2.png";
+                imgPath = ResourcePath.S_SHAPE;
                 break;
             case LINE_SHAPE:
-                imgPath = "image/blocks/Block3.png";
+                imgPath = ResourcePath.LINE_SHAPE;
                 break;
             case T_SHAPE:
-                imgPath = "image/blocks/Block4.png";
+                imgPath = ResourcePath.T_SHAPE;
                 break;
             case SQUARE_SHAPE:
-                imgPath = "image/blocks/Block5.png";
+                imgPath = ResourcePath.SQUARE_SHAPE;
                 break;
             case L_SHAPE:
-                imgPath = "image/blocks/Block6.png";
+                imgPath = ResourcePath.L_SHAPE;
                 break;
             case MIRRORED_L_SHAPE:
-                imgPath = "image/blocks/Block7.png";
+                imgPath = ResourcePath.MIRRORED_L_SHAPE;
                 break;
             case BOMB_BLOCK:
-                imgPath = "image/blocks/BombIcon.png";
+                imgPath = ResourcePath.BOMB_BLOCK;
                 break;
             case LOCK_BLOCK:
-                imgPath = "image/blocks/lockBlock.png";
+                imgPath = ResourcePath.LOCK_BLOCK;
                 break;
         }
         return imgPath;

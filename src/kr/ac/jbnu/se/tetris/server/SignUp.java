@@ -3,6 +3,7 @@ package kr.ac.jbnu.se.tetris.server;
 import javax.swing.*;
 
 import kr.ac.jbnu.se.tetris.ui.Wallpapers;
+import kr.ac.jbnu.se.tetris.ResourcePath;
 import kr.ac.jbnu.se.tetris.ui.CustomButton;
 
 import java.awt.*;
@@ -37,7 +38,7 @@ public class SignUp extends JFrame{
     }
 
     private void setBackgrounds() {
-        backgrounds = new Wallpapers("image/Background.jpg", LoginPage.FRAME_WIDTH, LoginPage.FRAME_HEIGHT);
+        backgrounds = new Wallpapers(ResourcePath.WALL_PAPER, LoginPage.FRAME_WIDTH, LoginPage.FRAME_HEIGHT);
     }
 
     private void setFrame() {
@@ -51,7 +52,7 @@ public class SignUp extends JFrame{
     }
 
     private void setButton() {
-        accept = new CustomButton(new ImageIcon("image/SignUp.png"));
+        accept = new CustomButton(new ImageIcon(ResourcePath.BUTTON_SIGN_UP));
         accept.setBounds(530,270,80,80);
         buttonAction();
     }
