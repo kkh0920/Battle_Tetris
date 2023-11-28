@@ -30,7 +30,7 @@ public class MaxScorePanel extends JPanel {
             return;
 
         try {
-            try(BufferedReader scoreReading = new BufferedReader(new FileReader(ResourcePath.MAX_SCORE[i]))) {
+            try(BufferedReader scoreReading = new BufferedReader(new FileReader(ResourcePath.MAX_SCORE[i - 1]))) {
                 maxScore = scoreReading.readLine();
             }
         } catch (IOException e) {
@@ -46,7 +46,7 @@ public class MaxScorePanel extends JPanel {
             return;
 
         try {
-            try(FileWriter scoreWriter = new FileWriter(ResourcePath.MAX_SCORE[i])){
+            try(FileWriter scoreWriter = new FileWriter(ResourcePath.MAX_SCORE[i - 1])){
                 scoreWriter.write(Integer.toString(score));
             }
         } catch (IOException e) {

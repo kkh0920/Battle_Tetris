@@ -13,11 +13,11 @@ public final class ResourcePath {
      * 스코어 txt 파일
      */
     public static final String[] MAX_SCORE = {
-        "Score/MaxScore1",
-        "Score/MaxScore2",
-        "Score/MaxScore3",
-        "Score/MaxScore4",
-        "Score/MaxScore5",
+        "Score/MaxScore1.txt",
+        "Score/MaxScore2.txt",
+        "Score/MaxScore3.txt",
+        "Score/MaxScore4.txt",
+        "Score/MaxScore5.txt",
     };
 
     /**
