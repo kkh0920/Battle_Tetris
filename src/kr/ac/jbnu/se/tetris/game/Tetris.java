@@ -17,7 +17,7 @@ public class Tetris extends JPanel {
 
     final int frame_X = 335, frame_Y = 500, status_X = 60, status_Y = 30;
 
-    boolean isComputer;
+    private boolean isComputer;
     
     // 체력바
     private JProgressBar healthBar;
@@ -151,7 +151,7 @@ public class Tetris extends JPanel {
     @Override
     public void paint(Graphics g) {
         super.paint(g);
-        if(!parentManager.isComputer()) { // 플레이어 패널만 폭탄 아이콘 생성
+        if(!isComputer) { // 플레이어 패널만 폭탄 아이콘 생성
             BlockImage image = new BlockImage(Tetrominoes.BOMB_BLOCK);
             g.drawImage(image.getImage(), 32 + board.panelWidth(), 40 + board.panelHeight() - status_Y - 52,
                         30, 30, null);
