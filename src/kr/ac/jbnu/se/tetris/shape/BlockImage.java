@@ -3,7 +3,6 @@ package kr.ac.jbnu.se.tetris.shape;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.util.ResourceBundle;
 
 import javax.imageio.ImageIO;
 

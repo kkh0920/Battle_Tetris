@@ -24,14 +24,13 @@ import kr.ac.jbnu.se.tetris.ui.dialogs.PauseDialog;
 
 public class TetrisGameManager extends JFrame {
     
-    public static int level = 0;
-
     public static int p2_Up = 'w', p2_Down = 's', p2_Left = 'a', p2_Right = 'd',
                         p2_Up_Upper = 'W', p2_Down_Upper = 'S', p2_Left_Upper = 'A', p2_Right_Upper = 'D',
                         p2_Dropdown = KeyEvent.VK_SHIFT;
 
+    private int level;
+
     private boolean isPaused = false;
-    private boolean isComputer;
 
     // 최대 점수 표기 (AI 대전)
     private MaxScorePanel maxScorePanel;
@@ -47,8 +46,10 @@ public class TetrisGameManager extends JFrame {
     private PauseDialog pauseDialog;
     private GameOverDialog gameOverDialog;
 
-    public TetrisGameManager() {
+    public TetrisGameManager(int level) {
         setFrame();
+
+        this.level = level;
 
         pauseDialog = new PauseDialog(this); // 일시정지 화면 설정
         gameOverDialog = new GameOverDialog(this); // 게임종료 화면 설정
@@ -56,8 +57,11 @@ public class TetrisGameManager extends JFrame {
         addKeyListener(new PlayerKeyListener());
     }
 
+    public int getLevel() {
+        return level;
+    }
     public boolean isComputer(){
-        return isComputer;
+        return (level > 0);
     }
     public MaxScorePanel getMaxScorePanel(){
         return maxScorePanel;
@@ -72,13 +76,11 @@ public class TetrisGameManager extends JFrame {
      * @param isComputer true 값이면 AI 모드
      *                   false 값이면 2P 모드
      */
-    public void start(boolean isComputer) {
-        this.isComputer = isComputer;
-        
-        maxScorePanel = new MaxScorePanel(); // 1. 최대 점수 패널     
+    public void run() {
+        maxScorePanel = new MaxScorePanel(level); // 1. 최대 점수 패널     
         timer = new TimerPanel(); // 2. 타이머
         player1Panel = new Tetris(this, false); // 3. 테트리스 패널 1
-        player2Panel = new Tetris(this, isComputer); // 4. 테트리스 패널 2
+        player2Panel = new Tetris(this, isComputer()); // 4. 테트리스 패널 2
 
         // 각 테트리스 패널의 대결 상대 설정
         Board p1Board = player1Panel.getBoard();
@@ -88,7 +90,7 @@ public class TetrisGameManager extends JFrame {
 
         setLayoutLocation(); // 각 컴포넌트 위치 설정
 
-        addComponent(isComputer); // 각 컴포넌트 배치
+        addComponent(isComputer()); // 각 컴포넌트 배치
 
         timer.startTimer(); // 타이머 가동
 
@@ -151,7 +153,7 @@ public class TetrisGameManager extends JFrame {
     public void paint(Graphics g) {
         super.paint(g);
         
-        if(!isComputer)
+        if(!isComputer())
             return;
 
         try {  
@@ -236,7 +238,7 @@ public class TetrisGameManager extends JFrame {
          * @param p2Board Player 2 의 보드
          */
         private void p2KeyInput(int keycode, Board p2Board){
-            if(isComputer)
+            if(isComputer())
                 return;
 
             Shape p2CurPiece = p2Board.getCurPiece();

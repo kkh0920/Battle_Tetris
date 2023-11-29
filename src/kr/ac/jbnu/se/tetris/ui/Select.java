@@ -8,9 +8,9 @@ import kr.ac.jbnu.se.tetris.game.TetrisGameManager;
 
 public class Select extends JFrame {
     
-    private Wallpapers wallpaper;
+    private transient Wallpapers wallpaper;
     
-    private Music music;
+    private transient Music music;
 
     private SelectLevel selectLevel;
 
@@ -85,9 +85,8 @@ public class Select extends JFrame {
         versus.addActionListener(e->{
             dispose();
 
-            TetrisGameManager.level = 0; // 플레이어 대전인 경우 0 레벨 설정
-            TetrisGameManager game = new TetrisGameManager();
-            game.start(false);
+            TetrisGameManager game = new TetrisGameManager(0); // 플레이어 대전인 경우 0 레벨 설정
+            game.run();
         });
 
         settingBtn.addActionListener(e->{

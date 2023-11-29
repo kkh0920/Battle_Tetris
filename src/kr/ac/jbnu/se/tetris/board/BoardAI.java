@@ -6,20 +6,24 @@ import java.awt.event.ActionListener;
 import javax.swing.Timer;
 
 import kr.ac.jbnu.se.tetris.ai.TetrisAI;
+import kr.ac.jbnu.se.tetris.game.GameConfig;
 import kr.ac.jbnu.se.tetris.game.Tetris;
 
 public class BoardAI extends Board implements ActionListener {
 
-    public static int moveDelay = 100;
-
-    private TetrisAI computer;
+    private transient TetrisAI computer;
 
     private String bestRoute = "";
 
     private int index = 0;
 
+    private int moveDelay;
+
     public BoardAI(Tetris parent) {
         super(parent);
+
+        int level = parentTetris.gameManager().getLevel();
+        moveDelay = GameConfig.AI_BASE_MOVE_DELAY - GameConfig.AI_DELAY_REDUCE_PER_LEVEL * level;
 
         computer = new TetrisAI(this);
         timer = new Timer(moveDelay, this);

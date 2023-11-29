@@ -9,6 +9,7 @@ import java.util.concurrent.ThreadLocalRandom;
 
 import javax.swing.*;
 
+import kr.ac.jbnu.se.tetris.game.GameConfig;
 import kr.ac.jbnu.se.tetris.game.Tetris;
 import kr.ac.jbnu.se.tetris.game.TetrisGameManager;
 import kr.ac.jbnu.se.tetris.score.MaxScorePanel;
@@ -29,12 +30,7 @@ public class Board extends JPanel {
     protected final int boardHeight = 22;
 
     protected final int panelWidth = 220;
-
     protected final int panelHeight = 440;
-
-    // 공격 데미지 및 hp 회복량
-    protected final int healthRecover = 9;
-    protected final int attackDamage = 15;
 
     // 점수
     protected int numLinesRemoved;
@@ -46,8 +42,8 @@ public class Board extends JPanel {
     protected Tetrominoes[][] gridBoard;
 
     // 현재 떨어지는 도형 / 다음에 떨어질 도형
-    protected Shape curPiece;
-    protected Shape nextPiece;
+    protected transient Shape curPiece;
+    protected transient Shape nextPiece;
 
     // 상대편 보드
     protected Board opponent;
@@ -263,7 +259,7 @@ public class Board extends JPanel {
                 return false;
 
             /**
-             * "생성된 장애물 라인의 수" 만큼 블록의 높이도 같이 높이가지 때문에, 
+             * "생성된 장애물 라인의 수" 만큼 블록의 높이도 같이 높아지기 때문에, 
              * 떨어지는 블록은 보드의 높이를 넘어설 수 있습니다.
              * 
              * 따라서 y의 범위가 "높이만 벗어난 경우" shapeAt(x, y) 메소드를 수행하면
@@ -385,7 +381,7 @@ public class Board extends JPanel {
      */
     private void recoverHp(int count) {
         JProgressBar curHp = parentTetris.getHealthBar();
-        int increasedHp = curHp.getValue() + count * healthRecover;
+        int increasedHp = curHp.getValue() + count * GameConfig.HEALTH_RECOVER;
         if(increasedHp > 100)
             increasedHp = 100;
         curHp.setValue(increasedHp);
@@ -402,18 +398,18 @@ public class Board extends JPanel {
         int attackCount = 0;
 
         JProgressBar otherHp = opponent.parentTetris.getHealthBar();
-        int decreasedHp = otherHp.getValue() - count * attackDamage;
+        int decreasedHp = otherHp.getValue() - count * GameConfig.ATTACK_DAMAGE;
         if(decreasedHp < 0){
-            attackCount += (-1 * decreasedHp) / attackDamage;
+            attackCount += (-1 * decreasedHp) / GameConfig.ATTACK_DAMAGE;
             decreasedHp = 0;
         }
         otherHp.setValue(decreasedHp);
 
         stackLinesToOpponent(attackCount);
     }
-
+    
     /**
-     * 싱대방 보드에 장애물을 생성하는 메소드이다.
+     * 상대방 보드에 장애물을 생성하는 메소드이다.
      * 
      * @param attackCount 상대편 체력을 감소시키고 남은 제거 줄 수 카운트가 매개변수로 들어간다.
      */
