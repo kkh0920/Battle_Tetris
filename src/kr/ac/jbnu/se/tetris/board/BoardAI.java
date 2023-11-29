@@ -29,6 +29,9 @@ public class BoardAI extends Board implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        if(isBlockOvered)
+            gameOver();
+            
         if (isFallingFinished) {
             index = 0;
             newPiece();

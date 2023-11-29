@@ -313,6 +313,10 @@ public class Board extends JPanel {
         for (int i = 0; i < 4; ++i) {
             int x = curPiece.curX() + curPiece.x(i);
             int y = curPiece.curY() - curPiece.y(i);
+            if(y >= boardHeight) {
+                isBlockOvered = true;
+                continue;
+            }
             gridBoard[y][x] = curPiece.getShape();
         }
 
@@ -372,9 +376,6 @@ public class Board extends JPanel {
             attackOpponent(numFullLines);
         }
         repaint();
-
-        if(isBlockOvered)
-            opponent.gameOver();
     }
 
     /**
@@ -426,7 +427,7 @@ public class Board extends JPanel {
                     continue;
 
                 if (i + attackCount >= boardHeight) {
-                    isBlockOvered = true;
+                    opponent.isBlockOvered = true;
                 } else {
                     opponent.gridBoard[i + attackCount][j] = opponent.gridBoard[i][j];
                 }
