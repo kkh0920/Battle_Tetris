@@ -259,8 +259,20 @@ public class Board extends JPanel {
         for (int i = 0; i < 4; ++i) {
             int x = newX + piece.x(i);
             int y = newY - piece.y(i);
-            if (x < 0 || x >= boardWidth || y < 0 || y >= boardHeight)
+            if (x < 0 || x >= boardWidth || y < 0)
                 return false;
+
+            /**
+             * "생성된 장애물 라인의 수" 만큼 블록의 높이도 같이 높이가지 때문에, 
+             * 떨어지는 블록은 보드의 높이를 넘어설 수 있습니다.
+             * 
+             * 따라서 y의 범위가 "높이만 벗어난 경우" shapeAt(x, y) 메소드를 수행하면
+             * out of bound 오류가 발생하기 때문에,
+             * 이동 가능한 true를 바로 반환하도록 처리했습니다.
+             */
+            if(y >= boardHeight)
+                return true;
+
             if (shapeAt(x, y) != Tetrominoes.NO_SHAPE)
                 return false;
         }
@@ -408,11 +420,6 @@ public class Board extends JPanel {
         if(attackCount == 0)
             return;
 
-        Shape opponentPiece = opponent.curPiece;
-        for(int i = 0; i < attackCount; i++){
-            opponent.move(opponentPiece, opponentPiece.curX(), opponentPiece.curY() + 1);
-        }
-    
         for (int i = boardHeight - 1; i >= 0; i--) {
             for (int j = 0; j < boardWidth; j++) {
                 if(opponent.gridBoard[i][j] == Tetrominoes.NO_SHAPE)
@@ -426,6 +433,9 @@ public class Board extends JPanel {
                 opponent.gridBoard[i][j] = Tetrominoes.NO_SHAPE;
             }
         }
+
+        Shape opponentPiece = opponent.curPiece;
+        opponent.move(opponentPiece, opponentPiece.curX(), opponentPiece.curY() + attackCount);
 
         removeOneBlock(attackCount);
     }
@@ -475,11 +485,11 @@ public class Board extends JPanel {
     private void paintDroppingPiece(Graphics g, int boardTop) {
         if (curPiece.getShape() == Tetrominoes.NO_SHAPE)
             return;
-
         for (int i = 0; i < 4; ++i) {
             int x = curPiece.curX() + curPiece.x(i);
             int y = curPiece.curY() - curPiece.y(i);
-            drawSquare(g, x * squareWidth(), boardTop + (boardHeight - y - 1) * squareHeight(), curPiece.getShape());
+            if(x >= 0 && x < boardWidth && y >= 0 && y < boardHeight)
+                drawSquare(g, x * squareWidth(), boardTop + (boardHeight - y - 1) * squareHeight(), curPiece.getShape());
         }
     }
 
