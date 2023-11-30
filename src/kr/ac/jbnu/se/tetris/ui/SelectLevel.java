@@ -66,7 +66,7 @@ public class SelectLevel extends JFrame {
             level[index].addActionListener(e->{
                 dispose();
 
-                TetrisGameManager game = new TetrisGameManager(index + 1);
+                TetrisGameManager game = new TetrisGameManager(home, index + 1);
                 game.run();
             });
         }

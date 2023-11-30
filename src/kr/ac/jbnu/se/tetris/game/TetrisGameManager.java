@@ -19,6 +19,7 @@ import kr.ac.jbnu.se.tetris.score.MaxScorePanel;
 import kr.ac.jbnu.se.tetris.shape.Shape;
 import kr.ac.jbnu.se.tetris.shape.Tetrominoes;
 import kr.ac.jbnu.se.tetris.timer.TimerPanel;
+import kr.ac.jbnu.se.tetris.ui.Select;
 import kr.ac.jbnu.se.tetris.ui.dialogs.GameOverDialog;
 import kr.ac.jbnu.se.tetris.ui.dialogs.PauseDialog;
 
@@ -27,6 +28,8 @@ public class TetrisGameManager extends JFrame {
     public static int p2_Up = 'w', p2_Down = 's', p2_Left = 'a', p2_Right = 'd',
                         p2_Up_Upper = 'W', p2_Down_Upper = 'S', p2_Left_Upper = 'A', p2_Right_Upper = 'D',
                         p2_Dropdown = KeyEvent.VK_SHIFT;
+
+    private Select mainPage;
 
     private int level;
 
@@ -46,9 +49,10 @@ public class TetrisGameManager extends JFrame {
     private PauseDialog pauseDialog;
     private GameOverDialog gameOverDialog;
 
-    public TetrisGameManager(int level) {
+    public TetrisGameManager(Select mainPage, int level) {
         setFrame();
 
+        this.mainPage = mainPage;
         this.level = level;
 
         pauseDialog = new PauseDialog(this); // 일시정지 화면 설정
@@ -60,6 +64,7 @@ public class TetrisGameManager extends JFrame {
     public int getLevel() {
         return level;
     }
+    public Select getMainPage() { return mainPage; }
     public boolean isComputer(){
         return (level > 0);
     }
@@ -72,9 +77,6 @@ public class TetrisGameManager extends JFrame {
 
     /**
      * 해당 메소드에서 게임 시작을 담당한다.
-     *
-     * @param isComputer true 값이면 AI 모드
-     *                   false 값이면 2P 모드
      */
     public void run() {
         maxScorePanel = new MaxScorePanel(level); // 1. 최대 점수 패널     

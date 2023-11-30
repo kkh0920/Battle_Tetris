@@ -45,18 +45,21 @@ public class PauseDialog extends JDialog {
 
         retryBtn.addActionListener(e->{
             int level = manager.getLevel();
+            Select mainPage = manager.getMainPage();
             
             setVisible(false);
             manager.dispose();
 
-            TetrisGameManager game = new TetrisGameManager(level);
+            TetrisGameManager game = new TetrisGameManager(mainPage, level);
             game.run();
         });
 
         homeBtn.addActionListener(e->{
+            Select mainPage = manager.getMainPage();
+
             setVisible(false);
             manager.dispose();
-            Select mainPage = new Select();
+
             mainPage.setVisible(true);
         });
     }

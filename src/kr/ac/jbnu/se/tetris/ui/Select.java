@@ -78,14 +78,14 @@ public class Select extends JFrame {
 
     private void buttonAction() {
         ai.addActionListener(e->{
-            dispose();
+            setVisible(false);
             selectLevel.setVisible(true);
         });
 
         versus.addActionListener(e->{
-            dispose();
+            setVisible(false);
 
-            TetrisGameManager game = new TetrisGameManager(0); // 플레이어 대전인 경우 0 레벨 설정
+            TetrisGameManager game = new TetrisGameManager(this, 0); // 플레이어 대전인 경우 0 레벨 설정
             game.run();
         });
 
