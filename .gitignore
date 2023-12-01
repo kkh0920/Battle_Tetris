@@ -47,4 +47,4 @@ build/
 /dataSources/
 /dataSources.local.xml
 
-/src/kr/ac/jbnu/se/tetris/ServerInfo.java
+/src/kr/ac/jbnu/se/tetris/server/ServerInfo.java
