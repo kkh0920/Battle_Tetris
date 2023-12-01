@@ -19,7 +19,7 @@ public class LoginPage extends JFrame {
 
     public static final int FRAME_WIDTH = 800, FRAME_HEIGHT = 453;
 
-    LoginPage() {
+    public LoginPage() {
         setText();
         setTextField();
         setButton();
