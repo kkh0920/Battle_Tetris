@@ -58,4 +58,5 @@
 
 ### 2차 개선 클래스 다이어그램
 
-<img width="818" alt="2차 개선" src="https://github.com/kkh0920/Battle_Tetris/assets/65442366/477daf6b-f30f-4feb-a38e-976056d20bcc">
+<img width="775" alt="2차 개선" src="https://github.com/kkh0920/Battle_Tetris/assets/65442366/0aa4cbdf-cd9a-4ad2-9184-48838dfee112">
+
