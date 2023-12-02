@@ -8,8 +8,6 @@ import kr.ac.jbnu.se.tetris.game.TetrisGameManager;
 
 public class Select extends JFrame {
     
-    private transient Wallpapers wallpaper;
-    
     private transient Music music;
 
     private SelectLevel selectLevel;
@@ -48,7 +46,7 @@ public class Select extends JFrame {
         setLocationRelativeTo(null);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
 
-        wallpaper = new Wallpapers(ResourcePath.WALL_PAPER, frameWidth, frameHeight);
+        Wallpapers wallpaper = new Wallpapers(ResourcePath.WALL_PAPER, frameWidth, frameHeight);
         setButton();
 
         add(ai); add(versus); add(settingBtn); add(tutorialBtn);

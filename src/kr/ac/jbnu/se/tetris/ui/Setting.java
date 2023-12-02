@@ -7,8 +7,7 @@ import javax.swing.*;
 public class Setting extends JFrame {
 
     private Select home;
-
-    private Wallpapers backgrounds;
+    
     private CustomButton musicButton, changekey, backselect;
     private boolean isMusicStarted = true;
 
@@ -27,7 +26,7 @@ public class Setting extends JFrame {
         setLocationRelativeTo(null);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
 
-        backgrounds = new Wallpapers(ResourcePath.WALL_PAPER, home.getWidth(), home.getHeight());
+        Wallpapers backgrounds = new Wallpapers(ResourcePath.WALL_PAPER, home.getWidth(), home.getHeight());
         setButton();
         add(musicButton); add(changekey); add(backselect); add(backgrounds.getPane());
     }

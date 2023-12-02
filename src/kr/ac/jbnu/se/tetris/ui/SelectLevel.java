@@ -18,8 +18,6 @@ public class SelectLevel extends JFrame {
 
     private CustomButton backSelect;
 
-    private Wallpapers backgrounds;
-
     public SelectLevel(Select home){
         this.home = home;
 
@@ -29,8 +27,6 @@ public class SelectLevel extends JFrame {
         }
 
         backSelect = new CustomButton(new ImageIcon(ResourcePath.BUTTON_BACK));
-
-        backgrounds = new Wallpapers(ResourcePath.WALL_PAPER, home.getWidth(), home.getHeight());
 
         setFrame();
     }
@@ -48,6 +44,8 @@ public class SelectLevel extends JFrame {
             add(level[i]);
         }
 
+        Wallpapers backgrounds = new Wallpapers(ResourcePath.WALL_PAPER, home.getWidth(), home.getHeight());
+        
         add(backSelect);
         add(backgrounds.getPane());
     }
