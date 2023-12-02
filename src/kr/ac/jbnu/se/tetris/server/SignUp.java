@@ -17,6 +17,7 @@ public class SignUp extends JFrame{
     private JLabel id, pw;
     private String sign_id,sign_pw;
     private Wallpapers backgrounds;
+    private boolean check = true;
 
     SignUp() {
         setText();
@@ -44,7 +45,7 @@ public class SignUp extends JFrame{
     private void setFrame() {
 
         setSize(LoginPage.FRAME_WIDTH,LoginPage.FRAME_HEIGHT);
-        setVisible(true);
+        setVisible(check);
         setLayout(null);
         setResizable(false);
         setLocationRelativeTo(null);
@@ -69,12 +70,19 @@ public class SignUp extends JFrame{
 
     }
 
+    public void successSignUp(boolean signUpCheck) {
+        if(true) {
+            check = true;
+        }
+    }
+
     private void buttonAction() {
         accept.addActionListener(e->{
             sign_id = txt_id.getText();
             sign_pw = txt_pw.getText();
             try {
                 SignUpSQL signUpSQL = new SignUpSQL(sign_id, sign_pw);
+                dispose();
             } catch (SQLException ex) {
                 throw new RuntimeException(ex);
             } catch (IOException ex) {
