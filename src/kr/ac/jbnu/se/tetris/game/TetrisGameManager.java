@@ -55,9 +55,6 @@ public class TetrisGameManager extends JFrame {
         this.mainPage = mainPage;
         this.level = level;
 
-        pauseDialog = new PauseDialog(this); // 일시정지 화면 설정
-        gameOverDialog = new GameOverDialog(this); // 게임종료 화면 설정
-
         addKeyListener(new PlayerKeyListener());
     }
 
@@ -81,8 +78,12 @@ public class TetrisGameManager extends JFrame {
     public void run() {
         maxScorePanel = new MaxScorePanel(level); // 1. 최대 점수 패널     
         timer = new TimerPanel(); // 2. 타이머
-        player1Panel = new Tetris(this, false); // 3. 테트리스 패널 1
-        player2Panel = new Tetris(this, isComputer()); // 4. 테트리스 패널 2
+
+        pauseDialog = new PauseDialog(this); // 3. 일시정지 화면 설정
+        gameOverDialog = new GameOverDialog(this); // 4. 게임종료 화면 설정
+
+        player1Panel = new Tetris(this, false); // 5. 테트리스 패널 1
+        player2Panel = new Tetris(this, isComputer()); // 6. 테트리스 패널 2
 
         // 각 테트리스 패널의 대결 상대 설정
         Board p1Board = player1Panel.getBoard();
