@@ -5,6 +5,7 @@ import javax.swing.*;
 import kr.ac.jbnu.se.tetris.ui.Wallpapers;
 import kr.ac.jbnu.se.tetris.ResourcePath;
 import kr.ac.jbnu.se.tetris.ui.CustomButton;
+import kr.ac.jbnu.se.tetris.ui.Select;
 
 import java.awt.*;
 import java.sql.SQLException;
@@ -82,7 +83,16 @@ public class LoginPage extends JFrame {
             String cmp_id = id.getText();
             String cmp_pw = password.getText();
             try {
-                ComPareID comPareID = new ComPareID(cmp_id, cmp_pw);
+                ComPareID comPareID = new ComPareID();
+                boolean isSuccess = comPareID.login(cmp_id, cmp_pw);
+                if(isSuccess){
+                    setVisible(false);
+                    Select home = new Select();
+                    home.setVisible(true);
+                }
+                else {
+                    JOptionPane.showMessageDialog(this, "잘못된 아이디 혹은 패스워드가 입력되었습니다.");
+                } 
             } catch (SQLException ex) {
                 throw new RuntimeException(ex);
             }

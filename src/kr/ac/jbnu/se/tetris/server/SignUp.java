@@ -42,13 +42,11 @@ public class SignUp extends JFrame{
     }
 
     private void setFrame() {
-
         setSize(LoginPage.FRAME_WIDTH,LoginPage.FRAME_HEIGHT);
         setVisible(true);
         setLayout(null);
         setResizable(false);
         setLocationRelativeTo(null);
-
     }
 
     private void setButton() {
