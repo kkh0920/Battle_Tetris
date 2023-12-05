@@ -17,6 +17,7 @@ public class SignUp extends JFrame{
     private JLabel id, pw;
     private String sign_id,sign_pw;
     private Wallpapers backgrounds;
+    private boolean check = true;
 
     SignUp() {
         setText();
@@ -43,7 +44,7 @@ public class SignUp extends JFrame{
 
     private void setFrame() {
         setSize(LoginPage.FRAME_WIDTH,LoginPage.FRAME_HEIGHT);
-        setVisible(true);
+        setVisible(check);
         setLayout(null);
         setResizable(false);
         setLocationRelativeTo(null);
@@ -65,6 +66,12 @@ public class SignUp extends JFrame{
         txt_id.setBounds(330,260,160,50);
         txt_pw.setBounds(330,330,160,50);
 
+    }
+
+    public void successSignUp(boolean signUpCheck) {
+        if(true) {
+            check = true;
+        }
     }
 
     private void buttonAction() {

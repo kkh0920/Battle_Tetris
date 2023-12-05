@@ -10,7 +10,6 @@ public class SignUpSQL{
 
     private ServerSetting serverSetting;
     private PreparedStatement readQuery;
-
     SignUpSQL(String id, String pw) throws SQLException, IOException {
         signUpUser(id,pw);
     }
@@ -29,12 +28,12 @@ public class SignUpSQL{
             int updatecount = readQuery.executeUpdate();
 
             if(updatecount >= 1) {
-                JOptionPane.showMessageDialog(null, "회원가입 성공");
+                JOptionPane.showMessageDialog(null, "회원가입 성공, 로그인 화면으로 돌아갑니다.");
             }
 
         } catch (SQLException e) {
             if(e.getMessage().contains("PRIMARY")){
-                JOptionPane.showMessageDialog(null, "중복되는 아이디입니다.");
+                JOptionPane.showMessageDialog(null, "중복되는 아이디, 다시 회원가입을 진행해주세요");
             }
             else {
                 JOptionPane.showMessageDialog(null, "제대로 된 정보를 입력해주세요.");
