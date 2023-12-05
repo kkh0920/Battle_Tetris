@@ -14,12 +14,11 @@ public class ComPareID{
     
     private ResultSet matchQuery;
 
-    ComPareID(String id, String pw) throws SQLException {
+    ComPareID() throws SQLException {
         super();
-        login(id,pw);
     }
 
-    public void login(String id, String pw) throws SQLException {
+    public boolean login(String id, String pw) throws SQLException {
         serverSetting = new ServerSetting();
 
         serverSetting.connectMysql();
@@ -32,13 +31,11 @@ public class ComPareID{
         matchQuery = readQuery.executeQuery();
         while(matchQuery.next()){
             try{
-            if (matchQuery.getString(SqlTable.USER_ID.ordinal()).contentEquals(pw)) {
-                Select home = new Select();
-                home.setVisible(true);
-            }
+                return matchQuery.getString(SqlTable.USER_ID.ordinal()).contentEquals(pw);
             } catch (SQLException e) {
                 throw new RuntimeException(e);
             }
         }
+        return false;
     }
 }
