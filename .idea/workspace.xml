@@ -9,9 +9,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="df31b2e9-4dad-4417-a805-ed9e6604b83a" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/src/kr/ac/jbnu/se/tetris/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/kr/ac/jbnu/se/tetris/Main.java" afterDir="false" />
-    </list>
+    <list default="true" id="df31b2e9-4dad-4417-a805-ed9e6604b83a" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -111,7 +109,7 @@
       <workItem from="1701444104757" duration="19000" />
       <workItem from="1701444176854" duration="7000" />
       <workItem from="1701475882410" duration="985000" />
-      <workItem from="1701775506523" duration="47000" />
+      <workItem from="1701775506523" duration="360000" />
     </task>
     <servers />
   </component>

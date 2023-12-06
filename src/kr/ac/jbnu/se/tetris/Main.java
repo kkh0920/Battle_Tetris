@@ -2,7 +2,6 @@ package kr.ac.jbnu.se.tetris;
 
 import java.sql.SQLException;
 
-import kr.ac.jbnu.se.tetris.server.LoginPage;
 import kr.ac.jbnu.se.tetris.ui.Select;
 
 public class Main {
