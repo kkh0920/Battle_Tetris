@@ -3,6 +3,8 @@ package kr.ac.jbnu.se.tetris.game;
 import java.awt.*;
 import javax.swing.*;
 import javax.swing.plaf.basic.BasicProgressBarUI;
+import java.util.List;
+import java.util.ArrayList;
 
 import kr.ac.jbnu.se.tetris.board.Board;
 import kr.ac.jbnu.se.tetris.board.BoardAI;
@@ -51,7 +53,7 @@ public class Tetris extends JPanel {
     }
 
     /**
-     * 폭탄을 사용하는 메소드
+     * 폭탄을 사용하는 메소드.
      * 
      * 폭탄 개수를 1 줄이고, 다음에 올 블록을 폭탄 아이템으로 변경한다.
      */

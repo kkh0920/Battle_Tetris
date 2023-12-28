@@ -73,7 +73,7 @@ public class TetrisGameManager extends JFrame {
     }
 
     /**
-     * 해당 메소드에서 게임 시작을 담당한다.
+     * 게임 시작을 담당한다.
      */
     public void run() {
         maxScorePanel = new MaxScorePanel(level); // 1. 최대 점수 패널     
