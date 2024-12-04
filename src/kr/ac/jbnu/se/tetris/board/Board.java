@@ -255,19 +255,17 @@ public class Board extends JPanel {
         for (int i = 0; i < 4; ++i) {
             int x = newX + piece.x(i);
             int y = newY - piece.y(i);
+            /**
+             * 셍성된 장애물 라인 수 만큼 "떨어지는 블록"의 높이도 같이 올라갑니다.
+             * 
+             * 즉, 보드의 높이가 정해져 있기는 하지만, "떨어지는 블록"의 경우는 제한 높이가 없습니다.
+             * 
+             * 따라서, shapeAt(x, y)의 out of bound를 방지하기 위해, 높이만 넘어서는 경우 continue로 처리합니다.
+             */
             if (x < 0 || x >= boardWidth || y < 0)
                 return false;
-
-            /**
-             * "생성된 장애물 라인의 수" 만큼 블록의 높이도 같이 높아지기 때문에, 
-             * 떨어지는 블록은 보드의 높이를 넘어설 수 있습니다.
-             * 
-             * 따라서 y의 범위가 "높이만 벗어난 경우" shapeAt(x, y) 메소드를 수행하면
-             * out of bound 오류가 발생하기 때문에,
-             * 이동 가능한 true를 바로 반환하도록 처리했습니다.
-             */
             if(y >= boardHeight)
-                return true;
+                continue;
 
             if (shapeAt(x, y) != Tetrominoes.NO_SHAPE)
                 return false;
